@@ -1,0 +1,19 @@
+.home {
+    min-height: 500px;
+    width: 100%;
+    display: flex;
+    .home__content {
+        .title {
+            margin-bottom: 20px;
+            line-height: 1.3em;
+            font-weight: 600;
+            font-size: 22px;
+            margin-top: 0;
+            color: #40454d;
+        }
+        .sub-title {
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+    }
+}

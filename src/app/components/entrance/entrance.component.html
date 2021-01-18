@@ -1,0 +1,18 @@
+<div class='entrance-page'>
+    <div class='entrance-page__beauty'></div>
+    <div class='entrance-page__function'>
+        <button class='entrance-page__function__home-btn mybtn mybtn--transparent mybtn--sm' [routerLink]="['/']">
+            <fa-icon [icon]='faDoorOpen'></fa-icon>
+            home
+        </button>
+        <form class='entrance-page__function__toggle-btns buttons--horizontal'>
+            <input id='login' type='radio' value='login' name='logSign' (change)='onSwitch($event)'>
+            <label for='login'>login</label>
+            <input id='signUp' type='radio' value='signup' name='logSign' (change)='onSwitch($event)'>
+            <label for='signUp'>sign up</label>
+        </form>
+        <div class='entrance-page__function__contain'>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

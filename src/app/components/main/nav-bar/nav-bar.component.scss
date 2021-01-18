@@ -1,0 +1,97 @@
+@use '../../../../styles.scss';
+
+.nav-wrp {
+    background: styles.$color-dark-blue;
+    height: 40px;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+.nav {
+    width: styles.$size-page-width;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    padding: 0 20px;
+    background: inherit;
+    justify-content: space-evenly;
+    position: relative;
+}
+.nav__item {
+    margin: 0 5px;
+    border: 2px solid styles.$color-dark-blue;
+    height: 100%;
+    background-color: inherit;
+    font-weight: 400;
+}
+.nav__item--hasside {
+    position: relative;
+}
+.nav__item:hover > .sub-menu-wrp {
+    display: unset;
+}
+.nav__item__link {
+    text-transform: capitalize;
+    color: styles.$color-text-color;
+    height: 100%;
+    display: block;
+    line-height: 36px;
+    padding: 0 5px;
+    transition: background-color .3s ease;
+    background-color: inherit;
+}
+.nav__item__link:hover {
+    text-decoration: none;
+    background-color: styles.$color-light-green;
+}
+.nav__item__link--title {
+    font-weight: 600;
+}
+.sub-menu-wrp {
+    display: none;
+    background: inherit;
+}
+.sub-menu {
+    background: inherit;
+    padding: 5px 0;
+    min-width: 600px;
+    position: absolute;
+    left: 0;
+    top: 38px;
+    width: 100%;
+    border-top: 1px solid styles.$color-light-green;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+}
+.sub-menu--horizontal {
+    display: flex;
+    flex-wrap: wrap;
+}
+.sub-menu--horizontal > .nav__item {
+    margin: 10px;
+}
+.sub-menu--horizontal > .nav__item > ul > .nav__item {
+    font-weight: 100;
+}
+.sub-menu--side {
+    position: absolute;
+    left: calc(100% + 2px);
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+.sub-menu--side__contain {
+    background-color: styles.$color-dark-green;
+    padding: 5px 0;
+}
+.sub-menu--side__contain > .nav__item {
+    border: 0;
+    background-color: inherit;
+    font-weight: 100;
+}
+.sub-menu--side__contain > .nav__item > .nav__item__link {
+    transition: background-color .3s ease;
+    background-color: inherit;
+}
+.sub-menu--side__contain > .nav__item > .nav__item__link:hover {
+    background-color: styles.$color-dark-blue;
+}

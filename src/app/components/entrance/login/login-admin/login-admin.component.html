@@ -1,0 +1,32 @@
+<form class='login-form'>
+    <button class='login-form__back-btn mybtn mybtn--transparent mybtn--circle' type='button' (click)='onBackClick()'>
+        <fa-icon [icon]='faArrowLeft'></fa-icon>
+    </button>
+    <label for='username'>username</label>
+    <div class='fake-input'>
+        <input type='text' 
+            id='username' 
+            placeholder='Enter your user name' 
+            [(ngModel)]="username"
+            [ngModelOptions]="{ standalone: true }"
+            required>
+    </div>
+    <label for='password'>password</label>
+    <div class='fake-input'>
+        <input type='password' 
+            id='password' 
+            placeholder='Enter your password'
+            [(ngModel)]="password"
+            [ngModelOptions]="{ standalone: true }"
+            required>
+    </div>
+    <label for='rememberMe' class='remember-me-label'>
+        <input type='checkbox' id='rememberMe'>
+        remember me
+    </label>
+    <button class='login-form__login-btn mybtn mybtn--round mybtn--sm mybtn--light-green neu'
+        type='button'
+        (click)='onLoginClick()'>
+        <app-loading [size]="'small'"></app-loading>
+    </button>
+</form>

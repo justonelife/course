@@ -1,0 +1,42 @@
+@use '../../../../../styles.scss';
+
+$title-color: #40454d;
+
+.big-group {
+    width: 100%;
+    background: #efefef;
+    border-radius: 5px;
+    ul {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        li {
+            flex-grow: 1;
+            height: 55px;
+            width: 380px;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            a {
+                display: flex;
+                color: $title-color;
+                &:hover {
+                    color: styles.$color-light-green;
+                }
+                img {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                }
+                span {
+                    margin-left: 10px;
+                    line-height: 30px;
+                    &::first-letter {
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+    }
+}

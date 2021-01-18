@@ -1,0 +1,10 @@
+<div class='big-group'>
+    <ul *ngIf='childCate'>
+        <li *ngFor='let cate of childCate'>
+            <a href='#'>
+                <img src='https://freetuts.net/upload/tut_series/images/2015/12/14/53/python.gif'>
+                <span>{{cate.name}}</span>
+            </a>
+        </li>
+    </ul>
+</div>

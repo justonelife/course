@@ -1,0 +1,31 @@
+@use '../../../home/five-group/five-group.component.scss' as fg;
+@use '../../../../../../styles.scss';
+
+.pagi-btns {
+    // background: orange;
+    height: 42px;
+    li {
+        // background: green;
+        display: inline-block;
+        width: 42px;
+        height: 100%;
+        margin-left: 10px;
+        span {
+            background: #fff;
+            width: 42px;
+            height: 100%;
+            display: block;
+            line-height: 42px;
+            text-align: center;
+            font-size: 19px;
+            border: 1px solid fg.$border-color;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .active {
+            background: styles.$color-light-green;
+            color: styles.$color-text-color;
+        }
+    }
+}

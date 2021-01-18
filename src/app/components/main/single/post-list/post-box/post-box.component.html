@@ -1,0 +1,9 @@
+<div class='post-box'>
+    <h2 class='post-box__title'>
+        <a routerLink="{{'/read/' + (post.title | nameToUrl)}}">{{post.title}}</a>
+    </h2>
+    <div class='post-box__content'>
+        <img src='https://freetuts.net/upload/tut_series/images/2020/12/06/345/pandas.jpg'>
+        <p>{{post.content | limitCharacter:90}}</p>
+    </div>
+</div>

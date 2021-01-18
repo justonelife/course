@@ -1,1 +1,184 @@
 /* You can add global styles to this file, and also import other style files */
+$color-light-green: #63d6c5;
+$color-dark-green: #477d8c;
+$color-dark-blue: #253243;
+$color-text-color: #eeeeee;
+$color-white-green: #dff9fb;
+$color-text-color2: #535c68;
+$color-light-theme: #ffffff;
+$color-dark-theme: #1b1b1b;
+$size-page-width: 1400px;
+
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, button {
+    font-weight: 100;
+}
+
+button {
+    cursor: pointer;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.center-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.neu {
+    box-shadow: 2px 3px 6px rgba(0, 0, 0, .5);
+}
+
+.ml-20 {
+    margin-left: 20px;
+}
+
+button:focus, input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.buttons--vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons--vertical > button {
+    margin-bottom: 20px;
+}
+
+.buttons--horizontal {
+    display: flex;
+}
+
+.mybtn {
+    height: 50px;
+    width: 200px;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+.mybtn--sm {
+    height: 35px;
+    width: 130px;
+}
+
+.mybtn--round {
+    border-radius: 25px;
+}
+
+.mybtn--circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.mybtn--light-green {
+    background-color: $color-light-green;
+    color: $color-text-color;
+}
+
+.mybtn--light-green:hover {
+    background-color: #4bbdac;
+}
+
+.mybtn--fake-link {
+    background: transparent;
+    color: #63d6c5;
+    text-decoration: underline;
+}
+
+.mybtn--transparent {
+    background: transparent;
+    border: 1px solid $color-white-green;
+    color: $color-text-color;
+}
+
+.mybtn--transparent:hover {
+    border-color: $color-light-green;
+    color: $color-light-green;
+}
+
+.fake-input {
+    height: 35px;
+    padding: 0 15px;
+    border-bottom: 1px solid $color-text-color2;
+}
+
+.fake-input > input {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+}
+
+.fake-input--box {
+    border: 1px solid $color-white-green;
+    background: #fff;
+}
+
+.fake-input--box > input {
+    color: $color-text-color2;
+}
+
+.fake-input--round {
+    border-radius: 5px;
+}
+
+.fake-input--long {
+    width: 400px;
+}
+
+.fake-input--flex {
+    display: flex;
+    align-items: center;
+}
+
+.fake-input__icon {
+    color: #bbbbbb;
+}
+
+.fake-input__icon--left {
+    margin-right: 5px;
+}
+
+.layout {
+    display: flex;
+}
+
+.layout--center {
+    justify-content: center;
+    align-items: center;
+}
+
+.layout--vertical {
+    flex-direction: column;
+}
+
+.layout__item--grow-1 {
+    flex-grow: 1;
+}
+
+.layout__item--grow-2 {
+    flex-grow: 2;
+}

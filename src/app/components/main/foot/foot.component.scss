@@ -1,0 +1,75 @@
+@use '../../../../styles.scss';
+
+.footer-wrp {
+    background: styles.$color-dark-blue;
+}
+.footer {
+    height: 500px;
+    width: styles.$size-page-width;
+    margin: 0 auto;
+    background: inherit;
+}
+.footer__upper {
+    display: flex;
+    height: 420px;
+    padding: 50px;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+}
+.footer__upper::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 90%;
+    background: styles.$color-text-color;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+}
+.footer__lower {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer__column {
+    display: flex;
+    flex-direction: column;
+    /* min-height: 140px; */
+    max-width: 200px;
+    justify-content: space-between;
+}
+.footer__column__item {
+    color: styles.$color-text-color;
+    text-decoration: none;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+    transition: color .3s ease;
+    max-width: 200px;
+}
+.footer__column__text {
+    color: styles.$color-text-color;
+}
+.footer__column__text::first-letter {
+    text-transform: uppercase;
+}
+.footer__column__title {
+    color: styles.$color-light-green;
+    cursor: default;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+.footer__column__item:hover {
+    color: styles.$color-dark-green;
+}
+.footer__column > .fake-input {
+    width: 230px;
+    margin-bottom: 10px;
+}
+.footer__column > .fake-input > input {
+    font-size: 13px;
+}

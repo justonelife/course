@@ -1,0 +1,14 @@
+<div *ngIf='totalPage'>
+    <div class='post-list'>
+        <div *ngIf='!post' class='pl-loading'>
+            <app-loading [size]="'medium'"></app-loading>
+        </div>
+
+        <ul *ngIf='post'>
+            <li *ngFor='let p of post'>
+                <app-post-box [post]='p'></app-post-box>
+            </li>
+        </ul>
+    </div>
+    <app-pagi [count]='totalPage' (newPage)='changePage($event)'></app-pagi>
+</div>

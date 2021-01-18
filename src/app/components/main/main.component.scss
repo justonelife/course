@@ -1,0 +1,21 @@
+@use '../../../styles.scss';
+
+.main {
+    background: styles.$color-light-theme;
+    .main__contain {
+        width: styles.$size-page-width;
+        margin: 0 auto;
+        background: inherit;
+        padding: 50px 20px;
+        min-height: 1000px;
+        display: flex;
+        .content {
+            max-width: 1000px;
+            flex-grow: 3;
+        }
+        .side {
+            // background: green;
+            flex-grow: 1;
+        }
+    }
+}
