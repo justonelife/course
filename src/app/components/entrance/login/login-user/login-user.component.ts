@@ -18,6 +18,8 @@ export class LoginUserComponent implements OnInit {
     public username: string = '';
     public password: string = '';
 
+    public checking:boolean = false;
+
     constructor(
         private router: Router,
         private loginService: AuthorizationService    
@@ -34,6 +36,8 @@ export class LoginUserComponent implements OnInit {
     }
 
     onLoginClick() {
+        this.checking = !this.checking;
+
         let info:any = {
             username: this.username,
             password: this.password
@@ -41,6 +45,7 @@ export class LoginUserComponent implements OnInit {
 
         this.loginService.postLogin(info).subscribe(
             res => {
+                this.checking = !this.checking;
                 if (!res.error) {
                     let roleId = res.roleId;
                     if (roleId === ROLE) this.router.navigate(['']);

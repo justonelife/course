@@ -26,7 +26,9 @@
     </label>
     <button class='login-form__login-btn mybtn mybtn--round mybtn--sm mybtn--light-green neu'
         type='button'
+        [attr.disabled]="checking ? '':null"
         (click)='onLoginClick()'>
-        <app-loading [size]="'small'"></app-loading>
+        <span *ngIf='!checking'>login</span>
+        <app-loading *ngIf='checking' [size]="'small'"></app-loading>
     </button>
 </form>
