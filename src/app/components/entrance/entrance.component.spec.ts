@@ -1,25 +1,52 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { EntranceComponent } from './entrance.component';
 
 describe('EntranceComponent', () => {
-  let component: EntranceComponent;
-  let fixture: ComponentFixture<EntranceComponent>;
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [EntranceComponent],
+            imports: [
+                RouterTestingModule
+            ]
+        });
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ EntranceComponent ]
     })
-    .compileComponents();
-  }));
+    
+    it('should create', () => {
+        let fixture = TestBed.createComponent(EntranceComponent);
+        let comp = fixture.componentInstance;
+        expect(comp).toBeTruthy();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(EntranceComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    it('login switch button work right', () => {
+        let fixture = TestBed.createComponent(EntranceComponent);
+        let comp = fixture.componentInstance;
+        spyOn(comp, 'onSwitch');
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+        fixture.detectChanges();
+        let compiled = fixture.nativeElement;
+
+        let btn = compiled.querySelector("input[value='login']");
+
+        btn.click();
+        expect(comp.onSwitch).toHaveBeenCalled();
+
+    });
+
+    it('register switch button work right', () => {
+        let fixture = TestBed.createComponent(EntranceComponent);
+        let comp = fixture.componentInstance;
+        spyOn(comp, 'onSwitch');
+
+        fixture.detectChanges();
+        let compiled = fixture.nativeElement;
+
+        let btn = compiled.querySelector("input[value='signup']");
+
+        btn.click();
+        expect(comp.onSwitch).toHaveBeenCalled();
+
+    });
 });
