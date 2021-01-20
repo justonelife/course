@@ -5,6 +5,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginModule } from './login/login.module';
 import { RegisterComponent } from './register/register.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { RegisterComponent } from './register/register.component';
         CommonModule,
         AppRoutingModule,
         FontAwesomeModule,
-        LoginModule
+        LoginModule,
+        FormsModule
     ],
     exports: [
         EntranceComponent

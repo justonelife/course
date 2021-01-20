@@ -3,17 +3,29 @@
     <form class='register-form'>
         <label for='username'>username</label>
         <div class='fake-input'>
-            <input type='text' id='username' placeholder='Enter your user name'>
+            <input type='text' 
+                id='username' 
+                placeholder='Enter your user name'
+                [(ngModel)]='username'
+                [ngModelOptions]="{standalone:true}">
         </div>
 
         <label for='password'>password</label>
         <div class='fake-input'>
-            <input type='password' id='password' placeholder='Enter your password'>
+            <input type='password' 
+                id='password' 
+                placeholder='Enter your password'
+                [(ngModel)]='password'
+                [ngModelOptions]="{standalone:true}">
         </div>
 
         <label for='rePassword'>confirm password</label>
         <div class='fake-input'>
-            <input type='password' id='rePassword' placeholder='Retype your password'>
+            <input type='password' 
+                id='rePassword' 
+                placeholder='Retype your password'
+                [(ngModel)]='confirmPass'
+                [ngModelOptions]="{standalone:true}">
         </div>
 
         <label for='email'>e-mail</label>
