@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
+import { User } from 'src/app/models/user.model';
+import { AuthorizationService } from 'src/app/services/authorization.service';
+import { ROLE_USER } from 'src/app/services/reference';
+
 
 @Component({
     selector: 'app-register',
@@ -7,13 +12,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-    public username:string;
-    public password:string;
-    public confirmPass:string;
+    registerForm: FormGroup;
 
-    constructor() { }
+    public checking: boolean = false;
+
+    constructor(
+        private fb: FormBuilder,
+        private authService: AuthorizationService
+    ) { }
 
     ngOnInit(): void {
+        this.registerForm = this.fb.group({
+            username: [''],
+            password: [''],
+            repass: ['', [this.MatchPassword.bind(this)]],
+            email: ['']
+        })
+    }
+
+    MatchPassword(control: AbstractControl): { [key: string]: any } | null {
+        const pass: string = this.registerForm
+            ? this.registerForm.value.password
+            : null;
+        
+        const repass: string = control.value;
+        if (pass === repass) return null;
+        return {
+            'notMatch': true
+        }
+    }
+
+    onSignupClick(): void {
+        this.checking = !this.checking;
+
+        if (this.registerForm.valid) {
+
+            const { username, password, email } = this.registerForm.value;
+
+            this.authService.postRegister({ username, password, email }).subscribe(res => this.assignRole(res));
+
+        } else console.log('hold');
+    }
+
+    assignRole(res:User) {
+        this.authService.putAssignRole(res._id, ROLE_USER).subscribe(success => {
+            this.checking = !this.checking;
+            if (success) {
+                window.alert('register success');
+                this.registerForm.reset();
+            }
+            else window.alert('register fail');
+        });
     }
 
 }

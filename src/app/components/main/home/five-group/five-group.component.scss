@@ -50,7 +50,6 @@ $border-color: #dbdbdb;
                         }
                         h4 {
                             padding: 0 10px;
-                            font-weight: 600;
                             &:hover {
                                 color: styles.$color-light-green;
                             }
@@ -81,7 +80,7 @@ $border-color: #dbdbdb;
                         }
                         h4 {
                             padding-left: 10px;
-                            font-weight: 600;
+                            font-size: 18px;
                             &:hover {
                                 color: styles.$color-light-green;
                             }

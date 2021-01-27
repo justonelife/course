@@ -15,6 +15,7 @@ export class BigGroupComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
+        // console.log(this.cate)
         this.childCate = this.cate;
     }
 

@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './home.component';
 import { LoadingComponent } from './loading/loading.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 
@@ -17,7 +18,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     imports: [
         CommonModule,
         FontAwesomeModule,
-        PipesModule
+        PipesModule,
+        AppRoutingModule
     ],
     exports: [
         FiveGroupComponent,

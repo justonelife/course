@@ -23,6 +23,7 @@
             (click)='onLoginClick()'>
             <span *ngIf='!checking'>login</span>
             <app-loading *ngIf='checking' [size]="'small'"></app-loading>
+
         </button>
         <button class='mybtn mybtn--sm mybtn--fake-link ml-20' type='button' routerLink='/entrance/forgot'>forgot
             password?</button>

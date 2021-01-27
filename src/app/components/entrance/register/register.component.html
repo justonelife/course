@@ -1,42 +1,53 @@
 <div class='register'>
     <h1 class='register__title'>sign up</h1>
-    <form class='register-form'>
+    <form [formGroup]='registerForm' class='register-form'>
         <label for='username'>username</label>
         <div class='fake-input'>
             <input type='text' 
                 id='username' 
                 placeholder='Enter your user name'
-                [(ngModel)]='username'
-                [ngModelOptions]="{standalone:true}">
+                formControlName='username'
+                appUsernameValidate>
+            <span class='alert alert--decline' *ngIf="registerForm.get('username').touched && registerForm.get('username').invalid">
+                required && accept (a-z) (A-Z) (0-9)
+            </span>
         </div>
 
         <label for='password'>password</label>
         <div class='fake-input'>
-            <input type='password' 
-                id='password' 
-                placeholder='Enter your password'
-                [(ngModel)]='password'
-                [ngModelOptions]="{standalone:true}">
+            <input type='password' id='password' placeholder='Enter your password' formControlName='password'
+                appPasswordValidate>
+            <span class='alert alert--decline' *ngIf="registerForm.get('password').touched && registerForm.get('password').invalid">
+                require && >= 8 characters, at least 1 letter, 1 number and 1 special character
+            </span>
         </div>
 
         <label for='rePassword'>confirm password</label>
         <div class='fake-input'>
-            <input type='password' 
-                id='rePassword' 
-                placeholder='Retype your password'
-                [(ngModel)]='confirmPass'
-                [ngModelOptions]="{standalone:true}">
+            <input type='password' id='rePassword' placeholder='Retype your password' formControlName='repass'>
+            <span class='alert alert--decline' *ngIf="registerForm.get('repass').invalid">
+                password not match
+            </span>
         </div>
 
         <label for='email'>e-mail</label>
         <div class='fake-input'>
-            <input type='text' id='email' placeholder='Enter your email'>
+            <input type='text' id='email' placeholder='Enter your email' formControlName='email' appEmailValidate>
+            <span class='alert alert--decline' *ngIf="registerForm.get('email').touched && registerForm.get('email').invalid">
+                require && must in format email@abc.xyz
+            </span>
         </div>
 
         <label for='agreement' class='remember-me-label'>
             <input type='checkbox' id='agreement'>
             i agree all statements in terms of service
         </label>
-        <button class='login-form__login-btn mybtn mybtn--round mybtn--sm mybtn--light-green neu'>sign up</button>
+        <button class='login-form__login-btn mybtn mybtn--round mybtn--sm mybtn--light-green neu'
+            type='button'
+            [attr.disabled]="checking ? '' : null"
+            (click)='onSignupClick()'>
+            <span *ngIf='!checking'>sign up</span>
+            <app-loading *ngIf='checking' [size]="'small'"></app-loading>
+        </button>
     </form>
 </div>

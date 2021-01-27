@@ -15,7 +15,10 @@ export class FiveGroupComponent implements OnInit {
 
     @Input() categoryId: string;
 
-    public topic:string = 'loading...';
+    public group:{[key:string]: string} = {
+        name: 'loading...',
+        url: ''
+    };
 
     public posts: Post[] | undefined;
     public characterTitle: number = 60;
@@ -27,7 +30,7 @@ export class FiveGroupComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.dataCategory.getSingleCategory(this.categoryId).subscribe(res => this.topic = res.name);
+        this.dataCategory.getSingleCategory(this.categoryId).subscribe(res => this.group = {name: res.name, url: res.url});
         this.dataSevice.getLatestPost(this.categoryId).subscribe(res => this.posts = res);
     }
 

@@ -1,4 +1,9 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 
 import { LoginAdminComponent } from './login-admin.component';
 
@@ -8,9 +13,9 @@ describe('LoginAdminComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginAdminComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [LoginAdminComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

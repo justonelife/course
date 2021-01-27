@@ -1,0 +1,67 @@
+@use '../../../../../styles.scss';
+
+.breadscrumb-wrp {
+    margin-bottom: 20px;
+    height: 40px;
+    width: 100%;
+    background: styles.$color-light-green;
+}
+.breadscrumb {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    li {
+        flex-grow: 1;
+        .step {
+            background: styles.$color-light-green;
+            color: styles.$color-text-color;
+            height: 40px;
+            display: block;
+            font-size: 15px;
+            font-weight: 900;
+            padding: 0 10px;
+            text-transform: capitalize;
+            line-height: 40px;
+            position: relative;
+            text-align: center;
+            &:hover {
+                cursor: pointer;
+            }
+            &::before,
+            &::after {
+                content: "";
+                display: block;
+                height: 0;
+                width: 0;
+                position: absolute;
+                border: 20px solid transparent;
+                transform: rotate(-90deg);
+            }
+            &::before {
+                border-top: 20px solid #fff;
+                left: 0;
+            }
+            &::after {
+                border-top: 20px solid #63d6c5;
+                right: -33px;
+                top: 0;
+                z-index: 1;
+            }
+        }
+
+        &:first-child {
+            .step {
+                &::before {
+                    display: none;
+                }
+            }
+        }
+        &:last-child {
+            .step {
+                &::after {
+                    display: none;
+                }
+            }
+        }
+    }
+}

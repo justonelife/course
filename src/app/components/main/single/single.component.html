@@ -1,17 +1,22 @@
-<div class='single'>
-    <div>home/programming/python</div>
-    <div class='single__content-wrp'>
-        <div *ngIf='!post' class='loading'>
+<div class="single">
+    <!-- <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">home</a></li>
+            <li class="breadcrumb-item"><a href="#">programming</a></li>
+            <li class="breadcrumb-item active" aria-current="page">python</li>
+        </ol>
+    </nav> -->
+    <app-cate-breadscrumb></app-cate-breadscrumb>
+    <div class="single__content-wrp">
+        <div *ngIf="!post" class="loading">
             <app-loading [size]="'medium'"></app-loading>
         </div>
-        <div *ngIf='post && childCate' class='single__content'>
-
-            <h1 class='title'>{{post.title}}</h1>
-            <span class='author'>Đăng bởi: Administrator</span>
-            <p class='content' [innerHtml]='post.content'></p>
-            <app-big-group [cate]='childCate'></app-big-group>
+        <div *ngIf="post && childCate" class="single__content">
+            <h1 class="title">{{ post.title }}</h1>
+            <span class="author">Đăng bởi: Administrator</span>
+            <p class="content" [innerHtml]="post.content"></p>
+            <app-big-group [cate]="childCate"></app-big-group>
         </div>
-
     </div>
-    <app-post-list *ngIf='childCate' [cate]='childCate'></app-post-list>
+    <app-post-list *ngIf="category" [cate]="category"></app-post-list>
 </div>

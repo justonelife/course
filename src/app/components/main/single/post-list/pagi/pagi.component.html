@@ -1,8 +1,10 @@
-<ul class='pagi-btns'>
-    <li *ngFor='let p of page; index as i'>
-        <span class="{{currentPage === i + 1 ? 'active':null}}"
-            (click)='switchPage($event)'>
-            {{p}}
-        </span>
-    </li>
+<ul class="pagi-btns">
+  <li *ngFor="let p of page; index as i">
+    <span
+      class="{{ currentPage === i + 1 ? 'active' : null }}"
+      (click)="switchPage($event)"
+    >
+      {{ p }}
+    </span>
+  </li>
 </ul>

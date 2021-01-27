@@ -1,0 +1,52 @@
+<app-loading [size]="'medium'" *ngIf="!isLoaded"></app-loading>
+<div class="card-container" *ngIf="isLoaded">
+    <div class="card title">
+        <div class="card-body">
+            <h5 class="card-title">Title</h5>
+            <input class="form-control" required [(ngModel)]="post.title" #title="ngModel" />
+
+            <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
+                <div *ngIf="title.errors.required">Title is required.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card thumbnail">
+        <div class="card-body">
+            <h5 class="card-title">Thumbnail</h5>
+            <input class="form-control" placeholder="Image URL here..." required [(ngModel)]="post.thumbnail" />
+        </div>
+    </div>
+
+    <div class="card category">
+        <div class="card-body">
+            <h5 class="card-title">Category</h5>
+            <select id="input" class="form-control" required="required" [(ngModel)]="post.categoryId">
+                <option value="null" selected>None</option>
+                <option selected *ngFor="let item of categories" value="{{ item._id }}">
+                    {{ item.name }}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="card content">
+        <div class="card-header">
+            <h4>Content</h4>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="form">
+                <div class="editor">
+                    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+
+                    <ngx-editor [editor]="editor" formControlName="editorContent" [(ngModel)]="post.content"></ngx-editor>
+                </div>
+
+                <button type="button" class="btn btn-primary reset" (click)="onReset()">Reset</button>
+
+                <button type="button" class="btn btn-primary save" (click)="onPost()" [disabled]="!title.valid">Save</button>
+
+            </form>
+        </div>
+    </div>
+</div>

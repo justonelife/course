@@ -8,8 +8,8 @@ import { HeadComponent } from './head/head.component';
 import { FootComponent } from './foot/foot.component';
 import { HomeModule } from './home/home.module';
 import { SingleModule } from './single/single.module';
-import { PipesModule } from 'src/app/pipes/pipes.module';
 import { ReadComponent } from './read/read.component';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 
 
@@ -26,8 +26,7 @@ import { ReadComponent } from './read/read.component';
     FontAwesomeModule,
     AppRoutingModule,
     HomeModule,
-    SingleModule,
-    PipesModule
+    SingleModule
   ],
   exports: [
     MainComponent,

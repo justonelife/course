@@ -1,6 +1,20 @@
 export class Category {
-    _id:string;
-    name:string;
-    parentId:string;
-    child?:Category[]
+    _id: string;
+    name: string;
+    parentId: string;
+    url: string;
+    child?: Category[];
+    constructor(Cate:Category) {
+        this._id = Cate._id;
+        this.name = Cate.name;
+        this.parentId = Cate.parentId;
+        this.url = Cate.url;
+    }
+}
+
+export class CategoryData {
+    _id: string;
+    name: string;
+    parentId: string;
+    url: string;
 }

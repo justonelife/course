@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
+import { PassingService } from 'src/app/services/passing.service';
 
 @Component({
     selector: 'app-entrance',
@@ -10,10 +11,15 @@ import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 export class EntranceComponent implements OnInit {
 
     faDoorOpen = faDoorOpen;
+    public modalErr:string = '';
 
-    constructor(private router: Router) { }
+    constructor(
+        private router: Router,
+        private passing: PassingService
+    ) { }
 
     ngOnInit(): void {
+        this.passing.currentShowModal.subscribe(res => this.modalErr = res);
     }
 
     onSwitch(event) {
@@ -28,5 +34,9 @@ export class EntranceComponent implements OnInit {
             default:
                 break;
         }
+    }
+
+    onToggleModalClick() {
+        this.passing.toggleModal('');
     }
 }

@@ -1,5 +1,7 @@
 <div class='entrance-page'>
-    <div class='entrance-page__beauty'></div>
+    <div class='entrance-page__beauty'>
+        <img src="./../../../assets/images/logo.png" alt="logo-freetuts">
+    </div>
     <div class='entrance-page__function'>
         <button class='entrance-page__function__home-btn mybtn mybtn--transparent mybtn--sm' [routerLink]="['/']">
             <fa-icon [icon]='faDoorOpen'></fa-icon>
@@ -13,6 +15,18 @@
         </form>
         <div class='entrance-page__function__contain'>
             <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <div [class]="'alert-modal-wrp' + (modalErr ? ' modal--active': '')">
+        <div class="alert-modal"
+            (click)='onToggleModalClick()'>
+            <div class="my-modal" appClickStopPropagation>
+                <h4>message</h4>
+                <p>{{modalErr}}</p>
+                <button class='mybtn mybtn--sm mybtn--light-green'
+                    (click)='onToggleModalClick()'>ok</button>
+            </div>
         </div>
     </div>
 </div>

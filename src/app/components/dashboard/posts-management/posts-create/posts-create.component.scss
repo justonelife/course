@@ -1,0 +1,58 @@
+.card-container {
+    display: grid;
+    grid-template-columns: 30% 30% 40%;
+    max-height: 100%;
+    height: 100%;
+    .card {
+        margin: 10px;
+        &.thumbnail {
+            input {
+                height: 38px;
+                border: 1px solid;
+                border-radius: 0.25rem;
+                border-color: #cccccc;
+                color: #495057;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+            input[type="file"] {
+                display: none;
+            }
+            input[type="file"]::-webkit-file-upload-button {
+                visibility: hidden;
+            }
+            .custom-file-upload {
+                border: 1px solid #ccc;
+                display: inline-block;
+                padding: 6px 12px;
+                cursor: pointer;
+                background-color: #2596be;
+                color: white;
+                border: 1px solid;
+                border-radius: 0.25rem;
+                margin-left: 2px;
+            }
+        }
+        &.content {
+            .card-body {
+                background: wheat;
+            }
+        }
+    }
+}
+
+.card.content {
+    grid-column: 1 / span 3;
+}
+
+button {
+    float: right;
+    background-color: #2596be;
+    margin-top: 10px;
+    &.save {
+        margin-right: 5px;
+    }
+    &.save:disabled {
+        background: #495057;
+        border: none;
+    }
+}

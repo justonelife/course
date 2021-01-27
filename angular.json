@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "freetuts"
+    }
+  },
+  "defaultProject": "freetuts",
+  "cli": {
+    "analytics": false
+  }
 }

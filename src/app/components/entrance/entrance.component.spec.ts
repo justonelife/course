@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EntranceComponent } from './entrance.component';
 
@@ -7,13 +7,10 @@ describe('EntranceComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [EntranceComponent],
-            imports: [
-                RouterTestingModule
-            ]
+            imports: [RouterTestingModule],
         });
+    });
 
-    })
-    
     it('should create', () => {
         let fixture = TestBed.createComponent(EntranceComponent);
         let comp = fixture.componentInstance;
@@ -32,7 +29,6 @@ describe('EntranceComponent', () => {
 
         btn.click();
         expect(comp.onSwitch).toHaveBeenCalled();
-
     });
 
     it('register switch button work right', () => {
@@ -47,6 +43,5 @@ describe('EntranceComponent', () => {
 
         btn.click();
         expect(comp.onSwitch).toHaveBeenCalled();
-
     });
 });

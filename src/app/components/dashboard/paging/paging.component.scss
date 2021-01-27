@@ -1,0 +1,33 @@
+.paginate {
+    height: 42px;
+    float: right;
+    margin-right: 10px;
+    li {
+        display: inline-block;
+        width: 42px;
+        height: 100%;
+        margin-left: 10px;
+        border: 1px solid #63d6c5;
+        border-radius: 5px;
+        span {
+            display: block;
+            background: #fff;
+            text-align: center;
+            width: 40px;
+            height: 100%;
+            line-height: 42px;
+            font-size: 19px;
+            border-radius: 5px;
+            &:hover {
+                cursor: pointer;
+            }
+            &:hover:not(.active) {
+                background-color: #63d6c5;
+            }
+        }
+        .active {
+            background-color: #108876;
+            color: white;
+        }
+    }
+}

@@ -1,48 +1,48 @@
 <div class='five-group'>
-    <h1 class='title'>{{topic}}</h1>
+    <h1 class='title'>{{group.name}}</h1>
     <div class='contain-wrp'>
         <div *ngIf='!posts' class='loading'>
             <app-loading *ngIf='!posts' [size]="'medium'"></app-loading>
         </div>
         <div *ngIf='posts' class='contain'>
             <div>
-                <a href='#'>
+                <a routerLink="{{'/read/' + posts[0].url}}">
                     <img src='https://freetuts.net/upload/tut_post/images/2015/12/17/527/cach-cai-dat-wordpress.gif'>
                     <h4>{{posts[0].title | limitCharacter:characterTitle}}</h4>
                     <p>{{posts[0].content | limitCharacter:characterContent}}</p>
                 </a>
             </div>
             <div>
-                <a href='#'>
+                <a routerLink="{{'/read/' + posts[1].url}}">
                     <img
                         src='https://freetuts.net/upload/tut_post/_thumbs/Images/2016/04/25/638/tao-trang-quan-ly-options-trong-wordpress.gif'>
                     <h4>{{posts[1].title | limitCharacter:characterTitle}}</h4>
                 </a>
             </div>
             <div>
-                <a href='#'>
+                <a routerLink="{{'/read/' + posts[2].url}}">
                     <img
                         src='https://freetuts.net/upload/tut_post/_thumbs/Images/2016/04/25/638/tao-trang-quan-ly-options-trong-wordpress.gif'>
                     <h4>{{posts[2].title | limitCharacter:characterTitle}}</h4>
                 </a>
             </div>
             <div>
-                <a href='#'>
+                <a routerLink="{{'/read/' + posts[3].url}}">
                     <img
                         src='https://freetuts.net/upload/tut_post/_thumbs/Images/2016/04/25/638/tao-trang-quan-ly-options-trong-wordpress.gif'>
                     <h4>{{posts[3].title | limitCharacter:characterTitle}}</h4>
                 </a>
             </div>
             <div>
-                <a href='#'>
+                <a routerLink="{{'/read/' + posts[4].url}}">
                     <img
                         src='https://freetuts.net/upload/tut_post/_thumbs/Images/2016/04/25/638/tao-trang-quan-ly-options-trong-wordpress.gif'>
                     <h4>{{posts[4].title | limitCharacter:characterTitle}}</h4>
                 </a>
             </div>
             <div>
-                <button>
-                    xem them
+                <button routerLink="{{'/single/' + group.url}}">
+                    xem thêm
                     <fa-icon [icon]='arrow'></fa-icon>
                 </button>
             </div>

@@ -9,10 +9,23 @@
                 <fa-icon [icon]='faSearch'></fa-icon>
             </button>
         </div>
-        <div class='header__buttons'>
-            <button class='header__btn' [routerLink]="['', 'entrance']">
-                <fa-icon [icon]='faUserCircle'></fa-icon>
+        <div class="dropdown" *ngIf="isLogged; else toLogin">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="title">{{username | titlecase}} <fa-icon [icon]="faUserCircle"></fa-icon></span>
             </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button">
+                    Profile
+                </button>
+                <button class="dropdown-item" type="button" [routerLink]="['/entrance']" (click)="onLogout()">
+                    Logout
+                </button>
+            </div>
         </div>
+        <ng-template #toLogin>
+            <div class="dropdown">
+                <button class="btn btn-outline-info" type="button" [routerLink]="['/entrance']" (click)="onLogout()">Login</button>
+            </div>
+        </ng-template>
     </div>
 </div>

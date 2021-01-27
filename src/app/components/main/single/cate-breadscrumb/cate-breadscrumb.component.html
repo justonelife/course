@@ -1,0 +1,7 @@
+<div class='breadscrumb-wrp'>
+
+    <ul *ngIf='breadscrumb.length > 0' class='breadscrumb'>
+        <li><span class='step' [routerLink]="['']">home</span></li>
+        <li *ngFor='let bc of breadscrumb'><span class='step'>{{bc}}</span></li>
+    </ul>
+</div>

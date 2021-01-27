@@ -5,21 +5,28 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginModule } from './login/login.module';
 import { RegisterComponent } from './register/register.component';
-import { FormsModule } from '@angular/forms';
+import { DirectivesModule } from 'src/app/directives/directives.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { HomeModule } from '../main/home/home.module';
 
 
 
 @NgModule({
     declarations: [
         EntranceComponent,
-        RegisterComponent
+        RegisterComponent,
+        ForgotPasswordComponent
     ],
     imports: [
         CommonModule,
         AppRoutingModule,
         FontAwesomeModule,
         LoginModule,
-        FormsModule
+        DirectivesModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HomeModule
     ],
     exports: [
         EntranceComponent

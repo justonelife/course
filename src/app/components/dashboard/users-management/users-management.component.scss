@@ -1,0 +1,29 @@
+.card {
+    margin: 10px;
+    width: 100%;
+    .card-header {
+        background-color: #333;
+        color: #eeeeee;
+    }
+}
+
+.pagination {
+    float: right;
+    margin: 20px;
+}
+
+.pull-right {
+    margin-bottom: 10px;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+tr:hover {
+    background-color: rgb(223, 222, 222);
+}
+
+th {
+    cursor: pointer;
+}

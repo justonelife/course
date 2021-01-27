@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 $color-light-green: #63d6c5;
 $color-dark-green: #477d8c;
 $color-dark-blue: #253243;
@@ -7,9 +8,8 @@ $color-white-green: #dff9fb;
 $color-text-color2: #535c68;
 $color-light-theme: #ffffff;
 $color-dark-theme: #1b1b1b;
+$color-red: #e74c3c;
 $size-page-width: 1400px;
-
-
 * {
     margin: 0;
     padding: 0;
@@ -21,7 +21,8 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-h1, button {
+h1,
+button {
     font-weight: 100;
 }
 
@@ -53,7 +54,8 @@ a {
     margin-left: 20px;
 }
 
-button:focus, input:focus {
+button:focus,
+input:focus {
     outline: none;
     box-shadow: none;
 }
@@ -64,7 +66,7 @@ button:focus, input:focus {
     align-items: center;
 }
 
-.buttons--vertical > button {
+.buttons--vertical>button {
     margin-bottom: 20px;
 }
 
@@ -126,7 +128,7 @@ button:focus, input:focus {
     border-bottom: 1px solid $color-text-color2;
 }
 
-.fake-input > input {
+.fake-input>input {
     height: 100%;
     width: 100%;
     background: transparent;
@@ -137,7 +139,7 @@ button:focus, input:focus {
     background: #fff;
 }
 
-.fake-input--box > input {
+.fake-input--box>input {
     color: $color-text-color2;
 }
 
@@ -181,4 +183,9 @@ button:focus, input:focus {
 
 .layout__item--grow-2 {
     flex-grow: 2;
+}
+
+.NgxEditor__Content {
+    height: 340px;
+    overflow-y: scroll;
 }

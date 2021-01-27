@@ -1,0 +1,11 @@
+<ul class="paginate">
+    <li>
+        <span (click)="prev()">&laquo;</span>
+    </li>
+    <li *ngFor="let page of pageNumber; index as i">
+        <span class="{{ currentPage === i + 1 ? 'active' : null }}" (click)="switchPage($event)">
+      {{ page }}
+    </span>
+    </li>
+    <li><span (click)="next()">&raquo;</span></li>
+</ul>

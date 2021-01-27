@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginDecisionComponent } from './login-decision.component';
@@ -8,9 +9,9 @@ describe('LoginDecisionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginDecisionComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule],
+      declarations: [LoginDecisionComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

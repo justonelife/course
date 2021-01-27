@@ -1,8 +1,8 @@
 @use '../../../../styles.scss';
-
 .header-wrp {
     background: styles.$color-light-green;
 }
+
 .header {
     background: inherit;
     width: styles.$size-page-width;
@@ -13,12 +13,14 @@
     align-items: center;
     justify-content: space-between;
 }
+
 .logo-link {
     height: 50px;
     display: inline-block;
     padding: 0 20px;
     line-height: 50px;
 }
+
 .logo {
     background-image: url('../../../../assets/images/logo.png');
     width: 181px;
@@ -28,18 +30,38 @@
     background-position: center center;
     text-indent: -9999em;
 }
+
 .search-btn {
     color: #bbbbbb;
     width: 33px;
     background: transparent;
 }
+
 .header__buttons {
     min-width: 181px;
 }
+
 .header__btn {
-    width: 50px;
+    width: 200px;
     height: 50px;
-    font-size: 28px;
+    font-size: 20px;
     color: #ffffff;
     background: transparent;
+}
+
+.dropdown-menu {
+    border: 1px solid;
+    .dropdown-item {
+        padding: 10px;
+    }
+    .dropdown-item:hover {
+        background: #63d6c5;
+    }
+}
+
+.btn {
+    &.btn-outline-info {
+        padding: 5px;
+        border: 1px solid;
+    }
 }

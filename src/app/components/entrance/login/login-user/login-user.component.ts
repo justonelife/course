@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { ROLE_USER } from 'src/app/services/reference';
+import { PassingService } from 'src/app/services/passing.service';
 
-const ROLE = 'c13d1ff1-8e1e-4c5b-82c1-408a5724c776';
+
 
 @Component({
     selector: 'app-login-user',
@@ -18,11 +20,12 @@ export class LoginUserComponent implements OnInit {
     public username: string = '';
     public password: string = '';
 
-    public checking:boolean = false;
+    public checking: boolean = false;
 
     constructor(
         private router: Router,
-        private loginService: AuthorizationService    
+        private loginService: AuthorizationService,
+        private passing: PassingService
     ) { }
 
     ngOnInit(): void {
@@ -36,23 +39,24 @@ export class LoginUserComponent implements OnInit {
     }
 
     onLoginClick() {
-        this.checking = !this.checking;
+        this.checking = true;
 
-        let info:any = {
+        let info: any = {
             username: this.username,
             password: this.password
         }
 
         this.loginService.postLogin(info).subscribe(
             res => {
-                this.checking = !this.checking;
+                this.checking = false;
                 if (!res.error) {
                     let roleId = res.roleId;
-                    if (roleId === ROLE) this.router.navigate(['']);
-                    else window.alert('Login User Fail');
-                } else {
-                    window.alert('Login Fail');
-                }
+                    if (roleId === ROLE_USER) {
+                        sessionStorage.setItem('user', this.username)
+                        this.router.navigate(['']);
+                    }
+                    else this.passing.toggleModal('login user fail, please check role');
+                } else this.passing.toggleModal('login fail');
             }
         )
     }
