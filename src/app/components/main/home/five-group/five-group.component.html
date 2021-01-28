@@ -7,36 +7,32 @@
         <div *ngIf='posts' class='contain'>
             <div>
                 <a routerLink="{{'/read/' + posts[0].url}}">
-                    <img src='https://freetuts.net/upload/tut_post/images/2015/12/17/527/cach-cai-dat-wordpress.gif'>
+                    <img [src]='posts[0].thumbnail'>
                     <h4>{{posts[0].title | limitCharacter:characterTitle}}</h4>
                     <p>{{posts[0].content | limitCharacter:characterContent}}</p>
                 </a>
             </div>
             <div>
                 <a routerLink="{{'/read/' + posts[1].url}}">
-                    <img
-                        src='https://freetuts.net/upload/tut_post/_thumbs/Images/2016/04/25/638/tao-trang-quan-ly-options-trong-wordpress.gif'>
+                    <img [src]='posts[1].thumbnail'>
                     <h4>{{posts[1].title | limitCharacter:characterTitle}}</h4>
                 </a>
             </div>
             <div>
                 <a routerLink="{{'/read/' + posts[2].url}}">
-                    <img
-                        src='https://freetuts.net/upload/tut_post/_thumbs/Images/2016/04/25/638/tao-trang-quan-ly-options-trong-wordpress.gif'>
+                    <img [src]='posts[2].thumbnail'>
                     <h4>{{posts[2].title | limitCharacter:characterTitle}}</h4>
                 </a>
             </div>
             <div>
                 <a routerLink="{{'/read/' + posts[3].url}}">
-                    <img
-                        src='https://freetuts.net/upload/tut_post/_thumbs/Images/2016/04/25/638/tao-trang-quan-ly-options-trong-wordpress.gif'>
+                    <img [src]='posts[3].thumbnail'>
                     <h4>{{posts[3].title | limitCharacter:characterTitle}}</h4>
                 </a>
             </div>
             <div>
                 <a routerLink="{{'/read/' + posts[4].url}}">
-                    <img
-                        src='https://freetuts.net/upload/tut_post/_thumbs/Images/2016/04/25/638/tao-trang-quan-ly-options-trong-wordpress.gif'>
+                    <img [src]='posts[4].thumbnail'>
                     <h4>{{posts[4].title | limitCharacter:characterTitle}}</h4>
                 </a>
             </div>

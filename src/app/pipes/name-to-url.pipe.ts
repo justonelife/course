@@ -40,7 +40,7 @@ export class NameToUrlPipe implements PipeTransform {
             var char = AccentsMap[i][0];
             str = str.replace(re, char);
         }
-        return str;
+        return str.toLocaleLowerCase();
     }
 
 }

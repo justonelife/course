@@ -1,12 +1,12 @@
 @use '../../../../../styles.scss';
 
-$border-color: #dbdbdb;
+$border-color: #cccccc;
 
 .five-group {
     width: 900px;
     margin-bottom: 50px;
     .title {
-        color: #eeeeee;
+        color: styles.$color-text-color;
         background: styles.$color-light-green;
         font-size: 18px;
         height: 45px;
@@ -17,7 +17,7 @@ $border-color: #dbdbdb;
     }
     .contain-wrp {
         min-height: 465px;
-        background: #efefef;
+        background: styles.$color-text-color;
         .loading {
             width: 100%;
             height: 465px;
@@ -76,7 +76,6 @@ $border-color: #dbdbdb;
                         color: #40454d;
                         img {
                             width: 100px;
-                            height: 74px;
                         }
                         h4 {
                             padding-left: 10px;

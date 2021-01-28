@@ -1,0 +1,30 @@
+@use '../home/five-group/five-group.component.scss' as fg;
+
+.my-read {
+    width: 100%;
+    min-height: 400px;
+    border: 1px solid fg.$border-color;
+    margin-bottom: 20px;
+    .my-read__content {
+        padding: 20px;
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-transform: capitalize;
+        }
+        .author {
+            font-size: 12px;
+            color: #afafaf;
+            margin-bottom: 25px;
+            display: block;
+        }
+        .content {
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
+    }
+    .my-read__loading {
+        height: 400px;
+    }
+}

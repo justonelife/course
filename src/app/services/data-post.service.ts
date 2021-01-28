@@ -44,7 +44,7 @@ export class DataPostService {
                 map((data) => {
                     let newData: Post[] = [];
                     data.forEach(d => newData.push(new Post(d)));
-                    return newData;
+                    return this.formatFiveGroup(newData);
                 })
             );
     }
@@ -96,6 +96,25 @@ export class DataPostService {
                     return newData;
                 })
             );
+    }
+
+    getSinglePostByUrl(url: string): Observable<Post> {
+        console.log(this.allPostUrl + `/?query={"url":"${url}"}`);
+        return this.httpClient
+            .get<Post[]>(
+                this.allPostUrl + `/?query={"url":"${url}"}`,
+                this.httpOptions
+            )
+            .pipe(
+                map(data => new Post(data[0]))
+            )
+    }
+
+    formatFiveGroup(data: Post[]): Post[] {
+        let parser = new DOMParser();
+        let htmlDoc = parser.parseFromString(data[0].content, 'text/html');
+        data[0].content = htmlDoc.body.innerText;
+        return data;
     }
 
 }
