@@ -49,6 +49,8 @@ export class SingleComponent implements OnInit {
                     categoryId: '',
                     _id: '',
                     url: '',
+                    prevId: '',
+                    thumbnail: '',
                     content: res
                 }
             } else this.post = res;

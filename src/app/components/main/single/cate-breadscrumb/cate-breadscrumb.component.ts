@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { Category } from 'src/app/models/category.model';
 import { DataCategoryService } from 'src/app/services/data-category.service';
@@ -12,22 +13,30 @@ import { DataCategoryService } from 'src/app/services/data-category.service';
 export class CateBreadscrumbComponent implements OnInit {
 
     private current: string;
-    public breadscrumb: string[] = [];
+    public breadscrumb: {name: string, url: string}[] = [];
+    private stepClick: boolean = false;
 
     constructor(
         private activatedRoute: ActivatedRoute,
-        private dataCategory: DataCategoryService
+        private dataCategory: DataCategoryService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
 
         this.activatedRoute.params.pipe(
             tap((res) => {
-                this.variableReset();
-                this.current = res.categoryURL; 
+                if (!this.stepClick) this.variableReset();
+                this.current = res.categoryURL;
             }),
-            switchMap(() => this.dataCategory.getRawAllCategory())
-        ).subscribe(res => this.findBread(res))
+            switchMap(() => {
+                if (this.stepClick) return of(null);
+                return this.dataCategory.getRawAllCategory();
+            })
+        ).subscribe(res => {
+            if (!this.stepClick) this.findBread(res);
+            this.stepClick = false;
+        })
 
     }
 
@@ -37,7 +46,10 @@ export class CateBreadscrumbComponent implements OnInit {
 
         while (startPoint.length > 0) {
 
-            this.breadscrumb.unshift(startPoint[0].name);
+            this.breadscrumb.unshift({
+                name: startPoint[0].name,
+                url: startPoint[0].url
+            });
 
             startPoint = cate.filter(val => val._id === startPoint[0].parentId);
         }
@@ -46,6 +58,13 @@ export class CateBreadscrumbComponent implements OnInit {
 
     variableReset() {
         this.breadscrumb.splice(0, this.breadscrumb.length);
+    }
+
+    onStepClick(url:any, index:number) {
+        let Len = this.breadscrumb.length;
+        this.breadscrumb.splice(index + 1, Len - index - 1);
+        this.stepClick = true;
+        this.router.navigate(['/single', url]);
     }
 
 }

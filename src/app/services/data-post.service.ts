@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PUBLIC_USER, COLLECTION_END_POINT } from './reference';
 import { Post } from '../models/post.model';
@@ -43,14 +43,7 @@ export class DataPostService {
             .pipe(
                 map((data) => {
                     let newData: Post[] = [];
-                    for (let d of data)
-                        newData.push({
-                            _id: d._id,
-                            categoryId: d.categoryId,
-                            content: d.content,
-                            title: d.title,
-                            url: d.url
-                        });
+                    data.forEach(d => newData.push(new Post(d)));
                     return newData;
                 })
             );
@@ -64,15 +57,8 @@ export class DataPostService {
             )
             .pipe(
                 map((data) => {
-                    if (data.length > 0) {
-                        let _id: string = data[0]._id;
-                        let title: string = data[0].title;
-                        let content: string = data[0].content;
-                        let categoryId: string = data[0].categoryId;
-                        let url: string = data[0].url;
-                        let newData: Post = { _id, title, content, categoryId, url };
-                        return newData;
-                    } else return 'No Post';
+                    if (data.length > 0) return new Post(data[0]);
+                    else return 'No Post';
                 })
             );
     }
@@ -98,40 +84,18 @@ export class DataPostService {
         result = result.slice(0, result.length - 2);
 
         return this.httpClient
-            .get<any>(
+            .get<Post[]>(
                 this.allPostUrl +
                 `/?query={"$or":[${result}]}&skip=${skip}&limit=${limit}`,
                 this.httpOptions
             )
-            .pipe(map((data) => data));
+            .pipe(
+                map(data => {
+                    let newData: Post[] = [];
+                    data.forEach(d => newData.push(new Post(d)));
+                    return newData;
+                })
+            );
     }
 
 }
-
-
-
- //lazy edit 
-//  getAllPost(): Observable<Post[]> {
-//     return this.httpClient
-//         .get<Post[]>(this.allPostUrl + '/?skip=3000&limit=400', this.httpOptions)
-//         .pipe();
-// }
-
-
-// this.data.getRawAllCategory().subscribe(res => {
-//     res.forEach(val => {
-//         console.log(val)
-//         const mypipe = new NameToUrlPipe();
-
-//         let temp = val;
-//         temp.url = mypipe.transform(val.name);
-//         this.data.lazyEdit(val._id, temp).subscribe(console.log)
-//     })
-// })
-
-//-----
-// lazyEdit(id: string, bod: any): Observable<any> {
-//     return this.httpClient
-//         .put<any>(this.allCategoryURL + `/${id}`, bod, { headers: { Authorization: "Basic a2lkX1NrXzhJM0NDUDowMWRmNjlmNzUzMDI0ZGI2YWQ2ZWNiZjBhMDlhMDY2Mw==", 'Content-Type': 'application/json' } })
-//         .pipe();
-// }

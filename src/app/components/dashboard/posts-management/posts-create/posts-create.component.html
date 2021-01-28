@@ -21,12 +21,14 @@
     <div class="card category">
         <div class="card-body">
             <h5 class="card-title">Category</h5>
-            <select id="input" class="form-control" required="required" [(ngModel)]="post.categoryId">
-                <option value="null" selected>None</option>
-                <option selected *ngFor="let item of categories" value="{{ item._id }}">
-                    {{ item.name }}
-                </option>
-            </select>
+            <select id="input" class="form-control" required="required" [(ngModel)]="post.categoryId" #cateId="ngModel">
+        <option selected *ngFor="let item of categories" value="{{ item._id}}">
+          {{ item.name }}
+        </option>
+      </select>
+            <div *ngIf="cateId.invalid && (cateId.dirty || cateId.touched)" class="alert alert-danger">
+                <div *ngIf="cateId.errors.required">Category is required.</div>
+            </div>
         </div>
     </div>
 
@@ -42,11 +44,32 @@
                     <ngx-editor [editor]="editor" formControlName="editorContent" [(ngModel)]="post.content"></ngx-editor>
                 </div>
 
-                <button type="button" class="btn btn-primary reset" (click)="onReset()">Reset</button>
+                <button type="button" class="btn btn-primary reset" (click)="onReset()">
+          Reset
+        </button>
 
-                <button type="button" class="btn btn-primary save" (click)="onPost()" [disabled]="!title.valid">Save</button>
-
+                <button type="button" class="btn btn-primary save" (click)="onPost()" [disabled]="!title.valid || !cateId.valid" data-toggle="modal" data-target="#postModal">
+          Save
+        </button>
             </form>
+        </div>
+    </div>
+</div>
+
+<div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" *ngIf="isPosted">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Created a new post</h4>
+                <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success">
+                    <p>{{ post.title }}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

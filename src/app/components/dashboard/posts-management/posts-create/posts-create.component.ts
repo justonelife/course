@@ -4,9 +4,9 @@ import {
     Validators,
     AbstractControl,
 } from '@angular/forms';
-import { PostsData } from './../../../../models/post.model';
+import { Post } from './../../../../models/post.model';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { CategoryData } from 'src/app/models/category.model';
+import { Category } from 'src/app/models/category.model';
 import { DataService } from 'src/app/services/data.service';
 import { Editor, Toolbar } from 'ngx-editor';
 
@@ -16,20 +16,20 @@ import { Editor, Toolbar } from 'ngx-editor';
     styleUrls: ['./posts-create.component.scss'],
 })
 export class PostsCreateComponent implements OnInit, OnChanges {
-    public categories: CategoryData[] = [];
-    public posts: PostsData[] = [];
-    public post: PostsData;
-    public defaultPosts: PostsData = {
+    public categories: Category[] = [];
+    public posts: Post[] = [];
+    public post: Post;
+    public defaultPosts: Post = {
         _id: null,
         title: null,
         content: null,
         categoryId: null,
         prevId: null,
-        nextId: null,
         thumbnail: null,
         url: null
     };
     public isLoaded: boolean = false;
+    public isPosted: boolean = false;
 
     editor: Editor;
     toolbar: Toolbar = [
@@ -50,7 +50,7 @@ export class PostsCreateComponent implements OnInit, OnChanges {
     ngOnInit(): void {
         this.post = JSON.parse(JSON.stringify(this.defaultPosts));
 
-        this._dataService.getCategories().subscribe((data: CategoryData[]) => {
+        this._dataService.getCategories().subscribe((data: Category[]) => {
             this.isLoaded = true;
             this.categories = data;
         });
@@ -60,7 +60,6 @@ export class PostsCreateComponent implements OnInit, OnChanges {
         });
 
         this.editor = new Editor();
-
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -76,9 +75,8 @@ export class PostsCreateComponent implements OnInit, OnChanges {
     }
 
     onPost = () => {
-        this._dataService.createPosts(this.post).subscribe(res => {
-            // console.log(res);
-        });
+        this.isPosted = true;
+        this._dataService.createPosts(this.post).subscribe(res => { });
     }
 
 }

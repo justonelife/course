@@ -1,3 +1,4 @@
+import { PagingModule } from './paging/paging.module';
 import { PostsManagementModule } from './posts-management/posts-management.module';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { NgModule } from '@angular/core';
@@ -10,14 +11,12 @@ import { FormsModule } from '@angular/forms';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { HomeModule } from '../main/home/home.module';
 import { CategoriesManagementComponent } from './categories-management/categories-management.component';
-import { PagingComponent } from './paging/paging.component';
 
 @NgModule({
     declarations: [
         DashboardComponent,
         UsersManagementComponent,
         CategoriesManagementComponent,
-        PagingComponent,
     ],
     imports: [
         CommonModule,
@@ -28,6 +27,7 @@ import { PagingComponent } from './paging/paging.component';
         HomeModule,
         Ng2OrderModule,
         PostsManagementModule,
+        PagingModule
     ],
     exports: [DashboardComponent],
 })

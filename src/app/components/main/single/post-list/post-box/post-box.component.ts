@@ -14,6 +14,9 @@ export class PostBoxComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
+        let parser = new DOMParser();
+        let htmlDoc = parser.parseFromString(this.post.content, 'text/html');
+        this.post.content = htmlDoc.body.innerText
     }
 
 }

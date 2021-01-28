@@ -7,53 +7,57 @@
                     <h4>Categories Management</h4>
                 </div>
                 <div class="card-body">
-                    <div class="pull-left">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" (click)="onModalAdd()">
-              <fa-icon [icon]="faPlusCircle"></fa-icon> Add
-            </button>
+                    <div>
+                        <div class="pull-left">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" (click)="onModalAdd()">
+                                 <fa-icon [icon]="faPlusCircle"></fa-icon> Add
+                            </button>
+                        </div>
+                        <div class="pull-right">
+                            <span class="search-icon">
+                                <fa-icon [icon]="faSearch"></fa-icon>
+                             </span>
+                            <input class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
+                        </div>
                     </div>
-                    <div class="pull-right">
-                        <input class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
+                    <div class="table-scroll">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th (click)="sort('id')">
+                                        Name
+                                        <fa-icon [icon]="faSort"></fa-icon>
+                                    </th>
+                                    <th>Parent Category</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="
+                                  let item of categories
+                                    | filter: searchText
+                                    | orderBy: key:reverse
+                                ">
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.parentId | idToName: categoryArray }}</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal" (click)="onModalEdit(item)">
+                                    <fa-icon [icon]="faEdit"></fa-icon>
+                                    Edit
+                                  </button>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" (click)="onModalDelete(item)">
+                                    <fa-icon [icon]="faTrash"></fa-icon>
+                                    Delete
+                                  </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <table class="table">
-                        <thead class="thead-light">
-                            <tr>
-                                <th (click)="sort('id')">
-                                    ID
-                                    <fa-icon [icon]="faSort"></fa-icon>
-                                </th>
-                                <th (click)="sort('id')">
-                                    Name
-                                    <fa-icon [icon]="faSort"></fa-icon>
-                                </th>
-                                <th>Parent Category</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="
-                  let item of categories
-                    | filter: searchText
-                    | orderBy: key:reverse
-                ">
-                                <td>{{ item._id }}</td>
-                                <td>{{ item.name }}</td>
-                                <td>{{ item.parentId }}</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal" (click)="onModalEdit(item)">
-                    <fa-icon [icon]="faEdit"></fa-icon>
-                    Edit
-                  </button>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" (click)="onModalDelete(item)">
-                    <fa-icon [icon]="faTrash"></fa-icon>
-                    Delete
-                  </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <app-paging *ngIf="totalPage" [count]="totalPage" (newPage)="pageChange($event)"></app-paging>
+                    <div class="pagination">
+                        <app-paging *ngIf="totalPage" [count]="totalPage" (newPage)="pageChange($event)"></app-paging>
+                    </div>
                 </div>
             </div>
         </div>
@@ -68,19 +72,19 @@
             <div class="modal-header">
                 <h4 class="modal-title">Are you sure to delete?</h4>
                 <button type="button" class="close" data-dismiss="modal">
-          &times;
-        </button>
+                    &times;
+                </button>
             </div>
             <div class="modal-body">
                 <h3>{{ category.name }}</h3>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onDelete(category)" data-target="#alertModal" data-toggle="modal">
-          Yes
-        </button>
+                    Yes
+                </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">
-          Close
-        </button>
+                    Close
+                </button>
             </div>
         </div>
     </div>
@@ -94,8 +98,8 @@
             <div class="modal-header">
                 <h4 class="modal-title">Change category's name</h4>
                 <button type="button" class="close" data-dismiss="modal">
-          &times;
-        </button>
+                    &times;
+                </button>
             </div>
             <div class="modal-body">
                 <form>
@@ -107,11 +111,11 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success" data-dismiss="modal" data-target="#alertEditModal" data-toggle="modal" (click)="onUpdate(edit.value)">
-          Save changes
-        </button>
+                    Save changes
+                </button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">
-          Close
-        </button>
+                    Close
+                </button>
             </div>
         </div>
     </div>
@@ -125,193 +129,188 @@
             <div class="modal-header">
                 <h4 class="modal-title">Add new category</h4>
                 <button type="button" class="close" data-dismiss="modal">
-          &times;
-        </button>
+                    &times;
+                </button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="category-name" class="col-form-label">Category's Name:</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="category-name"
-              [(ngModel)]="category.name"
-              [ngModelOptions]="{ standalone: true, updateOn: 'blur' }"
-            />
-            <label for="category-parentid" class="col-form-label"
-              >Category's Parent:</label
-            >
-            <div>
-              <select
-                class="form-select form-select-lg mb-3"
-                aria-label=".form-select-lg example"
-                [(ngModel)]="category.parentId"
-                [ngModelOptions]="{ standalone: true, updateOn: 'blur' }"
-              >
-                <option
-                  selected
-                  *ngFor="let item of categoryArray"
-                  value="{{ item._id }}"
-                >
-                  {{ item.name }}
-                </option>
-              </select>
+                        <label for="category-name" class="col-form-label">Category's Name:</label>
+                        <input type="text" class="form-control" id="category-name" [(ngModel)]="category.name" [ngModelOptions]="{ standalone: true, updateOn: 'blur' }" />
+                        <label for="category-parentid" class="col-form-label">Category's Parent:</label>
+                        <div>
+                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" [(ngModel)]="category.parentId" [ngModelOptions]="{ standalone: true, updateOn: 'blur' }">
+                                <option selected *ngFor="let item of categoryArray" value="{{ item._id }}">
+                                    {{ item.name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-success"
-          data-dismiss="modal"
-          data-toggle="modal"
-          data-target="#alertAddModal"
-          (click)="onAdd(category)"
-        >
-          Add
-        </button>
-      </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#alertAddModal" (click)="onAdd(category)">
+                    Add
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Delete Alert Modal -->
 <ng-container *ngIf="!delSuccess; then a; else b"></ng-container>
 <ng-template #a>
-  <div class="modal fade" id="alertModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Failed</h4>
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">&times;</span
-            ><span class="sr-only">Close</span>
-          </button>
+    <div class="modal fade" id="alertModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Failed</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger" role="alert">
+                        <p>
+                            Cannot <b>delete</b> category <b>{{ category.name }}</b>
+                        </p>
+                        <p>Having sub-category(s) !!!</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="alert alert-danger" role="alert">
-            <p>
-              Cannot <b>delete</b> category <b>{{ category.name }}</b>
-            </p>
-            <p>Having sub-category(s) !!!</p>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
 </ng-template>
 <ng-template #b>
-  <div class="modal fade" id="alertModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Success</h4>
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">&times;</span
-            ><span class="sr-only">Close</span>
-          </button>
+    <div class="modal fade" id="alertModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Success</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert">
+                        <p>
+                            Successfull <b>deleted</b> category <b>{{ category.name }}</b> =)
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="alert alert-success" role="alert">
-            <p>
-              Successfull <b>deleted</b> category <b>{{ category.name }}</b> =)
-            </p>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
 </ng-template>
 
 <!-- Add Alert Modal -->
 <ng-container *ngIf="!addSuccess; then addFailed; else addDone"> </ng-container>
 <ng-template #addFailed>
-  <div class="modal fade" id="alertAddModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Failed</h4>
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">&times;</span
-            ><span class="sr-only">Close</span>
-          </button>
+    <div class="modal fade" id="alertAddModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Failed</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning" role="alert">
+                        Category name <b>{{ category.name }}</b> is <b>exist</b>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="alert alert-warning" role="alert">
-            Category name <b>{{ category.name }}</b> is <b>exist</b>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
 </ng-template>
 <ng-template #addDone>
-  <div class="modal fade" id="alertAddModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Success</h4>
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">&times;</span
-            ><span class="sr-only">Close</span>
-          </button>
+    <div class="modal fade" id="alertAddModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Success</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert">
+                        Successfully <b>added</b> category <b>{{ category.name }}</b> =)
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="alert alert-success" role="alert">
-            Successfully <b>added</b> category <b>{{ category.name }}</b> =)
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
 </ng-template>
 
 <!-- Edit Alert Modal -->
-<ng-container *ngIf="editSuccess">
-  <div class="modal fade" id="alertEditModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Success</h4>
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">&times;</span
-            ><span class="sr-only">Close</span>
-          </button>
+<ng-container *ngIf="editSuccess; then editDone; else editFailed"></ng-container>
+<ng-template #editDone>
+    <div class="modal fade" id="alertEditModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Success</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert">
+                        Successfully <b>updated</b> category <b>{{ category.name }}</b> =)
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="alert alert-success" role="alert">
-            Successfully <b>updated</b> category <b>{{ category.name }}</b> =)
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
-</ng-container>
+</ng-template>
+<ng-template #editFailed>
+    <div class="modal fade" id="alertEditModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Failed</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning" role="alert">
+                        Category name <b>{{ category.name }}</b> exist =)
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

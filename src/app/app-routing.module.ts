@@ -1,3 +1,4 @@
+import { PostsEditComponent } from './components/dashboard/posts-management/posts-edit/posts-edit.component';
 import { AuthGuard } from './services/guards/auth.guard';
 import { PostsCreateComponent } from './components/dashboard/posts-management/posts-create/posts-create.component';
 import { PostsManagementComponent } from './components/dashboard/posts-management/posts-management.component';
@@ -39,7 +40,18 @@ export const routes: Routes = [
                 path: 'posts',
                 component: PostsManagementComponent,
                 data: { title: 'Posts Management' },
-                children: [{ path: 'posts-create', component: PostsCreateComponent }],
+                children: [
+                    {
+                        path: 'posts-create',
+                        component: PostsCreateComponent,
+                        data: { title: 'Posts Create' }
+                    },
+                    {
+                        path: 'posts-edit',
+                        component: PostsEditComponent,
+                        data: { title: 'Posts Edit' }
+                    }
+                ],
             },
             {
                 path: 'users',

@@ -8,6 +8,9 @@
                 </div>
                 <div class="card-body">
                     <div class="pull-right">
+                        <span class="search-icon">
+                            <fa-icon [icon]="faSearch"></fa-icon>
+                        </span>
                         <input class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
                     </div>
                     <table class="table" data-pagination="true" data-show-pagination-switch="true" data-show-footer="true">

@@ -11,10 +11,3 @@ export class Category {
         this.url = Cate.url;
     }
 }
-
-export class CategoryData {
-    _id: string;
-    name: string;
-    parentId: string;
-    url: string;
-}

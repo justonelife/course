@@ -1,7 +1,7 @@
 import { User } from './../../../models/user.model';
 import { DataService } from '../../../services/data.service';
 import { Component, OnInit } from '@angular/core';
-import { faSort, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faSort, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-users-management',
@@ -11,6 +11,7 @@ import { faSort, faTrash } from '@fortawesome/free-solid-svg-icons';
 export class UsersManagementComponent implements OnInit {
     faTrash = faTrash;
     faSort = faSort;
+    faSearch = faSearch;
 
     public users: User[] = [];
     public userSArray: User[];

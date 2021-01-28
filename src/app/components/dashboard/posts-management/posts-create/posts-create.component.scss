@@ -44,6 +44,19 @@
     grid-column: 1 / span 3;
 }
 
+.modal-header {
+    .close {
+        background: none;
+    }
+}
+
+.alert-success {
+    overflow-x: hidden;
+    // word-wrap: break-word;
+    text-align: center;
+    font-size: 30px;
+}
+
 button {
     float: right;
     background-color: #2596be;

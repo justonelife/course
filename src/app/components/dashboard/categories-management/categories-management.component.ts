@@ -3,8 +3,9 @@ import {
     faPlusCircle,
     faSort,
     faTrash,
+    faSearch
 } from '@fortawesome/free-solid-svg-icons';
-import { CategoryData } from './../../../models/category.model';
+import { Category } from './../../../models/category.model';
 import { DataService } from './../../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -18,18 +19,18 @@ export class CategoriesManagementComponent implements OnInit {
     faEdit = faEdit;
     faTrash = faTrash;
     faPlusCircle = faPlusCircle;
+    faSearch = faSearch;
 
-    public categories: CategoryData[] = [];
-    public defaultCategory: CategoryData = {
+    public categories: Category[] = [];
+    public defaultCategory: Category = {
         _id: null,
         name: null,
         parentId: null,
         url: null,
     };
-    public category: CategoryData;
-    public categoryArray: CategoryData[];
+    public category: Category;
+    public categoryArray: Category[];
     public errrorMessage;
-    public config: any;
     public isDelete: boolean = false;
     public isEdit: boolean = false;
     public isAdd: boolean = false;
@@ -41,7 +42,7 @@ export class CategoriesManagementComponent implements OnInit {
     public editSuccess: boolean = false;
     public isLoaded: boolean = false;
     public count: number = 0;
-    public itemPerPage: number = 5;
+    public itemPerPage: number = 15;
     public totalPage: number;
 
     constructor(private _dataService: DataService) { }
@@ -54,7 +55,7 @@ export class CategoriesManagementComponent implements OnInit {
         // });
 
         this._dataService.getCategories().subscribe(
-            (data: CategoryData[]) => {
+            (data: Category[]) => {
                 this.categoryArray = data;
                 this.isLoaded = true;
             },
@@ -108,8 +109,9 @@ export class CategoriesManagementComponent implements OnInit {
         } else {
             this.addSuccess = true;
             this.category.url = this.formatURL();
+            this.categoryArray.push({ ...item })
             this._dataService.addCategories(this.category).subscribe((res) => {
-                this.categories.push(item);
+                this.categories.push({ ...item });
 
                 let temp = this.categories.filter((value) => value.name === res.name);
                 if (temp.length > 0) {
@@ -128,16 +130,22 @@ export class CategoriesManagementComponent implements OnInit {
     };
 
     onUpdate = (value) => {
-        this.editSuccess = true;
-        this._dataService.updateCategories(this.category).subscribe((_) => {
-            this.category.name = value;
-        });
+        if (this.categories.some(item => item.name === value)) {
+            this.editSuccess = false;
+        } else {
+            this.editSuccess = true;
+            this._dataService.updateCategories(this.category).subscribe((_) => {
+                this.category.name = value;
+            });
+        }
     };
 
-    onDelete = (category: CategoryData) => {
+    onDelete = (category: Category) => {
         if (this.categories.some((item) => item.parentId === category._id)) {
             this.delSuccess = false;
         } else {
+            let index = this.categoryArray.indexOf(category);
+            this.categoryArray.splice(index, 1);
             this.delSuccess = true;
             this._dataService.deleteCategories(category).subscribe((_) => {
                 this.categories = this.categories.filter(

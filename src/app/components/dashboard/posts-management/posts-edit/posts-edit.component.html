@@ -1,0 +1,96 @@
+<app-loading [size]="'medium'" *ngIf="!isLoaded"></app-loading>
+<div *ngIf="isLoaded">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h4>Posts List</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="pull-left">
+                            <select class="form-control" required="required" id="select" name="select" [(ngModel)]="select">
+                                <option selected [ngValue]='undefined'>None</option>
+                                <option *ngFor="let item of categories" [ngValue]="item.name">{{item.name}}</option>
+                            </select>
+                        </div>
+                        <div class="pull-right">
+                            <span class="search-icon">
+                                <fa-icon [icon]="faSearch"></fa-icon>
+                            </span>
+                            <input class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
+                        </div>
+                    </div>
+                    <div class="table-scroll">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of posts | filter: searchText | selectbox: select">
+                                    <td>{{item.title | truncate: 30}}</td>
+                                    <td>{{item.categoryId}}</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-info">
+                                            <fa-icon [icon]="faEdit"></fa-icon>
+                                            Edit
+                                        </button>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal" (click)="delModal(item)"> 
+                                            <fa-icon [icon]="faTrash"></fa-icon>
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <app-paging *ngIf="totalPage" [count]="totalPage" (newPage)="pageChanges($event)"></app-paging>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Del Modal -->
+
+<div class="modal fade" id="delModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure to delete?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>{{post.title}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" (click)="onDelPost(post)" data-toggle="modal" data-target="#delAlert" data-dismiss="modal">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Del Alert -->
+
+<div class="modal fade" id="delAlert" *ngIf="isDeleted">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Deleted post</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success">
+                    <p>Successfully <b>deleted</b> post <b>{{post.title}}</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,6 +2,11 @@
 
     <ul *ngIf='breadscrumb.length > 0' class='breadscrumb'>
         <li><span class='step' [routerLink]="['']">home</span></li>
-        <li *ngFor='let bc of breadscrumb'><span class='step'>{{bc}}</span></li>
+        <li *ngFor='let bc of breadscrumb; index as i'>
+            <span class='step'
+                (click)='onStepClick(bc.url, i)'>
+                {{bc.name}}
+            </span>
+        </li>
     </ul>
 </div>
