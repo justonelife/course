@@ -9,8 +9,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostsCreateComponent } from './posts-create/posts-create.component';
-import { NgxEditorModule } from 'ngx-editor';
 import { PostsEditComponent } from './posts-edit/posts-edit.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -26,10 +26,10 @@ import { PostsEditComponent } from './posts-edit/posts-edit.component';
     FormsModule,
     ReactiveFormsModule,
     HomeModule,
-    NgxEditorModule,
     PipesModule,
     PagingModule,
+    EditorModule
   ],
   exports: [PostsManagementComponent],
 })
-export class PostsManagementModule {}
+export class PostsManagementModule { }

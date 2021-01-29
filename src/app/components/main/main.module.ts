@@ -10,6 +10,7 @@ import { HomeModule } from './home/home.module';
 import { SingleModule } from './single/single.module';
 import { ReadComponent } from './read/read.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { SideBarComponent } from './side-bar/side-bar.component';
 
 
 
@@ -19,7 +20,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     NavBarComponent,
     HeadComponent,
     FootComponent,
-    ReadComponent
+    ReadComponent,
+    SideBarComponent
   ],
   imports: [
     CommonModule,

@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SelectboxPipe implements PipeTransform {
     transform(value: any, select?: any): any {
-        // console.log('select:', select);
-        // console.log('value', value);
+        console.log('select:', select);
+        console.log('value', value);
         if (!select) {
             return value
         } else {

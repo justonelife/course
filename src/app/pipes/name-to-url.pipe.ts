@@ -12,9 +12,14 @@ export class NameToUrlPipe implements PipeTransform {
         let result: string;
         let re1 = /\s*\-\s*/;
         let re2 = /\s+/;
+        let re = /[\\\/{}[\]$&+,:;=?@#|'<>.^*()%!-]/g;
 
-        result = name.replace(re1, '-');
-        result = result.split(re2).join('-');
+        // result = name.replace(re1, '-');
+        // result = result.split(re2).join('-');
+
+        name = name.replace(re, '');
+        name = name.replace(re1, '-');
+        result = name.split(re2).join('-');
 
         return result;
     }

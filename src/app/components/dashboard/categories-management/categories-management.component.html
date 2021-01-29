@@ -14,44 +14,49 @@
                             </button>
                         </div>
                         <div class="pull-right">
+                            <input class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
                             <span class="search-icon">
                                 <fa-icon [icon]="faSearch"></fa-icon>
                              </span>
-                            <input class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
                         </div>
                     </div>
                     <div class="table-scroll">
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th (click)="sort('id')">
+                                    <th (click)="sort('name')">
                                         Name
                                         <fa-icon [icon]="faSort"></fa-icon>
                                     </th>
-                                    <th>Parent Category</th>
-                                    <th>Action</th>
+                                    <th (click)="sort('parentId')">
+                                        Parent Category
+                                        <fa-icon [icon]="faSort"></fa-icon>
+                                    </th>
+                                    <th></th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 <tr *ngFor="
-                                  let item of categories
-                                    | filter: searchText
-                                    | orderBy: key:reverse
-                                ">
+                                          let item of categories
+                                            | filter: searchText
+                                            | orderBy: key:reverse
+                                        ">
                                     <td>{{ item.name }}</td>
                                     <td>{{ item.parentId | idToName: categoryArray }}</td>
                                     <td class="text-center">
                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal" (click)="onModalEdit(item)">
-                                    <fa-icon [icon]="faEdit"></fa-icon>
-                                    Edit
-                                  </button>
+                                            <fa-icon [icon]="faEdit"></fa-icon>
+                                            Edit
+                                          </button>
                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" (click)="onModalDelete(item)">
-                                    <fa-icon [icon]="faTrash"></fa-icon>
-                                    Delete
-                                  </button>
+                                            <fa-icon [icon]="faTrash"></fa-icon>
+                                            Delete
+                                          </button>
                                     </td>
                                 </tr>
                             </tbody>
+
                         </table>
                     </div>
 

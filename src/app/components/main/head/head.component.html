@@ -1,14 +1,14 @@
 <div class='header-wrp'>
     <div class='header'>
         <a href='' class='logo-link'>
-            <span class='logo'>gomanga</span>
+            <span class='logo'>freetuts</span>
         </a>
-        <div class='fake-input fake-input--box fake-input--round fake-input--long fake-input--flex'>
+        <!-- <div class='fake-input fake-input--box fake-input--round fake-input--long fake-input--flex'>
             <input type='text' id='username' placeholder='Search...'>
             <button class='search-btn'>
                 <fa-icon [icon]='faSearch'></fa-icon>
             </button>
-        </div>
+        </div> -->
         <div class="dropdown" *ngIf="isLogged; else toLogin">
             <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="title">{{username | titlecase}} <fa-icon [icon]="faUserCircle"></fa-icon></span>
@@ -24,7 +24,7 @@
         </div>
         <ng-template #toLogin>
             <div class="dropdown">
-                <button class="btn btn-outline-info" type="button" [routerLink]="['/entrance']" (click)="onLogout()">Login</button>
+                <button class="btn btn-outline-info login-btn" type="button" [routerLink]="['/entrance']" (click)="onLogout()">Login</button>
             </div>
         </ng-template>
     </div>

@@ -5,11 +5,34 @@
         background-color: #333;
         color: #eeeeee;
     }
+    .card-body {
+        margin-top: 5px;
+        max-height: 78vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        .table-scroll {
+            height: 70vh;
+            overflow: auto;
+        }
+        .pull-left {
+            margin-bottom: 5px;
+        }
+        .pull-right {
+            display: flex;
+            align-items: center;
+            .search-icon {
+                margin-left: 10px;
+                transform: rotate(90deg);
+            }
+        }
+    }
 }
 
 .pagination {
-    float: right;
-    margin: 20px;
+    align-self: center;
+    margin-top: 10px;
+    margin-bottom: -30px;
 }
 
 .pull-right {
@@ -17,7 +40,8 @@
     display: flex;
     align-items: center;
     .search-icon {
-        margin-right: 10px;
+        margin-left: 10px;
+        transform: rotate(90deg);
     }
 }
 

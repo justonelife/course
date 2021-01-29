@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-$color-light-green: #63d6c5;
+$color-light-green: #2063ab;
+//  #63d6c5;
 $color-dark-green: #477d8c;
 $color-dark-blue: #253243;
 $color-text-color: #fff;
@@ -28,10 +29,6 @@ button {
 
 button {
     cursor: pointer;
-}
-
-li {
-    list-style: none;
 }
 
 a {
@@ -187,9 +184,4 @@ input:focus {
 
 .layout__item--grow-2 {
     flex-grow: 2;
-}
-
-.NgxEditor__Content {
-    height: 340px;
-    overflow-y: scroll;
 }

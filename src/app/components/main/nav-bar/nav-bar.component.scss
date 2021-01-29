@@ -1,5 +1,8 @@
 @use '../../../../styles.scss';
 
+li {
+    list-style: none;
+}
 .nav-wrp {
     background: styles.$color-dark-blue;
     height: 40px;

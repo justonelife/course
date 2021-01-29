@@ -1,0 +1,35 @@
+@use '../../../../styles.scss';
+@use '../home/five-group/five-group.component.scss' as fg;
+
+.side-bar {
+    max-width: 360px;
+    h3 {
+        background: styles.$color-light-green;
+        color: styles.$color-text-color;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 18px;
+        height: 45px;
+        line-height: 45px;
+        padding: 0 20px;
+    }
+    ul {
+        li {
+            list-style: none;
+            border: 1px solid fg.$border-color;
+            border-top: 0;
+            padding: 10px;
+            a {
+                display: block;
+                display: flex;
+                color: #212529;
+                &:hover {
+                    color: styles.$color-light-green;
+                }
+                span {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}

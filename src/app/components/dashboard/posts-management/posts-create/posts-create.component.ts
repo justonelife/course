@@ -1,14 +1,8 @@
-import {
-    FormControl,
-    FormGroup,
-    Validators,
-    AbstractControl,
-} from '@angular/forms';
 import { Post } from './../../../../models/post.model';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
 import { DataService } from 'src/app/services/data.service';
-import { Editor, Toolbar } from 'ngx-editor';
+
 
 @Component({
     selector: 'app-posts-create',
@@ -30,18 +24,6 @@ export class PostsCreateComponent implements OnInit, OnChanges {
     };
     public isLoaded: boolean = false;
     public isPosted: boolean = false;
-
-    editor: Editor;
-    toolbar: Toolbar = [
-        ['bold', 'italic'],
-        ['underline', 'strike'],
-        ['code', 'blockquote'],
-        ['ordered_list', 'bullet_list'],
-        [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
-        ['link', 'image'],
-        ['text_color', 'background_color'],
-        ['align_left', 'align_center', 'align_right', 'align_justify'],
-    ];
     public form: any;
     public content: string
 
@@ -55,23 +37,14 @@ export class PostsCreateComponent implements OnInit, OnChanges {
             this.categories = data;
         });
 
-        this.form = new FormGroup({
-            editorContent: new FormControl('', Validators.required),
-        });
-
-        this.editor = new Editor();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
 
     }
 
-    get doc(): AbstractControl {
-        return this.form.get('editorContent');
-    }
-
     onReset = () => {
-        this.post.content = ''
+        this.post.content = '';
     }
 
     onPost = () => {

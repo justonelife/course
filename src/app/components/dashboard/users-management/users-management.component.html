@@ -7,36 +7,40 @@
                     <h4>Users Management</h4>
                 </div>
                 <div class="card-body">
-                    <div class="pull-right">
-                        <span class="search-icon">
-                            <fa-icon [icon]="faSearch"></fa-icon>
-                        </span>
-                        <input class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
+                    <div>
+                        <div class="pull-right">
+                            <input class="form-control" placeholder="Search..." [(ngModel)]="searchText" />
+                            <span class="search-icon">
+                                <fa-icon [icon]="faSearch"></fa-icon>
+                            </span>
+                        </div>
                     </div>
-                    <table class="table" data-pagination="true" data-show-pagination-switch="true" data-show-footer="true">
-                        <thead class="thead-light">
-                            <tr>
-                                <th (click)="sort('id')">
-                                    ID
-                                    <fa-icon [icon]="faSort"></fa-icon>
-                                </th>
-                                <th (click)="sort('name')">
-                                    Name
-                                    <fa-icon [icon]="faSort"></fa-icon>
-                                </th>
-                                <th>Role</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="
+
+                    <div class="table-scroll">
+                        <table class="table" data-pagination="true" data-show-pagination-switch="true" data-show-footer="true">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th (click)="sort('id')">
+                                        ID
+                                        <fa-icon [icon]="faSort"></fa-icon>
+                                    </th>
+                                    <th (click)="sort('name')">
+                                        Name
+                                        <fa-icon [icon]="faSort"></fa-icon>
+                                    </th>
+                                    <th>Role</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="
                   let item of users | filter: searchText | orderBy: key:reverse;
                   let i = index
                 ">
-                                <td>{{ item._id }}</td>
-                                <td>{{ item.username }}</td>
-                                <td>
-                                    <span *ngIf="item.roleId === 'admin'" class="badge badge-pill badge-warning">Admin</span
+                                    <td>{{ item._id }}</td>
+                                    <td>{{ item.username }}</td>
+                                    <td>
+                                        <span *ngIf="item.roleId === 'admin'" class="badge badge-pill badge-warning">Admin</span
                   >
                   <span
                     *ngIf="item.roleId !== 'admin'"
@@ -60,11 +64,14 @@
               </tr>
             </tbody>
           </table>
-          <app-paging
+                    </div>
+          <div class="pagination">
+              <app-paging
             *ngIf="totalPage"
             [count]="totalPage"
             (newPage)="pageChange($event)"
-          ></app-paging>
+          ></app-paging></div>
+          
         </div>
       </div>
     </div>
@@ -114,19 +121,19 @@
           <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span
             ><span class="sr-only">Close</span>
-                                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="alert alert-success" role="alert">
-                        <b>{{ user.username }}</b> is <b>deleted</b> =)
+                                        </button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    <div class="modal-body">
+                        <div class="alert alert-success" role="alert">
+                            <b>{{ user.username }}</b> is <b>deleted</b> =)
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">
             Close
           </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    </ng-container>
+        </ng-container>

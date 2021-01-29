@@ -1,3 +1,4 @@
+import { PostsManagementComponent } from './posts-management/posts-management.component';
 import { PagingModule } from './paging/paging.module';
 import { PostsManagementModule } from './posts-management/posts-management.module';
 import { Ng2OrderModule } from 'ng2-order-pipe';

@@ -12,7 +12,7 @@
 }
 
 .navbar {
-    background-color: #63d6c5;
+    background-color: #2063ab;
     z-index: 99;
     position: sticky;
     top: 0;
@@ -108,6 +108,9 @@
 .btn {
     &.dropdown-toggle {
         color: white;
+    }
+    &.dropdown-toggle:hover {
+        color: rgb(31, 30, 30);
     }
 }
 
