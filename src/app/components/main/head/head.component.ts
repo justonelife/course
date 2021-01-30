@@ -23,11 +23,12 @@ export class HeadComponent implements OnInit {
         } else {
             this.isLogged = false;
         }
-        // console.log(this.username);
     }
 
     onLogout = () => {
-        sessionStorage.removeItem('user')
+        sessionStorage.removeItem('id');
+        sessionStorage.removeItem('email');
+        sessionStorage.removeItem('user');
     }
 
 }

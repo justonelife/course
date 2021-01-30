@@ -52,7 +52,9 @@ export class LoginUserComponent implements OnInit {
                 if (!res.error) {
                     let roleId = res.roleId;
                     if (roleId === ROLE_USER) {
-                        sessionStorage.setItem('user', this.username)
+                        sessionStorage.setItem('user', this.username);
+                        sessionStorage.setItem('email', res.email);
+                        sessionStorage.setItem('id', res._id);
                         this.router.navigate(['']);
                     }
                     else this.passing.toggleModal('login user fail, please check role');

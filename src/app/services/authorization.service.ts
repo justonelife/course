@@ -79,7 +79,6 @@ export class AuthorizationService {
             )
     }
 
-
     headerOptions(auth: string) {
         return {
             headers: new HttpHeaders({
