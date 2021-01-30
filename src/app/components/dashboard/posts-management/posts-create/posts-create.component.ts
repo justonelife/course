@@ -2,6 +2,7 @@ import { Post } from './../../../../models/post.model';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
 import { DataService } from 'src/app/services/data.service';
+import { NameToUrlPipe } from '../../../../pipes/name-to-url.pipe';
 
 
 @Component({
@@ -49,7 +50,15 @@ export class PostsCreateComponent implements OnInit, OnChanges {
 
     onPost = () => {
         this.isPosted = true;
-        this._dataService.createPosts(this.post).subscribe(res => { });
+        this.addUrl();
+        this._dataService.createPosts(this.post).subscribe(res => {
+            console.log(res)
+        });
+    }
+
+    addUrl() {
+        const nameToUrl = new NameToUrlPipe();
+        this.post.url = nameToUrl.transform(this.post.title);
     }
 
 }

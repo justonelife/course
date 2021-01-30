@@ -1,5 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+const RANDOM_RANGE = 10000;
+
 
 @Pipe({
     name: 'nameToUrl'
@@ -21,7 +23,8 @@ export class NameToUrlPipe implements PipeTransform {
         name = name.replace(re1, '-');
         result = name.split(re2).join('-');
 
-        return result;
+        let r = Math.floor(Math.random() * RANDOM_RANGE);
+        return `${result}-r${r}`;
     }
 
     removeUnicode(str: string) {
