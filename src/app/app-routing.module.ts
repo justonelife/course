@@ -19,6 +19,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ReadComponent } from './components/main/read/read.component';
 import { RegisterComponent } from './components/entrance/register/register.component';
 import { ForgotPasswordComponent } from './components/entrance/forgot-password/forgot-password.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
     {
@@ -82,6 +83,10 @@ export const routes: Routes = [
             { path: 'register', component: RegisterComponent },
             { path: 'forgot', component: ForgotPasswordComponent }
         ],
+    },
+    {
+        path: 'profile',
+        component: ProfileComponent
     },
     {
         path: '**',

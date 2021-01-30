@@ -9,9 +9,13 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { EntranceModule } from './components/entrance/entrance.module';
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { AuthGuard } from './services/guards/auth.guard';
+import { ProfileModule } from './components/profile/profile.module';
 
 @NgModule({
-    declarations: [AppComponent, PageNotFoundComponent],
+    declarations: [
+        AppComponent, 
+        PageNotFoundComponent, 
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -19,6 +23,7 @@ import { AuthGuard } from './services/guards/auth.guard';
         HttpClientModule,
         EntranceModule,
         DashboardModule,
+        ProfileModule
     ],
     providers: [AuthGuard],
     bootstrap: [AppComponent],

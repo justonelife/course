@@ -32,7 +32,7 @@ export class DataPostService {
         this.allPostUrl = this.END_POINT + this.postCollection;
         this.latestPostUrl = this.END_POINT + this.postCollection + `/?sort={"_kmd":1}&limit=5`;
         this.singlePostUrl = this.END_POINT + this.postCollection + `/?limit=1`;
-        this.newPostUrl = this.END_POINT + this.postCollection + `/?sort={"_kmd":-1}&limit=5`;
+        this.newPostUrl = this.END_POINT + this.postCollection + `/?sort={"_kmd":-1}&limit=10`;
     }
 
     getNewPost(): Observable<Post[]> {
@@ -112,7 +112,6 @@ export class DataPostService {
     }
 
     getSinglePostByUrl(url: string): Observable<Post> {
-        console.log(this.allPostUrl + `/?query={"url":"${url}"}`);
         return this.httpClient
             .get<Post[]>(
                 this.allPostUrl + `/?query={"url":"${url}"}`,

@@ -4,7 +4,7 @@
         <ul *ngIf='post'>
             <li *ngFor='let p of post'>
                 <a routerLink="{{'/read/' + p.url}}">
-                    <img [src]='p.thumbnail'>
+                    <!-- <img [src]='p.thumbnail'> -->
                     <span>{{p.title}}</span>
                 </a>
             </li>

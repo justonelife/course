@@ -10,11 +10,11 @@
             </button>
         </div> -->
         <div class="dropdown" *ngIf="isLogged; else toLogin">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn dropdown-toggle user-btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="title">{{username | titlecase}} <fa-icon [icon]="faUserCircle"></fa-icon></span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button">
+                <button class="dropdown-item" type="button" [routerLink]="['/profile']">
                     Profile
                 </button>
                 <button class="dropdown-item" type="button" [routerLink]="['/entrance']" (click)="onLogout()">
