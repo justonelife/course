@@ -8,7 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { HomeModule } from '../main/home/home.module';
+import { LoadingModule } from '../main/home/loading/loading.module';
 
 
 
@@ -26,7 +26,7 @@ import { HomeModule } from '../main/home/home.module';
         DirectivesModule,
         FormsModule,
         ReactiveFormsModule,
-        HomeModule
+        LoadingModule
     ],
     exports: [
         EntranceComponent

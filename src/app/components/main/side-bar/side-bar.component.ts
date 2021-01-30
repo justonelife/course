@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Post } from 'src/app/models/post.model';
+import { DataPostService } from 'src/app/services/data-post.service';
 
 @Component({
     selector: 'app-side-bar',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
 
-    constructor() { }
+    @Input() title: string;
+    @Input() target: any;
+
+    public post: Post[];
+
+    constructor(private dataPost: DataPostService) { }
 
     ngOnInit(): void {
+        if (!this.target) this.dataPost.getNewPost().subscribe(res => this.post = res);
     }
 
 }

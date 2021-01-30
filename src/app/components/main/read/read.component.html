@@ -1,10 +1,16 @@
-<div class='my-read'>
-    <div *ngIf='post' class='my-read__content'>
-        <h1 class="title">{{ post.title }}</h1>
-        <span class="author">Đăng bởi: Administrator</span>
-        <p class="content" [innerHtml]="post.content"></p>
+<div class='read'>
+
+    <div class='read__main'>
+        <div *ngIf='post' class='my-read__content'>
+            <h1 class="title">{{ post.title }}</h1>
+            <span class="author">Đăng bởi: Administrator</span>
+            <p class="content" [innerHtml]="post.content"></p>
+        </div>
+        <div *ngIf='!post' class='my-read__loading'>
+            <app-loading [size]="'medium'"></app-loading>
+        </div>
     </div>
-    <div *ngIf='!post' class='my-read__loading'>
-        <app-loading [size]="'medium'"></app-loading>
+    <div class='read__side'>
+        <app-side-bar></app-side-bar>
     </div>
 </div>

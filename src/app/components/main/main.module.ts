@@ -8,33 +8,30 @@ import { HeadComponent } from './head/head.component';
 import { FootComponent } from './foot/foot.component';
 import { HomeModule } from './home/home.module';
 import { SingleModule } from './single/single.module';
-import { ReadComponent } from './read/read.component';
-import { PipesModule } from 'src/app/pipes/pipes.module';
-import { SideBarComponent } from './side-bar/side-bar.component';
+import { ReadModule } from './read/read.module';
 
 
 
 @NgModule({
-  declarations: [
-    MainComponent,
-    NavBarComponent,
-    HeadComponent,
-    FootComponent,
-    ReadComponent,
-    SideBarComponent
-  ],
-  imports: [
-    CommonModule,
-    FontAwesomeModule,
-    AppRoutingModule,
-    HomeModule,
-    SingleModule
-  ],
-  exports: [
-    MainComponent,
-    NavBarComponent,
-    HeadComponent,
-    FootComponent
-  ]
+    declarations: [
+        MainComponent,
+        NavBarComponent,
+        HeadComponent,
+        FootComponent
+    ],
+    imports: [
+        CommonModule,
+        FontAwesomeModule,
+        AppRoutingModule,
+        HomeModule,
+        SingleModule,
+        ReadModule
+    ],
+    exports: [
+        MainComponent,
+        NavBarComponent,
+        HeadComponent,
+        FootComponent
+    ]
 })
 export class MainModule { }

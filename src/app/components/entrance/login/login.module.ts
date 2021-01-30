@@ -7,26 +7,26 @@ import { LoginDecisionComponent } from './login-decision/login-decision.componen
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { FormsModule } from '@angular/forms';
 import { LoginUserComponent } from './login-user/login-user.component';
-import { HomeModule } from '../../main/home/home.module';
+import { LoadingModule } from '../../main/home/loading/loading.module';
 
 
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    LoginDecisionComponent,
-    LoginAdminComponent,
-    LoginUserComponent
-  ],
-  imports: [
-    CommonModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-    FormsModule,
-    HomeModule
-  ],
-  exports: [
-    LoginComponent
-  ]
+    declarations: [
+        LoginComponent,
+        LoginDecisionComponent,
+        LoginAdminComponent,
+        LoginUserComponent
+    ],
+    imports: [
+        CommonModule,
+        AppRoutingModule,
+        FontAwesomeModule,
+        FormsModule,
+        LoadingModule
+    ],
+    exports: [
+        LoginComponent
+    ]
 })
 export class LoginModule { }

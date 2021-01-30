@@ -25,7 +25,7 @@ export class PostListComponent implements OnInit {
 
         this.dataService.getCountPostByMultiCategoryId(this.ids).subscribe(res => this.calcTotalPage(res));
 
-        this.dataService.getPostChildCate(this.ids, 0, this.postPerPage).subscribe(res => this.post = res);
+        this.dataService.getPostChildCate({ ids: this.ids, skip: 0, limit: this.postPerPage }).subscribe(res => this.post = res);
 
     }
 
@@ -37,7 +37,7 @@ export class PostListComponent implements OnInit {
     changePage(e: number) {
         this.post = undefined;
         this.dataService
-            .getPostChildCate(this.ids, (e - 1) * this.postPerPage, this.postPerPage)
+            .getPostChildCate({ ids: this.ids, skip: (e - 1) * this.postPerPage, limit: this.postPerPage })
             .subscribe(res => this.post = res);
     }
 

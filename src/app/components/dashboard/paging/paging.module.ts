@@ -5,10 +5,10 @@ import { CommonModule } from '@angular/common';
 
 
 @NgModule({
-  declarations: [PagingComponent],
-  imports: [
-    CommonModule
-  ],
-  exports: [PagingComponent]
+    declarations: [PagingComponent],
+    imports: [
+        CommonModule
+    ],
+    exports: [PagingComponent]
 })
 export class PagingModule { }

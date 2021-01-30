@@ -8,14 +8,5 @@
         background: inherit;
         padding: 50px 20px;
         min-height: 1000px;
-        display: flex;
-        .content {
-            width: 1000px;
-            flex-grow: 3;
-            padding: 0 10px;
-        }
-        .side {
-            flex-grow: 1;
-        }
     }
 }

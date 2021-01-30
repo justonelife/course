@@ -1,7 +1,6 @@
 import { PagingModule } from './../paging/paging.module';
 import { PipesModule } from './../../../pipes/pipes.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { HomeModule } from './../../main/home/home.module';
 import { PostsManagementComponent } from './posts-management.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostsCreateComponent } from './posts-create/posts-create.component';
 import { PostsEditComponent } from './posts-edit/posts-edit.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { LoadingModule } from '../../main/home/loading/loading.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HomeModule,
+    LoadingModule,
     PipesModule,
     PagingModule,
     EditorModule

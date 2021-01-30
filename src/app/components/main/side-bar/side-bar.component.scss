@@ -2,7 +2,7 @@
 @use '../home/five-group/five-group.component.scss' as fg;
 
 .side-bar {
-    max-width: 360px;
+    max-width: 350px;
     h3 {
         background: styles.$color-light-green;
         color: styles.$color-text-color;
@@ -13,23 +13,35 @@
         line-height: 45px;
         padding: 0 20px;
     }
-    ul {
-        li {
-            list-style: none;
-            border: 1px solid fg.$border-color;
-            border-top: 0;
-            padding: 10px;
-            a {
-                display: block;
-                display: flex;
-                color: #212529;
-                &:hover {
-                    color: styles.$color-light-green;
-                }
-                span {
-                    margin-left: 10px;
+    .side-bar__content {
+        ul {
+            li {
+                list-style: none;
+                border: 1px solid fg.$border-color;
+                border-top: 0;
+                padding: 10px;
+                a {
+                    display: block;
+                    display: flex;
+                    color: #212529;
+                    &:hover {
+                        color: styles.$color-light-green;
+                    }
+                    img {
+                        width: 100px;
+                    }
+                    span {
+                        margin-left: 10px;
+                    }
                 }
             }
+        }
+
+        .loading {
+            width: 350px;
+            height: 100px;
+            border: 1px solid fg.$border-color;
+            border-top: 0;
         }
     }
 }

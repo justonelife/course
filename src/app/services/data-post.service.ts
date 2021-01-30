@@ -26,12 +26,25 @@ export class DataPostService {
     private latestPostUrl: string;
     private singlePostUrl: string;
     private allPostUrl: string;
+    private newPostUrl: string;
 
     constructor(private httpClient: HttpClient) {
         this.allPostUrl = this.END_POINT + this.postCollection;
-        this.latestPostUrl =
-            this.END_POINT + this.postCollection + `/?sort={"_kmd":1}&limit=5`;
+        this.latestPostUrl = this.END_POINT + this.postCollection + `/?sort={"_kmd":1}&limit=5`;
         this.singlePostUrl = this.END_POINT + this.postCollection + `/?limit=1`;
+        this.newPostUrl = this.END_POINT + this.postCollection + `/?sort={"_kmd":-1}&limit=5`;
+    }
+
+    getNewPost(): Observable<Post[]> {
+        return this.httpClient
+            .get<Post[]>(this.newPostUrl, this.httpOptions)
+            .pipe(
+                map(data => {
+                    let newData: Post[] = [];
+                    data.forEach(d => newData.push(new Post(d)));
+                    return newData;
+                })
+            )
     }
 
     getLatestPost(_id: string): Observable<Post[]> {
@@ -77,7 +90,7 @@ export class DataPostService {
             .pipe(map((data) => data.count));
     }
 
-    getPostChildCate(ids: string[], skip: number, limit: number): Observable<Post[]> {
+    getPostChildCate({ ids, skip, limit }: { ids: string[]; skip: number; limit: number; }): Observable<Post[]> {
         let result: string = '';
         for (let id of ids) result += `{"categoryId":"${id}"}, `;
 
@@ -116,5 +129,6 @@ export class DataPostService {
         data[0].content = htmlDoc.body.innerText;
         return data;
     }
+
 
 }

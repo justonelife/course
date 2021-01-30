@@ -13,15 +13,13 @@ export class HomeComponent implements OnInit {
         "6002adb71b91b572332dead9", //thu thuat linux
         "6002b00281e5b600143bce61", //photoshop can ban
         "6012cdc9b29e7800134f6568", //tac gia van hoc
-    ]
+    ];
 
-    // public topicId:string[] = [
-    //     "600272cee2da4000131de6c3", //hoc c
-    // ]
+    public sideBarTitle: string = 'Bài viết mới nhất';
+
 
     constructor() { }
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
 }

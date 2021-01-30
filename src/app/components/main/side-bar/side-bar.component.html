@@ -1,29 +1,16 @@
 <div class='side-bar'>
-    <h3>bài viết mới nhất</h3>
-    <ul>
-        <li>
-            <a href='#'>
-                <img src='https://freetuts.net/upload/learn_post/_thumbs/Images/2020/08/20/134/khoa-hoc-photoshop-online-chuyen-nghiep.jpg'>
-                <span>Lộ trình học Photoshop cho người mới bắt đầu - Có video học miễn phí</span>
-            </a>
-        </li>
-        <li>
-            <a href='#'>
-                <img src='https://freetuts.net/upload/learn_post/_thumbs/Images/2020/08/20/134/khoa-hoc-photoshop-online-chuyen-nghiep.jpg'>
-                <span>Lộ trình học Photoshop cho người mới bắt đầu - Có video học miễn phí</span>
-            </a>
-        </li>
-        <li>
-            <a href='#'>
-                <img src='https://freetuts.net/upload/learn_post/_thumbs/Images/2020/08/20/134/khoa-hoc-photoshop-online-chuyen-nghiep.jpg'>
-                <span>Lộ trình học Photoshop cho người mới bắt đầu - Có video học miễn phí</span>
-            </a>
-        </li>
-        <li>
-            <a href='#'>
-                <img src='https://freetuts.net/upload/learn_post/_thumbs/Images/2020/08/20/134/khoa-hoc-photoshop-online-chuyen-nghiep.jpg'>
-                <span>Lộ trình học Photoshop cho người mới bắt đầu - Có video học miễn phí</span>
-            </a>
-        </li>
-    </ul>
+    <h3>{{title}}</h3>
+    <div class='side-bar__content'>
+        <ul *ngIf='post'>
+            <li *ngFor='let p of post'>
+                <a routerLink="{{'/read/' + p.url}}">
+                    <img [src]='p.thumbnail'>
+                    <span>{{p.title}}</span>
+                </a>
+            </li>
+        </ul>
+        <div *ngIf='!post' class='loading'>
+            <app-loading [size]="'medium'"></app-loading>
+        </div>
+    </div>
 </div>
