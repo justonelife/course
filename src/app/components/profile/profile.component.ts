@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-profile',
@@ -7,19 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-    public option:number = 2;
+    public option:number;
 
-    constructor() { }
+    constructor(
+        private router: Router
+    ) { }
 
     ngOnInit(): void {
+        this.option = this.router.url === '/profile/password'
+            ? 2
+            : 1
     }
 
     onSettingsClick() {
         this.option = 1;
+        this.router.navigate(['/profile', 'settings']);
     }
 
     onPasswordClick() {
         this.option = 2;
+        this.router.navigate(['/profile', 'password']);
     }
 
 }

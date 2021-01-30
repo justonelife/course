@@ -20,6 +20,8 @@ import { ReadComponent } from './components/main/read/read.component';
 import { RegisterComponent } from './components/entrance/register/register.component';
 import { ForgotPasswordComponent } from './components/entrance/forgot-password/forgot-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileSettingComponent } from './components/profile/profile-setting/profile-setting.component';
+import { ProfilePasswordComponent } from './components/profile/profile-password/profile-password.component';
 
 export const routes: Routes = [
     {
@@ -86,7 +88,12 @@ export const routes: Routes = [
     },
     {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent,
+        children: [
+            { path: '', redirectTo: 'settings', pathMatch: 'full' },
+            { path: 'settings', component: ProfileSettingComponent },
+            { path: 'password', component: ProfilePasswordComponent }
+        ]
     },
     {
         path: '**',
