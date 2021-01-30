@@ -1,1 +1,25 @@
-<p>profile works!</p>
+<div>
+    <app-head></app-head>
+    <div class='profile'>
+        <div class='profile__control'>
+            <h2>account</h2>
+            <ul>
+                <li>
+                    <button [class]="option === 1 ? 'active': null"
+                        (click)='onSettingsClick()'>
+                        settings
+                    </button>
+                </li>
+                <li>
+                    <button [class]="option === 2 ? 'active': null"
+                        (click)='onPasswordClick()'>
+                        password
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class='profile__main'>
+
+        </div>
+    </div>
+</div>

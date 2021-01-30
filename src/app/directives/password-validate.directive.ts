@@ -22,8 +22,9 @@ export class PasswordValidateDirective implements Validator {
 function ValidatePassword(control: AbstractControl): {[key:string]: any} | null {
     
     let re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+    let re1 = /[`"']/g
 
-    if (!control.value || !control.value.match(re)) return {
+    if (!control.value || !control.value.match(re) || control.value.match(re1)) return {
         'passwordInvalid': true
     }
     return null;

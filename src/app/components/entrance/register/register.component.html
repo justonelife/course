@@ -18,7 +18,7 @@
             <input type='password' id='password' placeholder='Enter your password' formControlName='password'
                 appPasswordValidate>
             <span class='alert alert--decline' *ngIf="registerForm.get('password').touched && registerForm.get('password').invalid">
-                require && >= 8 characters, at least 1 letter, 1 number and 1 special character
+                require && >= 8 characters, at least 1 letter, 1 number and 1 special character (not `, " or ')
             </span>
         </div>
 

@@ -2,7 +2,7 @@
 @use '../home/five-group/five-group.component.scss' as fg;
 
 .side-bar {
-    max-width: 350px;
+    width: 350px;
     h3 {
         background: styles.$color-light-green;
         color: styles.$color-text-color;
@@ -38,7 +38,7 @@
         }
 
         .loading {
-            width: 350px;
+            width: 100%;
             height: 100px;
             border: 1px solid fg.$border-color;
             border-top: 0;
