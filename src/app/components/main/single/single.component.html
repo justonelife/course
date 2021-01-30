@@ -1,5 +1,4 @@
 <div class="single">
-    <div class='single__main'>
         <app-cate-breadscrumb></app-cate-breadscrumb>
         <div class="single__content-wrp">
             <div *ngIf="!post" class="loading">
@@ -13,8 +12,4 @@
             </div>
         </div>
         <app-post-list *ngIf="category" [cate]="category"></app-post-list>
-    </div>
-    <div class='single__side'>
-        <app-side-bar></app-side-bar>
-    </div>
 </div>
