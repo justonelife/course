@@ -11,6 +11,6 @@
         </div>
     </div>
     <div class='read__side'>
-        <app-side-bar [title]='sideBarTitle' [target]='null'></app-side-bar>
+        <app-side-bar *ngIf='category' [title]='sideBarTitle' [target]='category._id'></app-side-bar>
     </div>
 </div>

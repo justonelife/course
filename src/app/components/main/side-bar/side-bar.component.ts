@@ -10,7 +10,7 @@ import { DataPostService } from 'src/app/services/data-post.service';
 export class SideBarComponent implements OnInit {
 
     @Input() title: string;
-    @Input() target: any;
+    @Input() target: string | null;
 
     public post: Post[];
 
@@ -18,6 +18,7 @@ export class SideBarComponent implements OnInit {
 
     ngOnInit(): void {
         if (!this.target) this.dataPost.getNewPost().subscribe(res => this.post = res);
+        else this.dataPost.getAllPostOfCategory(this.target).subscribe(res => this.post = res);
     }
 
 }

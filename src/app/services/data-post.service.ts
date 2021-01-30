@@ -47,6 +47,18 @@ export class DataPostService {
             )
     }
 
+    getAllPostOfCategory(_id:string): Observable<Post[]> {
+        return this.httpClient
+            .get<Post[]>(this.allPostUrl + `/?query={"categoryId":"${_id}"}`, this.httpOptions)
+            .pipe(
+                map(data => {
+                    let newData: Post[] = [];
+                    data.forEach(d => newData.push(new Post(d)));
+                    return newData;
+                })
+            )
+    }
+
     getLatestPost(_id: string): Observable<Post[]> {
         return this.httpClient
             .get<Post[]>(
@@ -54,7 +66,7 @@ export class DataPostService {
                 this.httpOptions
             )
             .pipe(
-                map((data) => {
+                map(data => {
                     let newData: Post[] = [];
                     data.forEach(d => newData.push(new Post(d)));
                     return this.formatFiveGroup(newData);
