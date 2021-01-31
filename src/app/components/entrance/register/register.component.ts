@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { PassingService } from 'src/app/services/passing.service';
 import { ROLE_USER } from 'src/app/services/reference';
 
 
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private authService: AuthorizationService
+        private authService: AuthorizationService,
+        private passing: PassingService
     ) { }
 
     ngOnInit(): void {
@@ -51,17 +53,20 @@ export class RegisterComponent implements OnInit {
 
             this.authService.postRegister({ username, password, email }).subscribe(res => this.assignRole(res));
 
-        } else console.log('hold');
+        } else {
+            this.checking = !this.checking;
+            this.passing.toggleModal('register fail! invalid info');
+        }
     }
 
     assignRole(res:User) {
         this.authService.putAssignRole(res._id, ROLE_USER).subscribe(success => {
             this.checking = !this.checking;
             if (success) {
-                window.alert('register success');
+                this.passing.toggleModal('success! now you can login.');
                 this.registerForm.reset();
             }
-            else window.alert('register fail');
+            else this.passing.toggleModal('register fail');
         });
     }
 
