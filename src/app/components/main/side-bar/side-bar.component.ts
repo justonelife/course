@@ -17,8 +17,18 @@ export class SideBarComponent implements OnInit {
     constructor(private dataPost: DataPostService) { }
 
     ngOnInit(): void {
-        if (!this.target) this.dataPost.getNewPost().subscribe(res => this.post = res);
-        else this.dataPost.getAllPostOfCategory(this.target).subscribe(res => this.post = res);
+        if (!this.target) {
+            let subscription = this.dataPost.getNewPost().subscribe(res => {
+                this.post = res;
+                subscription.unsubscribe();
+            });
+        }
+        else {
+            let subscription = this.dataPost.getAllPostOfCategory(this.target).subscribe(res => {
+                this.post = res;
+                subscription.unsubscribe();
+            });
+        }
     }
 
 }

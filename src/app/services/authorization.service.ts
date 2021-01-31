@@ -62,11 +62,12 @@ export class AuthorizationService {
             )
     }
 
-    postRegister(info): Observable<User> {
+    postRegister(info): Observable<any> {
         return this.httpClient
             .post(this.END_POINT, info, this.headerOptions(this.APP_AUTH))
             .pipe(
-                map(data => new User(data))
+                map(data => new User(data)),
+                catchError(err => of(err.error))
             );
     }
 

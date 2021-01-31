@@ -65,7 +65,8 @@ export class ProfilePasswordComponent implements OnInit {
 
     changePass(id: string) {
         let info = {
-            password: this.passForm.value.newPass
+            password: this.passForm.value.newPass,
+            email: sessionStorage.getItem('email')
         }
         let subscription = this.auth.putInfo(info, id).subscribe(() => {
             this.updating = !this.updating;

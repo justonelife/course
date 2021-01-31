@@ -51,7 +51,15 @@ export class RegisterComponent implements OnInit {
 
             const { username, password, email } = this.registerForm.value;
 
-            this.authService.postRegister({ username, password, email }).subscribe(res => this.assignRole(res));
+            let subscription = this.authService
+                .postRegister({ username, password, email })
+                .subscribe(res => {
+                    if (res.error) {
+                        this.checking = !this.checking;
+                        this.passing.toggleModal(res.error);
+                    } else this.assignRole(res);
+                    subscription.unsubscribe();
+                });
 
         } else {
             this.checking = !this.checking;
@@ -60,13 +68,15 @@ export class RegisterComponent implements OnInit {
     }
 
     assignRole(res:User) {
-        this.authService.putAssignRole(res._id, ROLE_USER).subscribe(success => {
+        let subscription = this.authService.putAssignRole(res._id, ROLE_USER).subscribe(success => {
             this.checking = !this.checking;
             if (success) {
                 this.passing.toggleModal('success! now you can login.');
                 this.registerForm.reset();
             }
             else this.passing.toggleModal('register fail');
+
+            subscription.unsubscribe();
         });
     }
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DataPostService } from 'src/app/services/data-post.service';
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import { Post } from 'src/app/models/post.model';
@@ -9,9 +9,12 @@ import { DataCategoryService } from 'src/app/services/data-category.service';
     templateUrl: './five-group.component.html',
     styleUrls: ['./five-group.component.scss']
 })
-export class FiveGroupComponent implements OnInit {
+export class FiveGroupComponent implements OnInit, OnDestroy {
 
     arrow = faLongArrowAltRight;
+
+    private subscription1;
+    private subscription2;
 
     @Input() categoryId: string;
 
@@ -30,8 +33,13 @@ export class FiveGroupComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.dataCategory.getSingleCategory(this.categoryId).subscribe(res => this.group = {name: res.name, url: res.url});
-        this.dataSevice.getLatestPost(this.categoryId).subscribe(res => this.posts = res);
+        this.subscription1 = this.dataCategory.getSingleCategory(this.categoryId).subscribe(res => this.group = {name: res.name, url: res.url});
+        this.subscription2 = this.dataSevice.getLatestPost(this.categoryId).subscribe(res => this.posts = res);
+    }
+
+    ngOnDestroy(): void {
+        this.subscription1.unsubscribe();
+        this.subscription2.unsubscribe();
     }
 
 }
