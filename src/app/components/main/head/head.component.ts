@@ -45,7 +45,7 @@ export class HeadComponent implements OnInit, OnDestroy {
         this.passing.toggleOnSearch();
         console.log('search')
         if (this.query) {
-            this.router.navigate(['search']);
+            this.router.navigate(['main', 'search']);
             this.passing.searchPost(this.query.toLocaleLowerCase());
         }
     }

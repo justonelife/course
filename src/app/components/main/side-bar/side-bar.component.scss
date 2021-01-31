@@ -32,6 +32,9 @@
                     }
                     span {
                         margin-left: 10px;
+                        &::first-letter {
+                            text-transform: capitalize;
+                        }
                     }
                 }
             }

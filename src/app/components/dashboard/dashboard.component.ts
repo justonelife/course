@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
     };
 
     onBackHome = () => {
-        this.router.navigate(['']);
+        this.router.navigate(['dashboard']);
     };
 
     onLogout = () => {

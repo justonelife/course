@@ -26,9 +26,11 @@ import { AuthUserGuard } from './services/guards/auth-user.guard';
 import { SearchComponent } from './components/main/search/search.component';
 
 export const routes: Routes = [
+    { path: '', redirectTo: 'entrance', pathMatch: 'full' },
     {
-        path: '',
+        path: 'main',
         component: MainComponent,
+        canActivate: [AuthUserGuard],
         children: [
             { path: '', component: HomeComponent },
             { path: 'single/:categoryURL', component: SingleComponent },

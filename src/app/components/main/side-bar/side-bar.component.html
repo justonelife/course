@@ -3,7 +3,7 @@
     <div class='side-bar__content'>
         <ul *ngIf='post'>
             <li *ngFor='let p of post'>
-                <a routerLink="{{'/read/' + p.url}}">
+                <a routerLink="{{'/main/read/' + p.url}}">
                     <!-- <img [src]='p.thumbnail'> -->
                     <span>{{p.title}}</span>
                 </a>
