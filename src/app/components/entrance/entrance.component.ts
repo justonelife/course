@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { PassingService } from 'src/app/services/passing.service';
@@ -8,10 +8,11 @@ import { PassingService } from 'src/app/services/passing.service';
     templateUrl: './entrance.component.html',
     styleUrls: ['./entrance.component.scss']
 })
-export class EntranceComponent implements OnInit {
+export class EntranceComponent implements OnInit, OnDestroy {
 
     faDoorOpen = faDoorOpen;
     public modalErr:string = '';
+    private subscription;
 
     constructor(
         private router: Router,
@@ -19,7 +20,11 @@ export class EntranceComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.passing.currentShowModal.subscribe(res => this.modalErr = res);
+        this.subscription = this.passing.currentShowModal.subscribe(res => this.modalErr = res);
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     onSwitch(event) {

@@ -70,3 +70,62 @@ form {
         }
     }
 }
+
+.alert-modal-wrp {
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 99;
+    display: none;
+    top: 0;
+    .alert-modal {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        .my-modal {
+            width: 500px;
+            height: 214px;
+            background: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 5px;
+            h4 {
+                height: 70px;
+                line-height: 70px;
+                padding: 0 20px;
+                font-size: 25px;
+                position: relative;
+                &::first-letter {
+                    text-transform: uppercase;
+                }
+                &::after {
+                    content: "";
+                    display: block;
+                    height: 1px;
+                    width: 100%;
+                    background: #dbdbdb;
+                    position: absolute;
+                    left: 0;
+                }
+            }
+            p {
+                padding: 20px;
+                font-size: 20px;
+                text-transform: capitalize;
+                text-align: center;
+                height: 90px;
+            }
+            button {
+                margin: 0 auto;
+                display: block;
+            }
+        }
+    }
+}
+
+.modal--active {
+    display: unset;
+}

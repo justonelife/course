@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { PassingService } from 'src/app/services/passing.service';
 
 @Component({
     selector: 'app-profile-setting',
@@ -18,7 +19,8 @@ export class ProfileSettingComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private auth: AuthorizationService
+        private auth: AuthorizationService,
+        private passing: PassingService
     ) { }
 
     ngOnInit(): void {
@@ -31,17 +33,20 @@ export class ProfileSettingComponent implements OnInit {
     }
 
     onUpdateClick() {
+
         let id: string = sessionStorage.getItem('id');
+
         if (this.checkChange()) {
+
             if (this.infoForm.valid) {
                 this.updating = !this.updating;
-                this.auth.putInfo(this.infoForm.value, id).subscribe(res => {
+                let subscription = this.auth.putInfo(this.infoForm.value, id).subscribe(res => {
                     this.updating = !this.updating;
-                    res.error 
-                        ? window.alert(res.error)
-                        : this.updateInfo(res);
+                    res.error ? this.passing.toggleModal(res.error) : this.updateInfo(res);
+                    subscription.unsubscribe();
                 });
-            } else window.alert('hold');
+            } else this.passing.toggleModal('invalid info');
+            
         }
     }
 
@@ -52,7 +57,7 @@ export class ProfileSettingComponent implements OnInit {
     }
 
     updateInfo(data: User) {
-        window.alert('success');
+        this.passing.toggleModal('your information is updated')
         let name = data.username;
         let email = data.email;
         this.username = name;
