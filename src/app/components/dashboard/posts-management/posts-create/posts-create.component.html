@@ -40,7 +40,7 @@
             <!-- <form [formGroup]="form"> -->
             <div class="editor">
                 <editor apiKey="hg63qewgjorv2m8gat981p1w1d9zy4wtq03oxkrysvj3wdol" [init]="{
-            height: 450,
+            height: 400,
             menubar: 'file edit view insert format tools table help',
             plugins: [
               'advlist autolink lists link image charmap print preview anchor',
@@ -56,6 +56,9 @@
               'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
           }" [(ngModel)]="post.content">
                 </editor>
+            </div>
+            <div class="pull-left">
+                <input type="checkbox" name="post-intro" id="post-intro" (change)="onToggleIntro($event)"> Intro
             </div>
             <div>
                 <button type="button" class="btn btn-primary reset" (click)="onReset()">

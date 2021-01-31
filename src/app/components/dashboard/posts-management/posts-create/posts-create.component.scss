@@ -35,7 +35,7 @@
         &.content {
             .card-body {
                 background: wheat;
-                height: 65vh;
+                height: 63vh;
             }
         }
     }
@@ -68,5 +68,6 @@ button {
     &.save:disabled {
         background: #495057;
         border: none;
+        height: 38px;
     }
 }

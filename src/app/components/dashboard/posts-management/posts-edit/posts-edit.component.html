@@ -35,7 +35,7 @@
                                     <td>{{item.title | truncate: 30}}</td>
                                     <td>{{item.categoryId | idToName: categories }}</td>
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-info">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal" (click)="editModal(item)">
                                             <fa-icon [icon]="faEdit"></fa-icon>
                                             Edit
                                         </button>
@@ -70,8 +70,63 @@
                 <p>{{post.title}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-danger" (click)="onDelPost(post)" data-toggle="modal" data-target="#delAlert" data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+
+<div class="modal fade" id="editModal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Editing post: <b>{{post.title}}</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="post-title" class="col-form-label">New title:</label>
+                        <input type="text" class="form-control" id="post-title" [(ngModel)]="post.title" [ngModelOptions]="{ standalone: true, updateOn: 'blur' }" />
+
+                        <label for="post-thumbnail" class="col-form-label">New title:</label>
+                        <input type="text" class="form-control" id="post-thumbnail" [(ngModel)]="post.thumbnail" [ngModelOptions]="{ standalone: true, updateOn: 'blur' }" />
+
+                        <label for="post-cate" class="col-form-label">New category:</label>
+                        <select class="form-control" required="required" id="post-cate" name="select" [(ngModel)]="post.categoryId">
+                            <option selected [ngValue]='undefined'>None</option>
+                            <option *ngFor="let item of categories" [ngValue]="item._id">{{item.name}}</option>
+                        </select>
+
+                        <label for="post-content" class="col-form-label">New content:</label>
+                        <div class="editor" id="post-content">
+                            <editor apiKey="hg63qewgjorv2m8gat981p1w1d9zy4wtq03oxkrysvj3wdol" [init]="{
+                            height: 400,
+                            menubar: 'file edit view insert format tools table help',
+                            plugins: [
+                              'advlist autolink lists link image charmap print preview anchor',
+                              'searchreplace visualblocks code fullscreen',
+                              'insertdatetime media table paste code help wordcount'
+                            ],
+                            toolbar:
+                              'undo redo | formatselect | ' +
+                              'bold italic backcolor | alignleft aligncenter ' +
+                              'alignright alignjustify | bullist numlist outdent indent | ' +
+                              'removeformat | help',
+                            content_style:
+                              'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                          }" [(ngModel)]="post.content" [ngModelOptions]="{standalone: true}">
+                            </editor>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#editAlert" data-dismiss="modal" (click)="onUpdatePost(post)">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -89,6 +144,24 @@
             <div class="modal-body">
                 <div class="alert alert-success">
                     <p>Successfully <b>deleted</b> post <b>{{post.title}}</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Alert -->
+
+<div class="modal fade" id="editAlert">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edited post</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success">
+                    <p>Successfully <b>updated</b> post <b>{{post.title}}</b></p>
                 </div>
             </div>
         </div>
