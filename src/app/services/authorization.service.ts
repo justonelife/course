@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { PUBLIC_USER, USER_END_POINT, APP_KEY, APP_SECRET, MASTER_KEY, ROLE_END_POINT } from './reference';
+import { PUBLIC_USER,ROOT_USER, USER_END_POINT, APP_KEY, APP_SECRET, MASTER_KEY, ROLE_END_POINT } from './reference';
 import { catchError, map } from 'rxjs/operators';
 import { Role } from '../models/role.model';
 import { User } from '../models/user.model';
@@ -10,17 +10,21 @@ import { User } from '../models/user.model';
 })
 export class AuthorizationService {
 
+    private END_POINT = USER_END_POINT;
+
     //user credentials
 
-    private publicUser = PUBLIC_USER;
-    private END_POINT = USER_END_POINT;
     private PUBLIC_AUTH: string = `Basic ${btoa(
-        this.publicUser.username + ':' + this.publicUser.password
+        PUBLIC_USER.username + ':' + PUBLIC_USER.password
     )}`;
 
 
     private loginUrl: string;
 
+
+    //root credentials
+
+    private ROOT_AUTH: string = `Basic ${btoa(ROOT_USER.username + ':' + ROOT_USER.password)}`;
 
     //master credentials
 
@@ -78,6 +82,14 @@ export class AuthorizationService {
                 })
             )
     }
+
+    putInfo(info: {[key:string]: string}, id:string): Observable<User> {
+        return this.httpClient
+            .put<User>(this.END_POINT + id, info, this.headerOptions(this.ROOT_AUTH))
+            .pipe(
+                map(data => new User(data))
+            )
+    } 
 
     headerOptions(auth: string) {
         return {

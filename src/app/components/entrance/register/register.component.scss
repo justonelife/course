@@ -36,13 +36,3 @@
     min-height: 500px;
     position: relative;
 }
-.alert {
-    font-size: 14px;
-    display: block;
-    &::first-letter {
-        text-transform: uppercase;
-    }
-}
-.alert--decline {
-    color: styles.$color-red;
-}

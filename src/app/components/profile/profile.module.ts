@@ -5,6 +5,8 @@ import { MainModule } from '../main/main.module';
 import { ProfileSettingComponent } from './profile-setting/profile-setting.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { ProfilePasswordComponent } from './profile-password/profile-password.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DirectivesModule } from 'src/app/directives/directives.module';
 
 
 
@@ -17,7 +19,10 @@ import { ProfilePasswordComponent } from './profile-password/profile-password.co
     imports: [
         CommonModule,
         MainModule,
-        AppRoutingModule
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        DirectivesModule
     ],
     exports: [
         ProfileComponent

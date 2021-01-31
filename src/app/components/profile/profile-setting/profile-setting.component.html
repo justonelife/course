@@ -1,10 +1,21 @@
-<form> 
+<form [formGroup]='infoForm'>
     <label for='username'>your username</label>
     <div class='profile__main__input'>
-        <input id='username'>
+        <input id='username' formControlName='username' appUsernameValidate>
+        <span class='alert alert--decline' *ngIf="infoForm.get('username').touched && infoForm.get('username').invalid">
+            accept (a-z) (A-Z) (0-9)
+        </span>
     </div>
     <label for='email'>email address</label>
     <div class='profile__main__input'>
-        <input id='email'>
+        <input id='email' formControlName='email' appEmailValidate>
+        <span class='alert alert--decline' *ngIf="infoForm.get('email').touched && infoForm.get('email').invalid">
+            must in format email@abc.xyz
+        </span>
     </div>
+    <button class='mybtn mybtn--light-green'
+        [attr.disabled]="(username === infoForm.value.username && email === infoForm.value.email) ? '': null"
+        (click)='onUpdateClick()'>
+        update
+    </button>
 </form>
