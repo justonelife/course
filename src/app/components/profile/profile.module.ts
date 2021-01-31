@@ -7,6 +7,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { ProfilePasswordComponent } from './profile-password/profile-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from 'src/app/directives/directives.module';
+import { LoadingModule } from '../main/home/loading/loading.module';
 
 
 
@@ -22,7 +23,8 @@ import { DirectivesModule } from 'src/app/directives/directives.module';
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        DirectivesModule
+        DirectivesModule,
+        LoadingModule
     ],
     exports: [
         ProfileComponent

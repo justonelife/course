@@ -45,9 +45,7 @@ export class AuthorizationService {
             .post(this.loginUrl, info, this.headerOptions(this.PUBLIC_AUTH))
             .pipe(
                 map(data => new User(data)),
-                catchError(err => {
-                    return of(err.error);
-                })
+                catchError(err => of(err.error))
             );
     }
 
@@ -83,11 +81,12 @@ export class AuthorizationService {
             )
     }
 
-    putInfo(info: {[key:string]: string}, id:string): Observable<User> {
+    putInfo(info: {[key:string]: string}, id:string): Observable<any> {
         return this.httpClient
-            .put<User>(this.END_POINT + id, info, this.headerOptions(this.ROOT_AUTH))
+            .put<any>(this.END_POINT + id, info, this.headerOptions(this.ROOT_AUTH))
             .pipe(
-                map(data => new User(data))
+                map(data => new User(data)),
+                catchError(err => of(err.error))
             )
     } 
 

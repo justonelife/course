@@ -14,8 +14,9 @@
         </span>
     </div>
     <button class='mybtn mybtn--light-green'
-        [attr.disabled]="(username === infoForm.value.username && email === infoForm.value.email) ? '': null"
+        [attr.disabled]="(username === infoForm.value.username && email === infoForm.value.email) || updating ? '': null"
         (click)='onUpdateClick()'>
-        update
+        <span *ngIf='!updating'>update</span>
+        <app-loading *ngIf='updating' [size]="'small'"></app-loading>
     </button>
 </form>
