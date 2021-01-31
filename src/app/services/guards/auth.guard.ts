@@ -15,7 +15,9 @@ export class AuthGuard implements CanActivate {
         if (sessionStorage.getItem('admin')) {
             return true;
         } else {
-            sessionStorage.removeItem('user')
+            sessionStorage.removeItem('user');
+            sessionStorage.removeItem('id');
+            sessionStorage.removeItem('email');
             this.router.navigate(['entrance/login/admin'])
             return false
         };
