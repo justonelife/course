@@ -6,14 +6,15 @@
 
 .entrance-page__beauty {
     background-color: styles.$color-light-green;
-    // background: styles.$color-light-green url('../../../assets/images/doraemon.png') no-repeat center center;
+    background: styles.$color-light-green url("../../../assets/images/work1.png") no-repeat center center;
     background-size: 80%;
     height: 100%;
     width: 50%;
     img {
         position: sticky;
-        top: 350px;
-        left: 250px;
+        top: 327px;
+        left: 68px;
+        transform: skewY(332deg);
     }
 }
 
