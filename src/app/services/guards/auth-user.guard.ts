@@ -1,28 +1,26 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ROLE_ADMIN } from '../reference';
+import { ROLE_USER } from '../reference';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthUserGuard implements CanActivate {
 
-    constructor(private router: Router) { }
+    constructor(private router: Router) {}
 
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        
         let role = sessionStorage.getItem('role');
-        if (role === ROLE_ADMIN) {
-            return true;
-        } else {
-            sessionStorage.removeItem('user');
-            sessionStorage.removeItem('id');
-            sessionStorage.removeItem('email');
-            this.router.navigate(['entrance/login/admin'])
-            return false
-        };
+        if (role === ROLE_USER) return true;
+        else {
+            sessionStorage.clear();
+            this.router.navigate(['entrance/login/user']);
+            return false;
+        }
     }
 
 }

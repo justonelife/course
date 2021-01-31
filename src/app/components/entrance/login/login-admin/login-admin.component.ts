@@ -52,7 +52,8 @@ export class LoginAdminComponent implements OnInit {
                     let roleId = res.roleId;
                     if (roleId === ROLE_ADMIN) {
                         this.router.navigate(['', 'dashboard']);
-                        sessionStorage.setItem('admin', this.username)
+                        sessionStorage.setItem('admin', this.username);
+                        sessionStorage.setItem('role', roleId);
                     }
                     else this.passing.toggleModal('login admin fail, please check role');
                 } else this.passing.toggleModal('login fail');

@@ -22,6 +22,7 @@ import { ForgotPasswordComponent } from './components/entrance/forgot-password/f
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileSettingComponent } from './components/profile/profile-setting/profile-setting.component';
 import { ProfilePasswordComponent } from './components/profile/profile-password/profile-password.component';
+import { AuthUserGuard } from './services/guards/auth-user.guard';
 
 export const routes: Routes = [
     {
@@ -89,6 +90,7 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [AuthUserGuard],
         children: [
             { path: '', redirectTo: 'settings', pathMatch: 'full' },
             { path: 'settings', component: ProfileSettingComponent },

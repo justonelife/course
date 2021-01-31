@@ -50,7 +50,8 @@ export class DashboardComponent implements OnInit {
 
     onLogout = () => {
         // localStorage.removeItem('currentUser');
-        sessionStorage.removeItem('admin')
+        sessionStorage.removeItem('admin');
+        sessionStorage.removeItem('role');
         this.router.navigate(['/entrance']);
     };
 }

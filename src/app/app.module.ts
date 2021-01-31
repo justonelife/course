@@ -10,6 +10,7 @@ import { EntranceModule } from './components/entrance/entrance.module';
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { AuthGuard } from './services/guards/auth.guard';
 import { ProfileModule } from './components/profile/profile.module';
+import { AuthUserGuard } from './services/guards/auth-user.guard';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,7 @@ import { ProfileModule } from './components/profile/profile.module';
         DashboardModule,
         ProfileModule
     ],
-    providers: [AuthGuard],
+    providers: [AuthGuard, AuthUserGuard],
     bootstrap: [AppComponent],
 })
 export class AppModule { }

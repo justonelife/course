@@ -26,9 +26,7 @@ export class HeadComponent implements OnInit {
     }
 
     onLogout = () => {
-        sessionStorage.removeItem('id');
-        sessionStorage.removeItem('email');
-        sessionStorage.removeItem('user');
+        sessionStorage.clear();
     }
 
 }
