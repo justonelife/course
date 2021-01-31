@@ -9,6 +9,8 @@ import { FootComponent } from './foot/foot.component';
 import { HomeModule } from './home/home.module';
 import { SingleModule } from './single/single.module';
 import { ReadModule } from './read/read.module';
+import { SearchModule } from './search/search.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -25,7 +27,9 @@ import { ReadModule } from './read/read.module';
         AppRoutingModule,
         HomeModule,
         SingleModule,
-        ReadModule
+        ReadModule,
+        SearchModule,
+        FormsModule
     ],
     exports: [
         MainComponent,

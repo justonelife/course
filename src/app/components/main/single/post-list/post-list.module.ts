@@ -23,7 +23,8 @@ import { LoadingModule } from '../../home/loading/loading.module';
         PipesModule
     ],
     exports: [
-        PostListComponent
+        PostListComponent,
+        PostBoxComponent
     ]
 })
 export class PostListModule { }

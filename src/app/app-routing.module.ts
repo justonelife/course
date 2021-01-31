@@ -23,6 +23,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileSettingComponent } from './components/profile/profile-setting/profile-setting.component';
 import { ProfilePasswordComponent } from './components/profile/profile-password/profile-password.component';
 import { AuthUserGuard } from './services/guards/auth-user.guard';
+import { SearchComponent } from './components/main/search/search.component';
 
 export const routes: Routes = [
     {
@@ -32,6 +33,7 @@ export const routes: Routes = [
             { path: '', component: HomeComponent },
             { path: 'single/:categoryURL', component: SingleComponent },
             { path: 'read/:name', component: ReadComponent },
+            { path: 'search', component: SearchComponent }
         ],
     },
     {

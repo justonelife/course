@@ -3,12 +3,20 @@
         <a href='' class='logo-link'>
             <span class='logo'>freetuts</span>
         </a>
-        <!-- <div class='fake-input fake-input--box fake-input--round fake-input--long fake-input--flex'>
-            <input type='text' id='username' placeholder='Search...'>
-            <button class='search-btn'>
-                <fa-icon [icon]='faSearch'></fa-icon>
-            </button>
-        </div> -->
+        <form>
+            <div class='fake-input fake-input--box fake-input--round fake-input--long fake-input--flex'>
+                <input type='text' 
+                    id='username' 
+                    placeholder='Search...' 
+                    [(ngModel)]='query'
+                    [ngModelOptions]="{standalone: true}">
+                <button class='search-btn'
+                    [attr.disabled]="searching ? '': null" 
+                    (click)='onSearchClick()'>
+                    <fa-icon [icon]='faSearch'></fa-icon>
+                </button>
+            </div>
+        </form>
         <div class="dropdown" *ngIf="isLogged; else toLogin">
             <button class="btn dropdown-toggle user-btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="title">{{username | titlecase}} <fa-icon [icon]="faUserCircle"></fa-icon></span>

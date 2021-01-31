@@ -39,23 +39,15 @@ export class DataPostService {
         return this.httpClient
             .get<Post[]>(this.newPostUrl, this.httpOptions)
             .pipe(
-                map(data => {
-                    let newData: Post[] = [];
-                    data.forEach(d => newData.push(new Post(d)));
-                    return newData;
-                })
+                map(data => this.transformData(data))
             )
     }
 
-    getAllPostOfCategory(_id:string): Observable<Post[]> {
+    getAllPostOfCategory(_id: string): Observable<Post[]> {
         return this.httpClient
             .get<Post[]>(this.allPostUrl + `/?query={"categoryId":"${_id}"}`, this.httpOptions)
             .pipe(
-                map(data => {
-                    let newData: Post[] = [];
-                    data.forEach(d => newData.push(new Post(d)));
-                    return newData;
-                })
+                map(data => this.transformData(data))
             )
     }
 
@@ -115,11 +107,7 @@ export class DataPostService {
                 this.httpOptions
             )
             .pipe(
-                map(data => {
-                    let newData: Post[] = [];
-                    data.forEach(d => newData.push(new Post(d)));
-                    return newData;
-                })
+                map(data => this.transformData(data))
             );
     }
 
@@ -134,6 +122,14 @@ export class DataPostService {
             )
     }
 
+    getSearchPost(title: string): Observable<Post[]> {
+        return this.httpClient
+            .get<Post[]>(this.allPostUrl + `/?query={"title":{"$regex":"^${title}"}}`, this.httpOptions)
+            .pipe(
+                map(data => this.transformData(data))
+            )
+    }
+
     formatFiveGroup(data: Post[]): Post[] {
         let parser = new DOMParser();
         let htmlDoc = parser.parseFromString(data[0].content, 'text/html');
@@ -141,5 +137,10 @@ export class DataPostService {
         return data;
     }
 
+    transformData(data: Post[]): Post[] {
+        let newData: Post[] = [];
+        data.forEach(d => newData.push(new Post(d)));
+        return newData;
+    }
 
 }

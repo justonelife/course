@@ -1,0 +1,13 @@
+<div class='search-page'>
+
+    <div *ngIf='post'>
+        
+        <ng-container *ngFor='let p of post'>
+            <app-post-box [post]='p'></app-post-box>
+        </ng-container>
+    </div>
+    <div *ngIf='searching' class='loading'>
+        <app-loading [size]="'medium'"></app-loading>
+    </div>
+</div>
+    
