@@ -4,7 +4,6 @@ import { switchMap, tap } from 'rxjs/operators';
 import { Category } from 'src/app/models/category.model';
 import { Post } from 'src/app/models/post.model';
 import { DataCategoryService } from 'src/app/services/data-category.service';
-import { DataPostService } from 'src/app/services/data-post.service';
 
 @Component({
     selector: 'app-single',
@@ -22,8 +21,7 @@ export class SingleComponent implements OnInit {
 
     constructor(
         private router: ActivatedRoute,
-        private dataService: DataCategoryService,
-        private dataPost: DataPostService
+        private dataService: DataCategoryService
     ) { }
 
     ngOnInit(): void {
@@ -42,7 +40,7 @@ export class SingleComponent implements OnInit {
     }
 
     getPost(categoryId: string) {
-        this.dataPost.getSinglePostByCategoryId(categoryId).subscribe(res => {
+        this.dataService.getCategoryDetail(categoryId).subscribe(res => {
             if (res === 'No Post') {
                 this.post = {
                     title: '',

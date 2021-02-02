@@ -4,14 +4,21 @@ import { Category } from '../models/category.model';
 import { User } from './../models/user.model';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { ROLE_ADMIN, USER_END_POINT, COLLECTION_END_POINT, ROOT_USER } from './reference';
+import { forkJoin, Observable, of } from 'rxjs';
+import {
+  ROLE_ADMIN,
+  USER_END_POINT,
+  COLLECTION_END_POINT,
+  ROOT_USER,
+} from './reference';
 
 // const USER_ROLE = 'c13d1ff1-8e1e-4c5b-82c1-408a5724c776';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    Authorization: `Basic ${btoa(ROOT_USER.username + ':' + ROOT_USER.password)}`,
+    Authorization: `Basic ${btoa(
+      ROOT_USER.username + ':' + ROOT_USER.password
+    )}`,
     'Content-Type': 'application/json',
   }),
 };
@@ -22,7 +29,8 @@ const httpOptions = {
 export class DataService {
   private usersURL;
   private categoriesURL;
-  private postsURL
+  private postsURL;
+  private detailURL;
 
   roleChange: EventEmitter<string> = new EventEmitter<string>();
   navData: EventEmitter<Category[]> = new EventEmitter<Category[]>();
@@ -31,6 +39,7 @@ export class DataService {
     this.usersURL = USER_END_POINT;
     this.categoriesURL = `${COLLECTION_END_POINT}category/`;
     this.postsURL = `${COLLECTION_END_POINT}post/`;
+    this.detailURL = `${COLLECTION_END_POINT}categorydetail/`;
   }
 
   emitRoleChange(role: string) {
@@ -93,9 +102,7 @@ export class DataService {
   }
 
   getCategories(): Observable<Category[]> {
-    return this.http
-      .get<Category[]>(this.categoriesURL, httpOptions)
-      .pipe();
+    return this.http.get<Category[]>(this.categoriesURL, httpOptions).pipe();
   }
 
   getAllCateName(): Observable<Category[]> {
@@ -128,7 +135,7 @@ export class DataService {
   }
 
   deleteUsers(user: User): Observable<User> {
-    console.log(httpOptions)
+    console.log(httpOptions);
     const url = `${this.usersURL}${user._id}?hard=true`;
     return this.http.delete<User>(url, httpOptions).pipe(
       tap((_) => console.log(`Deleted user with id = ${user._id}`)),
@@ -171,14 +178,30 @@ export class DataService {
   }
 
   createPosts(post: Post): Observable<Post> {
-    return this.http.post<Post>(this.postsURL, post, httpOptions).pipe(tap((newPost) => {
-      console.log(`Created post = ${JSON.stringify(newPost)}`);
-      catchError((error) => of(null));
-    }))
+    post.title = post.title.toLocaleLowerCase();
+    return this.http.post<Post>(this.postsURL, post, httpOptions).pipe(
+      tap((newPost) => {
+        console.log(`Created post = ${JSON.stringify(newPost)}`);
+        catchError((error) => of(null));
+      })
+    );
+  }
+
+  createPostIntro(post: Post): Observable<Post> {
+    return this.http.post<Post>(this.detailURL, post, httpOptions).pipe(
+      tap((newPost) => {
+        console.log(`Created post = ${JSON.stringify(newPost)}`);
+        catchError((error) => of(null));
+      })
+    );
   }
 
   getAllPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.postsURL, httpOptions).pipe();
+  }
+
+  getIntroPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.detailURL, httpOptions).pipe();
   }
 
   getCountPosts(): Observable<number> {
@@ -204,4 +227,12 @@ export class DataService {
     );
   }
 
+  updatePosts(post: Post): Observable<Post> {
+    return this.http.put(`${this.postsURL}${post._id}`, post, httpOptions).pipe(
+      tap((updatedPost) =>
+        console.log(`Updated post = ${JSON.stringify(updatedPost)}`)
+      ),
+      catchError((error) => of(null))
+    );
+  }
 }

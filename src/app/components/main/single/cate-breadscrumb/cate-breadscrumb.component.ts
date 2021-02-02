@@ -64,7 +64,7 @@ export class CateBreadscrumbComponent implements OnInit {
         let Len = this.breadscrumb.length;
         this.breadscrumb.splice(index + 1, Len - index - 1);
         this.stepClick = true;
-        this.router.navigate(['/single', url]);
+        this.router.navigate(['/main/single', url]);
     }
 
 }

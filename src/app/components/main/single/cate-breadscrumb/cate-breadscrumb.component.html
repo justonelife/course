@@ -1,7 +1,7 @@
 <div class='breadscrumb-wrp'>
 
     <ul *ngIf='breadscrumb.length > 0' class='breadscrumb'>
-        <li><span class='step' [routerLink]="['']">home</span></li>
+        <li><span class='step' [routerLink]="['', 'main']">home</span></li>
         <li *ngFor='let bc of breadscrumb; index as i'>
             <span class='step'
                 (click)='onStepClick(bc.url, i)'>

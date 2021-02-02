@@ -39,7 +39,7 @@ export class LoginUserComponent implements OnInit {
     }
 
     onLoginClick() {
-        this.checking = true;
+        this.checking = !this.checking;
 
         let info: any = {
             username: this.username,
@@ -48,7 +48,7 @@ export class LoginUserComponent implements OnInit {
 
         this.loginService.postLogin(info).subscribe(
             res => {
-                this.checking = false;
+                this.checking = !this.checking;
                 if (!res.error) {
                     let roleId = res.roleId;
                     if (roleId === ROLE_USER) {

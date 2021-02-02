@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
 import { COLLECTION_END_POINT, PUBLIC_USER } from './reference';
 import { map } from 'rxjs/operators';
+import { Post } from '../models/post.model';
 
 @Injectable({
     providedIn: 'root',
@@ -23,11 +24,14 @@ export class DataCategoryService {
     };
 
     private categoryCollection = 'category';
+    private detailCollection = 'categorydetail';
 
     private allCategoryURL: string;
+    private detailURL: string;
 
     constructor(private httpClient: HttpClient) {
         this.allCategoryURL = this.END_POINT + this.categoryCollection;
+        this.detailURL = this.END_POINT + this.detailCollection;
     }
 
     getAllCategory(): Observable<Category[]> {
@@ -43,6 +47,7 @@ export class DataCategoryService {
                             name: cate.name,
                             parentId: cate.parentId,
                             url: cate.url,
+                            thumbnail: cate.thumbnail,
                             child: [],
                         });
                     }
@@ -57,24 +62,36 @@ export class DataCategoryService {
             );
     }
 
+    getCategoryDetail(_id: string): Observable<any> {
+        return this.httpClient
+            .get<Post[]>(
+                this.detailURL + `/?query={"categoryId":"${_id}"}`,
+                this.httpOptions
+            )
+            .pipe(
+                map((data) => {
+                    if (data.length > 0) return new Post(data[0]);
+                    else return 'No Post';
+                })
+            );
+    }
+
     getRawAllCategory(): Observable<Category[]> {
         return this.httpClient
             .get<Category[]>(this.allCategoryURL, this.httpOptions)
             .pipe(
                 map((data) => {
                     let newData: Category[] = [];
-                    data.forEach(val => newData.push(new Category(val)));
+                    data.forEach((val) => newData.push(new Category(val)));
                     return newData;
                 })
-            )
+            );
     }
 
     getSingleCategory(_id: string): Observable<Category> {
         return this.httpClient
             .get<Category>(this.allCategoryURL + `/${_id}`, this.httpOptions)
-            .pipe(
-                map((data) => new Category(data))
-            );
+            .pipe(map((data) => new Category(data)));
     }
 
     getSingleCategoryByURL(url: string): Observable<Category> {
@@ -83,9 +100,7 @@ export class DataCategoryService {
                 this.allCategoryURL + `/?query={"url":"${url}"}`,
                 this.httpOptions
             )
-            .pipe(
-                map(data => new Category(data[0]))
-            );
+            .pipe(map((data) => new Category(data[0])));
     }
 
     getCategoryByParent(parentId: string): Observable<Category[]> {
@@ -95,9 +110,9 @@ export class DataCategoryService {
                 this.httpOptions
             )
             .pipe(
-                map(data => {
-                    let newData:Category[] = [];
-                    data.forEach(d => newData.push(new Category(d)));
+                map((data) => {
+                    let newData: Category[] = [];
+                    data.forEach((d) => newData.push(new Category(d)));
                     return newData;
                 })
             );
@@ -124,5 +139,4 @@ export class DataCategoryService {
             currentCate = [...newCurrentCate];
         }
     }
-    
 }
