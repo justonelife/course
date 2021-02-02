@@ -14,6 +14,13 @@
         .table-scroll {
             height: 70vh;
             overflow: auto;
+            table {
+                position: relative;
+            }
+            th {
+                position: sticky;
+                top: 0;
+            }
         }
         .pull-left {
             margin-bottom: 5px;

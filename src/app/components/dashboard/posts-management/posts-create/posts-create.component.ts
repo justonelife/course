@@ -27,7 +27,7 @@ export class PostsCreateComponent implements OnInit, OnChanges {
   public isIntro: boolean = false;
   public content: string;
 
-  constructor(private _dataService: DataService) {}
+  constructor(private _dataService: DataService) { }
 
   ngOnInit(): void {
     this.post = JSON.parse(JSON.stringify(this.defaultPosts));
@@ -38,7 +38,7 @@ export class PostsCreateComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void { }
 
   onReset = () => {
     this.post.content = '';

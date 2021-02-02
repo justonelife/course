@@ -1,11 +1,34 @@
 <ul class="paginate">
     <li>
-        <span (click)="prev()">&laquo;</span>
+        <span class="{{ currentPage === 1 ? 'disabled' : null }}" (click)="setCurrentPage(1)">First</span>
     </li>
-    <li *ngFor="let page of pageNumber; index as i">
-        <span class="{{ currentPage === i + 1 ? 'active' : null }}" (click)="switchPage($event)">
-      {{ page }}
-    </span>
+    <li>
+        <span class="{{ currentPage === 1 ? 'disabled' : null }}" (click)="prev()">&laquo;</span>
     </li>
-    <li><span (click)="next()">&raquo;</span></li>
+    <ng-container *ngIf="currentPage <= 5 && currentPage !== pageNumber.length ; then head; else mid"></ng-container>
+    <ng-template #head>
+        <li *ngFor="let page of pageNumber | slice:0:5 ; index as i">
+            <span class="{{ currentPage === i + 1 ? 'active' : null }}" (click)="switchPage($event)">{{page}}</span>
+        </li>
+        <li>
+            <span>...</span>
+        </li>
+    </ng-template>
+    <ng-template #mid>
+        <li>
+            <span>...</span>
+        </li>
+        <li *ngFor="let page of pageNumber | slice:(currentPage - 1):(currentPage + 5) ; index as j">
+            <span class="{{currentPage === j + 1 ? 'active' : null}}" (click)="switchPage($event)">{{page}}</span>
+        </li>
+        <li>
+            <span>...</span>
+        </li>
+    </ng-template>
+    <li>
+        <span class="{{ currentPage === pageNumber.length ? 'disabled' : null }}" (click)="next()">&raquo;</span>
+    </li>
+    <li>
+        <span class="{{ currentPage === pageNumber.length ? 'disabled' : null }}" (click)="setCurrentPage(pageNumber.length)">Last</span>
+    </li>
 </ul>
