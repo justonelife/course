@@ -57,11 +57,14 @@ export class PagingComponent implements OnInit, OnChanges {
     };
 
     setCurrentPage = (value) => {
-        if (this.currentPage < this.pageNumber.length + 1 && this.currentPage > 0) {
-            this.currentPage = value;
-            this.newPage.emit(this.currentPage);
-        } else return null;
-        console.log("current page: ", this.currentPage);
-        console.log("index: ", this.pageNumber.indexOf(this.currentPage));
+        if (value !== this.currentPage) {
+
+            if (this.currentPage < this.pageNumber.length + 1 && this.currentPage > 0) {
+                this.currentPage = value;
+                this.newPage.emit(this.currentPage);
+            } else return null;
+            console.log("current page: ", this.currentPage);
+            console.log("index: ", this.pageNumber.indexOf(this.currentPage));
+        }
     }
 }

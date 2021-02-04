@@ -18,8 +18,8 @@
         <li>
             <span>...</span>
         </li>
-        <li *ngFor="let page of pageNumber | slice:(currentPage - 1):(currentPage + 5) ; index as j">
-            <span class="{{currentPage === j + 1 ? 'active' : null}}" (click)="switchPage($event)">{{page}}</span>
+        <li *ngFor="let page of pageNumber | slice:(currentPage - 3):(currentPage + 2) ; index as j">
+            <span class="{{currentPage === page ? 'active' : null}}" (click)="switchPage($event)">{{page}}</span>
         </li>
         <li>
             <span>...</span>
