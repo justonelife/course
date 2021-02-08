@@ -11,12 +11,14 @@ import { PostsCreateComponent } from './posts-create/posts-create.component';
 import { PostsEditComponent } from './posts-edit/posts-edit.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { LoadingModule } from '../../main/home/loading/loading.module';
+import { PostsDecisionComponent } from './posts-decision/posts-decision.component';
 
 @NgModule({
   declarations: [
     PostsCreateComponent,
     PostsManagementComponent,
     PostsEditComponent,
+    PostsDecisionComponent,
   ],
   imports: [
     CommonModule,
