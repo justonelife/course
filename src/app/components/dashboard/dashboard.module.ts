@@ -12,12 +12,14 @@ import { FormsModule } from '@angular/forms';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { CategoriesManagementComponent } from './categories-management/categories-management.component';
 import { LoadingModule } from '../main/home/loading/loading.module';
+import { DashboardDecisionComponent } from './dashboard-decision/dashboard-decision.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     UsersManagementComponent,
     CategoriesManagementComponent,
+    DashboardDecisionComponent,
   ],
   imports: [
     CommonModule,

@@ -1,3 +1,5 @@
+import { PostsDecisionComponent } from './components/dashboard/posts-management/posts-decision/posts-decision.component';
+import { DashboardDecisionComponent } from './components/dashboard/dashboard-decision/dashboard-decision.component';
 import { PostsEditComponent } from './components/dashboard/posts-management/posts-edit/posts-edit.component';
 import { AuthGuard } from './services/guards/auth.guard';
 import { PostsCreateComponent } from './components/dashboard/posts-management/posts-create/posts-create.component';
@@ -45,11 +47,13 @@ export const routes: Routes = [
     data: { title: 'Admin Dashboard' },
     canActivate: [AuthGuard],
     children: [
+      { path: '', component: DashboardDecisionComponent },
       {
         path: 'posts',
         component: PostsManagementComponent,
         data: { title: 'Posts Management' },
         children: [
+          { path: '', component: PostsDecisionComponent },
           {
             path: 'posts-create',
             component: PostsCreateComponent,

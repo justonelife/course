@@ -1,0 +1,29 @@
+<div class="container">
+
+    <div class="card" routerLink="{{this.router.url + '/posts-edit'}}">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="card-body">
+                    <h3 class="card-title">Edit posts</h3>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <fa-icon class="icon" [icon]="faEdit"></fa-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" routerLink="{{this.router.url + '/posts-create'}}">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="card-body">
+                    <h3 class="card-title">Create a new Post</h3>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+            </div>
+        </div>
+    </div>
+
+</div>
