@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use './breadpoints.scss' as bp;
+
 $color-light-green: #2063ab;
-//  #63d6c5;
 $color-dark-green: #477d8c;
 $color-dark-blue: #253243;
 $color-text-color: #fff;
@@ -11,6 +12,33 @@ $color-light-theme: #ffffff;
 $color-dark-theme: #1b1b1b;
 $color-red: #e74c3c;
 $size-page-width: 1400px;
+
+
+@mixin mobile {
+    @media screen and (max-width: #{bp.$screen-mobile}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: #{bp.$screen-tablet}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (max-width: #{bp.$screen-desktop}) {
+        @content;
+    }
+}
+
+@mixin large_desktop {
+    @media screen and (max-width: #{bp.$screen-large-desktop}) {
+        @content;
+    }
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -150,6 +178,9 @@ input:focus {
 
 .fake-input--long {
     width: 400px;
+    @include mobile {
+        width: 220px;
+    }
 }
 
 .fake-input--flex {
