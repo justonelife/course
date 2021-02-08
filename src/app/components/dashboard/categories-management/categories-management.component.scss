@@ -42,6 +42,10 @@
     margin-bottom: -30px;
 }
 
+.item-label {
+    margin: 5px;
+}
+
 button {
     margin: 2px;
 }
@@ -62,11 +66,27 @@ th {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 600px) {
-    .form-control {
-        padding: 0.375rem 2.75rem;
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+    .btn {
+        border-radius: 50%;
+        .item-label {
+            display: none;
+        }
     }
-    .table-scroll {
-        overflow-x: auto;
+    .modal {
+        margin-top: 50%;
+        .btn {
+            border-radius: 5px;
+        }
     }
 }
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {}

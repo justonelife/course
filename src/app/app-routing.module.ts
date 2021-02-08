@@ -24,91 +24,97 @@ import { ProfileSettingComponent } from './components/profile/profile-setting/pr
 import { ProfilePasswordComponent } from './components/profile/profile-password/profile-password.component';
 import { AuthUserGuard } from './services/guards/auth-user.guard';
 import { SearchComponent } from './components/main/search/search.component';
+import { ChartComponent } from './components/dashboard/chart/chart.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'entrance', pathMatch: 'full' },
-    {
-        path: 'main',
-        component: MainComponent,
-        canActivate: [AuthUserGuard],
+  { path: '', redirectTo: 'entrance', pathMatch: 'full' },
+  {
+    path: 'main',
+    component: MainComponent,
+    canActivate: [AuthUserGuard],
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'single/:categoryURL', component: SingleComponent },
+      { path: 'read/:name', component: ReadComponent },
+      { path: 'search', component: SearchComponent },
+    ],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    data: { title: 'Admin Dashboard' },
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'posts',
+        component: PostsManagementComponent,
+        data: { title: 'Posts Management' },
         children: [
-            { path: '', component: HomeComponent },
-            { path: 'single/:categoryURL', component: SingleComponent },
-            { path: 'read/:name', component: ReadComponent },
-            { path: 'search', component: SearchComponent }
+          {
+            path: 'posts-create',
+            component: PostsCreateComponent,
+            data: { title: 'Posts Create' },
+          },
+          {
+            path: 'posts-edit',
+            component: PostsEditComponent,
+            data: { title: 'Posts Edit' },
+          },
         ],
-    },
-    {
-        path: 'dashboard',
-        component: DashboardComponent,
-        data: { title: 'Admin Dashboard' },
-        canActivate: [AuthGuard],
+      },
+      {
+        path: 'users',
+        component: UsersManagementComponent,
+        data: { title: 'Users Management' },
+      },
+      {
+        path: 'categories',
+        component: CategoriesManagementComponent,
+        data: { title: ' Categories Management' },
+      },
+      {
+        path: 'chart',
+        component: ChartComponent,
+        data: { title: 'Analytics' },
+      },
+    ],
+  },
+  {
+    path: 'entrance',
+    component: EntranceComponent,
+    children: [
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      {
+        path: 'login',
+        component: LoginComponent,
         children: [
-            {
-                path: 'posts',
-                component: PostsManagementComponent,
-                data: { title: 'Posts Management' },
-                children: [
-                    {
-                        path: 'posts-create',
-                        component: PostsCreateComponent,
-                        data: { title: 'Posts Create' }
-                    },
-                    {
-                        path: 'posts-edit',
-                        component: PostsEditComponent,
-                        data: { title: 'Posts Edit' }
-                    }
-                ],
-            },
-            {
-                path: 'users',
-                component: UsersManagementComponent,
-                data: { title: 'Users Management' },
-            },
-            {
-                path: 'categories',
-                component: CategoriesManagementComponent,
-                data: { title: ' Categories Management' },
-            },
+          { path: '', component: LoginDecisionComponent },
+          { path: 'admin', component: LoginAdminComponent },
+          { path: 'user', component: LoginUserComponent },
         ],
-    },
-    {
-        path: 'entrance',
-        component: EntranceComponent,
-        children: [
-            { path: '', redirectTo: 'login', pathMatch: 'full' },
-            {
-                path: 'login',
-                component: LoginComponent,
-                children: [
-                    { path: '', component: LoginDecisionComponent },
-                    { path: 'admin', component: LoginAdminComponent },
-                    { path: 'user', component: LoginUserComponent },
-                ],
-            },
-            { path: 'register', component: RegisterComponent },
-            { path: 'forgot', component: ForgotPasswordComponent }
-        ],
-    },
-    {
-        path: 'profile',
-        component: ProfileComponent,
-        canActivate: [AuthUserGuard],
-        children: [
-            { path: '', redirectTo: 'settings', pathMatch: 'full' },
-            { path: 'settings', component: ProfileSettingComponent },
-            { path: 'password', component: ProfilePasswordComponent }
-        ]
-    },
-    {
-        path: '**',
-        component: PageNotFoundComponent,
-    },
+      },
+      { path: 'register', component: RegisterComponent },
+      { path: 'forgot', component: ForgotPasswordComponent },
+    ],
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthUserGuard],
+    children: [
+      { path: '', redirectTo: 'settings', pathMatch: 'full' },
+      { path: 'settings', component: ProfileSettingComponent },
+      { path: 'password', component: ProfilePasswordComponent },
+    ],
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,18 +1,18 @@
 <div class="container-fluid">
     <nav class="navbar">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="fa fa-fw mr-3" *ngIf="!sidebarVisible" (click)="onToggleSidebar()">
+            <!-- <span class="fa fa-fw mr-3" *ngIf="!sidebarVisible" (click)="onToggleSidebar()">
                 <fa-icon [icon]="faBars"></fa-icon>
-            </span>
+            </span> -->
             <span class="title" (click)="onBackHome()" id="toHomeBtn"><img src="../../../assets/images/logo.png"
                     alt="freetuts" /></span>
         </button>
 
         <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn dropdown-toggle" type="button" id="account-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="title">{{username | titlecase}} <fa-icon [icon]="faUserCircle"></fa-icon></span>
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <div class="dropdown-menu" aria-labelledby="account-dropdown">
                 <button class="dropdown-item" type="button">
                     Profile
                 </button>
@@ -24,28 +24,32 @@
     </nav>
 
     <div class="row" id="body-row">
-        <div id="sidebar-container" class="sidebar-expanded d-none d-md-block" *ngIf="sidebarVisible">
+        <!-- <div id="sidebar-container" class="sidebar-expanded d-none d-md-block" *ngIf="sidebarVisible"> -->
+        <div id="sidebar-container" [ngClass]="{'sidebar-expanded': sidebarVisible, 'sidebar-collapsed': !sidebarVisible}">
             <ul class="list-group">
                 <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-                    <small>MAIN MENU</small>
+                    <small class="seperate-text">MAIN MENU</small>
                 </li>
 
-                <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                <a href="#submenu-post" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-fw mr-3">
                             <fa-icon [icon]="faFileAlt"></fa-icon>
                         </span>
                         <span class="menu-collapsed">Posts</span>
                         <span class="submenu-icon ml-auto"></span>
+                        <span class="collapse-icon-post">
+                            <fa-icon class="chevronPost" [icon]="faChevronCircleDown"></fa-icon>
+                        </span>
                     </div>
                 </a>
 
-                <div id="submenu1" class="collapse sidebar-submenu">
+                <div id="submenu-post" class="collapse sidebar-submenu">
                     <a [routerLink]="['posts/posts-edit']" routerLinkActive="router-link-active" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed"> Edit</span>
+                        <span class="submenu-collapsed"> Edit</span>
                     </a>
                     <a [routerLink]="['posts/posts-create']" routerLinkActive="router-link-active" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed"> Create</span>
+                        <span class="submenu-collapsed"> Create</span>
                     </a>
                 </div>
 
@@ -58,7 +62,7 @@
                     </div>
                 </a>
 
-                <div id="submenu3" class="collapse sidebar-submenu"></div>
+                <!-- <div id="submenu3" class="collapse sidebar-submenu"></div> -->
                 <a [routerLink]="['users']" routerLinkActive="router-link-active" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <span class="fa fa-fw mr-3">
@@ -67,41 +71,26 @@
                         <span class="menu-collapsed">Users</span>
                     </div>
                 </a>
+
+                <a [routerLink]="['chart']" routerLinkActive="router-link-active" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-fw mr-3">
+                            <fa-icon [icon]="faChartPie"></fa-icon>
+                        </span>
+                        <span class="menu-collapsed">Analytics</span>
+                    </div>
+                </a>
+
                 <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-                    <small>OPTIONS</small>
+                    <small class="seperate-text">OPTIONS</small>
                 </li>
-                <a href="#" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="fa fa-fw mr-3">
-                            <fa-icon [icon]="faCalendarAlt"></fa-icon>
-                        </span>
-                        <span class="menu-collapsed">Calendar</span>
-                    </div>
-                </a>
-                <a class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="fa fa-fw mr-3">
-                            <fa-icon [icon]="faEnvelope"></fa-icon>
-                        </span>
-                        <span class="menu-collapsed">Messages
-                            <span class="badge badge-pill badge-primary ml-2">6</span></span>
-                    </div>
-                </a>
-                <li class="list-group-item sidebar-separator menu-collapsed"></li>
-                <a class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="fa fa-fw mr-3">
-                            <fa-icon [icon]="faQuestion"></fa-icon>
-                        </span>
-                        <span class="menu-collapsed">Help</span>
-                    </div>
-                </a>
-                <a data-toggle="collapse" data-target="sidebar-container" class="bg-dark list-group-item list-group-item-action d-flex align-items-center" (click)="onToggleSidebar()">
+
+                <a data-toggle="collapse" aria-expanded="false" data-target="sidebar-container" class="collapse-btn bg-dark list-group-item list-group-item-action d-flex align-items-center" (click)="onToggleSidebar()">
                     <div class="d-flex w-100 justify-content-start align-items-center" id="collapse-sidebar">
                         <span id="collapse-text" class="menu-collapsed">Collapse</span>
                         <span class="submenu-icon ml-auto"></span>
-                        <span id="collapse-icon">
-                            <fa-icon [icon]="faChevronCircleLeft"></fa-icon>
+                        <span class="collapse-icon">
+                            <fa-icon class="chevronCollapse" [icon]="sidebarVisible ? faChevronCircleLeft : faChevronCircleRight"></fa-icon>
                         </span>
                     </div>
                 </a>
