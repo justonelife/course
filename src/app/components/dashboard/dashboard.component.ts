@@ -1,6 +1,7 @@
 import {
   faBars,
   faCalendarAlt,
+  faChartPie,
   faChevronCircleDown,
   faChevronCircleLeft,
   faChevronCircleRight,
@@ -33,6 +34,7 @@ export class DashboardComponent implements OnInit {
   faChevronCircleDown = faChevronCircleDown;
   faChevronCircleUp = faChevronCircleUp;
   faBars = faBars;
+  faChartPie = faChartPie;
 
   public newMessages: number;
   public sidebarVisible: boolean = true;

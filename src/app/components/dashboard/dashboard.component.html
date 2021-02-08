@@ -71,6 +71,16 @@
                         <span class="menu-collapsed">Users</span>
                     </div>
                 </a>
+
+                <a [routerLink]="['chart']" routerLinkActive="router-link-active" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-fw mr-3">
+                            <fa-icon [icon]="faChartPie"></fa-icon>
+                        </span>
+                        <span class="menu-collapsed">Analytics</span>
+                    </div>
+                </a>
+
                 <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
                     <small class="seperate-text">OPTIONS</small>
                 </li>
