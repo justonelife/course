@@ -8,20 +8,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingModule } from '../../main/home/loading/loading.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { PagingModule } from '../paging/paging.module';
+import { DonutGraphComponent } from './donut-graph/donut-graph.component';
 
 @NgModule({
-  declarations: [ChartComponent],
-  imports: [
-    CommonModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    LoadingModule,
-    PipesModule,
-    PagingModule,
-  ],
-  exports: [ChartComponent],
+    declarations: [ChartComponent, DonutGraphComponent],
+    imports: [
+        CommonModule,
+        AppRoutingModule,
+        FontAwesomeModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        LoadingModule,
+        PipesModule,
+        PagingModule,
+    ],
+    exports: [ChartComponent],
 })
-export class ChartModule {}
+export class ChartModule { }

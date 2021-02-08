@@ -12,25 +12,25 @@ import { FormsModule } from '@angular/forms';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { CategoriesManagementComponent } from './categories-management/categories-management.component';
 import { LoadingModule } from '../main/home/loading/loading.module';
-import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    UsersManagementComponent,
-    CategoriesManagementComponent,
-  ],
-  imports: [
-    CommonModule,
-    AppRoutingModule,
-    FormsModule,
-    FontAwesomeModule,
-    PipesModule,
-    LoadingModule,
-    Ng2OrderModule,
-    PostsManagementModule,
-    PagingModule,
-  ],
-  exports: [DashboardComponent],
+    declarations: [
+        DashboardComponent,
+        UsersManagementComponent,
+        CategoriesManagementComponent,
+    ],
+    imports: [
+        CommonModule,
+        AppRoutingModule,
+        FormsModule,
+        FontAwesomeModule,
+        PipesModule,
+        LoadingModule,
+        Ng2OrderModule,
+        PostsManagementModule,
+        PagingModule,
+        ChartModule
+    ],
+    exports: [DashboardComponent],
 })
-export class DashboardModule {}
+export class DashboardModule { }

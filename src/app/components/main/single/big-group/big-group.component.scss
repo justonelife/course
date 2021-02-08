@@ -13,9 +13,8 @@ $title-color: #40454d;
         flex-wrap: wrap;
         li {
             list-style: none;
-            flex-grow: 1;
             height: 55px;
-            width: 380px;
+            width: calc(100% / 3);
             padding: 0 30px;
             display: flex;
             align-items: center;
