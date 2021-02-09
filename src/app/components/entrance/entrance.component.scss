@@ -1,4 +1,30 @@
 @use '../../../styles.scss';
+@use '../../../breadpoints.scss' as bp;
+
+@mixin mobile {
+    @media screen and (max-width: #{bp.$screen-mobile}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: #{bp.$screen-tablet}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (max-width: #{bp.$screen-desktop}) {
+        @content;
+    }
+}
+
+@mixin large_desktop {
+    @media screen and (max-width: #{bp.$screen-large-desktop}) {
+        @content;
+    }
+}
+
 .entrance-page {
     height: 100vh;
     display: flex;
@@ -10,6 +36,12 @@
     background-size: 80%;
     height: 100%;
     width: 50%;
+    @include mobile {
+        display: none;
+    }
+    @include tablet {
+        display: none;
+    }
     img {
         position: sticky;
         top: 327px;
@@ -26,6 +58,12 @@
     padding: 20px;
     width: 50%;
     height: 100%;
+    @include mobile {
+        width: 100%;
+    }
+    @include tablet {
+        width: 100%;
+    }
 }
 
 .entrance-page__function__contain {

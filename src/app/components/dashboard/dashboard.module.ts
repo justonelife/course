@@ -15,24 +15,24 @@ import { LoadingModule } from '../main/home/loading/loading.module';
 import { DashboardDecisionComponent } from './dashboard-decision/dashboard-decision.component';
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    UsersManagementComponent,
-    CategoriesManagementComponent,
-    DashboardDecisionComponent,
-  ],
-  imports: [
-    CommonModule,
-    AppRoutingModule,
-    FormsModule,
-    FontAwesomeModule,
-    PipesModule,
-    LoadingModule,
-    Ng2OrderModule,
-    PostsManagementModule,
-    ChartModule,
-    PagingModule,
-  ],
-  exports: [DashboardComponent],
+    declarations: [
+        DashboardComponent,
+        UsersManagementComponent,
+        CategoriesManagementComponent,
+        DashboardDecisionComponent,
+    ],
+    imports: [
+        CommonModule,
+        AppRoutingModule,
+        FormsModule,
+        FontAwesomeModule,
+        PipesModule,
+        LoadingModule,
+        Ng2OrderModule,
+        PostsManagementModule,
+        ChartModule,
+        PagingModule,
+    ],
+    exports: [DashboardComponent],
 })
-export class DashboardModule {}
+export class DashboardModule { }

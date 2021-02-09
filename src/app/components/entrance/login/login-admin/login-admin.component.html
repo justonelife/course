@@ -12,10 +12,6 @@
         <input type="password" id="password" placeholder="Enter your password" [(ngModel)]="password"
             [ngModelOptions]="{ standalone: true }" required />
     </div>
-    <label for="rememberMe" class="remember-me-label">
-        <input type="checkbox" id="rememberMe" />
-        remember me
-    </label>
     <button class="login-form__login-btn mybtn mybtn--round mybtn--sm mybtn--light-green neu"
         [attr.disabled]="checking ? '':null" (click)="onLoginClick()">
         <span *ngIf='!checking'>login</span>

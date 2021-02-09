@@ -1,4 +1,30 @@
 @use '../../../../styles.scss';
+@use '../../../../breadpoints.scss' as bp;
+
+@mixin mobile {
+    @media screen and (max-width: #{bp.$screen-mobile}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: #{bp.$screen-tablet}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (max-width: #{bp.$screen-desktop}) {
+        @content;
+    }
+}
+
+@mixin large_desktop {
+    @media screen and (max-width: #{bp.$screen-large-desktop}) {
+        @content;
+    }
+}
+
 .header-wrp {
     background: styles.$color-light-green;
 }
@@ -12,6 +38,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include mobile {
+        width: 100%;
+    }
 }
 
 .logo-link {
@@ -19,6 +48,9 @@
     display: inline-block;
     padding: 0 20px;
     line-height: 50px;
+    @include mobile {
+        padding: 0;
+    }
 }
 
 .logo {
@@ -29,6 +61,9 @@
     display: block;
     background-position: center center;
     text-indent: -9999em;
+    @include mobile {
+        display: none;
+    }
 }
 
 .search-btn {
