@@ -1,3 +1,12 @@
 <div class='chart-card'>
-    <canvas #donutCanvas></canvas>
+    <div class='chart-card__header'>
+        <h2>post per category</h2>
+        <span *ngIf='updating' class='chart-card__header__loading'>loading...</span>
+        <button [attr.disabled]="updating ? '' : null" (click)='onBackClick()'>
+            back
+        </button>
+    </div>
+    <div class='chart-card__content'>
+        <canvas #donutCanvas width="600" height="250"></canvas>
+    </div>
 </div>

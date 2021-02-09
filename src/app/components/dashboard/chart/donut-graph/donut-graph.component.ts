@@ -22,6 +22,7 @@ export class DonutGraphComponent implements OnInit, OnDestroy {
     public postPerCateogry: any[];
     public category: Category[];
     public currentCategory: Category[];
+    public updating: boolean = true;
 
     constructor(
         private dataCategory: DataCategoryService,
@@ -53,6 +54,7 @@ export class DonutGraphComponent implements OnInit, OnDestroy {
         leaf.forEach(val => obs.push(this.dataPost.getCountPostByMultiCategoryId(val)));
 
         forkJoin(obs).subscribe(res => {
+            this.updating = !this.updating;
             this.postPerCateogry = res;
             this.donutChartMethod();
         });
@@ -87,11 +89,21 @@ export class DonutGraphComponent implements OnInit, OnDestroy {
         this.donutChart.update();
     }
 
-    getIn(e) {
+    getIn(e: any) {
         let activePoint = this.donutChart.getElementsAtEvent(e);
-        let index = activePoint[0]._index;
-        console.log(this.currentCategory[index])
-        this.getCurrentCategory(this.category, this.currentCategory[index]._id);
+        if (activePoint.length > 0 && !this.updating) {
+            this.updating = !this.updating;
+            let index = activePoint[0]._index;
+            this.getCurrentCategory(this.category, this.currentCategory[index]._id);
+        }
+    }
+
+    getOut() {
+        if (!this.updating) {
+            this.updating = !this.updating;
+            let reference = this.category.filter(d => d._id === this.currentCategory[0].parentId)[0];
+            this.getCurrentCategory(this.category, reference.parentId);
+        }
     }
 
     getName(data: Category[]): string[] {
@@ -112,6 +124,10 @@ export class DonutGraphComponent implements OnInit, OnDestroy {
         }
 
         return result;
+    }
+
+    onBackClick() {
+        if (this.currentCategory.length > 0 && this.currentCategory[0].parentId) this.getOut();
     }
 
 }
