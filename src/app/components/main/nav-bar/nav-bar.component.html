@@ -1,10 +1,10 @@
 <div class='nav-wrp'>
     <ul *ngIf='cate.length > 0' class='nav'>
         <li class='nav__item'>
-            <a class='nav__item__link' [routerLink]="['','main']">home</a>
+            <a class='nav__item__link' [routerLink]="['']">home</a>
         </li>
         <li class='nav__item' *ngFor='let category of cate'>
-            <a class='nav__item__link' routerLink="{{'/main/single/' + category.url}}">
+            <a class='nav__item__link' routerLink="{{'/single/' + category.url}}">
                 {{category.name}}
                 <fa-icon *ngIf='category.child.length > 0' [icon]='faCaretDown'></fa-icon>
             </a>
@@ -12,10 +12,10 @@
                 <ul class='sub-menu sub-menu--horizontal'>
                     <li class='nav__item' *ngFor='let child of category.child'>
                         <a class="{{'nav__item__link' + (child.child.length > 0 ? ' nav__item__link--title':'')}}" 
-                        routerLink="{{'/main/single/' + child.url}}">{{child.name}}</a>
+                        routerLink="{{'/single/' + child.url}}">{{child.name}}</a>
                         <ul *ngIf='child.child.length > 0'>
                             <li *ngFor='let nephew of child.child' class='nav__item nav__item--hasside'>
-                                <a class='nav__item__link' routerLink="{{'/main/single/' + nephew.url}}">{{nephew.name}}</a>
+                                <a class='nav__item__link' routerLink="{{'/single/' + nephew.url}}">{{nephew.name}}</a>
                                 <!-- <div *ngIf='nephew.child.length > 0' class='sub-menu-wrp sub-menu--side'>
 
                                     <ul class='sub-menu--side__contain'>

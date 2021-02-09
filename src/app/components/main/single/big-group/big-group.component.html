@@ -1,7 +1,7 @@
 <div class='big-group'>
     <ul *ngIf='childCate'>
         <li *ngFor='let cate of childCate'>
-            <a routerLink="{{'/main/single/' + cate.url}}">
+            <a routerLink="{{'/single/' + cate.url}}">
                 <img [src]='cate.thumbnail'>
                 <span>{{cate.name}}</span>
             </a>

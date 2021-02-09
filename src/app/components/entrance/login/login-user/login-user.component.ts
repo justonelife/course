@@ -56,7 +56,7 @@ export class LoginUserComponent implements OnInit {
                         sessionStorage.setItem('email', res.email);
                         sessionStorage.setItem('id', res._id);
                         sessionStorage.setItem('role', res.roleId);
-                        this.router.navigate(['main']);
+                        this.router.navigate(['']);
                     }
                     else this.passing.toggleModal('login user fail, please check role');
                 } else this.passing.toggleModal('login fail');
