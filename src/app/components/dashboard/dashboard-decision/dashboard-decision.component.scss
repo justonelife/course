@@ -5,6 +5,8 @@
         transition: all .2s ease-in-out;
         width: 90%;
         box-shadow: 5px 10px 8px 10px #888888;
+        background: #83a4d4;
+        background: linear-gradient(to right, #b6fbff, #83a4d4);
     }
     .card:hover {
         background: #76abe4;
