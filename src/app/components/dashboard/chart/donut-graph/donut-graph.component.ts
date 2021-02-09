@@ -91,10 +91,13 @@ export class DonutGraphComponent implements OnInit, OnDestroy {
 
     getIn(e: any) {
         let activePoint = this.donutChart.getElementsAtEvent(e);
-        if (activePoint.length > 0 && !this.updating) {
-            this.updating = !this.updating;
+
+        if (!this.updating && activePoint.length > 0) {
             let index = activePoint[0]._index;
-            this.getCurrentCategory(this.category, this.currentCategory[index]._id);
+            if (this.canGetIn(this.currentCategory[index]._id)) {
+                this.updating = !this.updating;
+                this.getCurrentCategory(this.category, this.currentCategory[index]._id);
+            }
         }
     }
 
@@ -104,6 +107,12 @@ export class DonutGraphComponent implements OnInit, OnDestroy {
             let reference = this.category.filter(d => d._id === this.currentCategory[0].parentId)[0];
             this.getCurrentCategory(this.category, reference.parentId);
         }
+    }
+
+    canGetIn(id: string): boolean {
+        let temp = this.category.filter(c => c.parentId === id);
+        if (temp.length > 0) return true;
+        return false;
     }
 
     getName(data: Category[]): string[] {
