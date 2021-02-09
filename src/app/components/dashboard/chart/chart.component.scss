@@ -4,15 +4,26 @@
     grid-template-rows: 50% 50%;
     max-height: 100vh;
     height: 89vh;
-    max-width: 100%;
-    width: 100%;
+    max-width: 95%;
+    width: 95%;
     margin-top: 10px;
     padding: 0;
     background: #e7e7e7;
+    .chart-box {
+        margin: 2px;
+        background: #fff;
+        border: 1px solid #dddada;
+        border-radius: 5px;
+        transition: all .2s ease-in-out;
+    }
+    .chart-box:hover {
+        z-index: 99;
+        cursor: pointer;
+        transform: scale(1.1);
+        transform-origin: center;
+    }
 }
 
-.chart-box {
-    margin: 10px;
-    background: #fff;
-    border: 1px solid #dddada;
+.container:hover>.chart-box:not(:hover) {
+    filter: blur(4px);
 }

@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { routes } from './../../../../app-routing.module';
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 

@@ -1,0 +1,13 @@
+.card {
+    height: 100%;
+    width: 100%;
+    border: none;
+    .card-header {
+        height: 50px;
+        background: white;
+        select {
+            // height: 25px;
+            margin-top: -6px;
+        }
+    }
+}
