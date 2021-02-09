@@ -8,9 +8,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingModule } from '../../main/home/loading/loading.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { PagingModule } from '../paging/paging.module';
+import { PostsStatiticsComponent } from './posts-statitics/posts-statitics.component';
 
 @NgModule({
-  declarations: [ChartComponent],
+  declarations: [ChartComponent, PostsStatiticsComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
