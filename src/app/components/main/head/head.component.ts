@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faSearch, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 import { PassingService } from 'src/app/services/passing.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class HeadComponent implements OnInit, OnDestroy {
 
     constructor(
         private router: Router,
-        private passing: PassingService
+        private passing: PassingService,
+        private auth: AuthorizationService
     ) { }
 
     ngOnInit(): void {
@@ -51,6 +53,10 @@ export class HeadComponent implements OnInit, OnDestroy {
     }
 
     onLogout = () => {
+        this.auth.postLogout().subscribe(res => {
+            if (res) console.log(`logout fail error ${res.error}`);
+            else console.log('success logout');
+        });
         sessionStorage.clear();
     }
 
