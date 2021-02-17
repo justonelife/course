@@ -1,10 +1,9 @@
-import { map } from 'rxjs/operators';
 import { HttpClientModule } from '@angular/common/http';
-import { TestBed, async } from '@angular/core/testing';
-import { of, Observable } from 'rxjs';
+import { TestBed } from '@angular/core/testing';
+import { of} from 'rxjs';
 
 import { DataService } from './data.service';
-import { CategoryData } from '../models/category.model';
+import { Category } from '../models/category.model';
 import { User } from '../models/user.model';
 
 describe('DataService', () => {
@@ -23,7 +22,7 @@ describe('DataService', () => {
     });
 
     it('should #getUsers return expected value', () => {
-        const fakeUsersData = [
+        const fakeUsersData: User[] = [
             {
                 _id: '1',
                 username: 'a',
@@ -44,7 +43,7 @@ describe('DataService', () => {
             },
         ];
 
-        const expectedUsersData = [
+        const expectedUsersData: User[] = [
             {
                 _id: '1',
                 username: 'a',
@@ -73,7 +72,7 @@ describe('DataService', () => {
     });
 
     it('should #getCountUsers return expected value', () => {
-        const fakeUsersData = [
+        const fakeUsersData: User[] = [
             {
                 _id: '1',
                 username: 'a',
@@ -104,22 +103,22 @@ describe('DataService', () => {
     });
 
     it('should #getCategories return expected value', () => {
-        const fakeCateData = [
-            { _id: '1', name: 'a', parentId: null, url: 'a' },
-            { _id: '2', name: 'a a', parentId: '1', url: 'a-a' },
-            { _id: '3', name: 'a a a', parentId: '2', url: 'a-a-a' },
-            { _id: '4', name: 'a a a a', parentId: '2', url: 'a-a-a-a' },
-            { _id: '5', name: 'b', parentId: '1', url: 'b' },
-            { _id: '6', name: 'b b', parentId: '5', url: 'b-b' },
+        const fakeCateData: Category[] = [
+            { _id: '1', name: 'a', parentId: null, url: 'a', thumbnail: 'img-src' },
+            { _id: '2', name: 'a a', parentId: '1', url: 'a-a', thumbnail: 'img-src' },
+            { _id: '3', name: 'a a a', parentId: '2', url: 'a-a-a', thumbnail: 'img-src' },
+            { _id: '4', name: 'a a a a', parentId: '2', url: 'a-a-a-a', thumbnail: 'img-src' },
+            { _id: '5', name: 'b', parentId: '1', url: 'b', thumbnail: 'img-src' },
+            { _id: '6', name: 'b b', parentId: '5', url: 'b-b', thumbnail: 'img-src' },
         ];
 
-        const expectedData = [
-            { _id: '1', name: 'a', parentId: null, url: 'a' },
-            { _id: '2', name: 'a a', parentId: '1', url: 'a-a' },
-            { _id: '3', name: 'a a a', parentId: '2', url: 'a-a-a' },
-            { _id: '4', name: 'a a a a', parentId: '2', url: 'a-a-a-a' },
-            { _id: '5', name: 'b', parentId: '1', url: 'b' },
-            { _id: '6', name: 'b b', parentId: '5', url: 'b-b' },
+        const expectedData: Category[] = [
+            { _id: '1', name: 'a', parentId: null, url: 'a', thumbnail: 'img-src' },
+            { _id: '2', name: 'a a', parentId: '1', url: 'a-a', thumbnail: 'img-src' },
+            { _id: '3', name: 'a a a', parentId: '2', url: 'a-a-a', thumbnail: 'img-src' },
+            { _id: '4', name: 'a a a a', parentId: '2', url: 'a-a-a-a', thumbnail: 'img-src' },
+            { _id: '5', name: 'b', parentId: '1', url: 'b', thumbnail: 'img-src' },
+            { _id: '6', name: 'b b', parentId: '5', url: 'b-b', thumbnail: 'img-src' },
         ];
 
         spyOn(service, 'getCategories').and.returnValue(of(fakeCateData));

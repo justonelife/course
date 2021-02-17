@@ -5,23 +5,17 @@ import { Category } from '../models/category.model';
 import { COLLECTION_END_POINT, PUBLIC_USER } from './reference';
 import { map } from 'rxjs/operators';
 import { Post } from '../models/post.model';
+import { headerOptions } from './authorization.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class DataCategoryService {
-    private publicUser = PUBLIC_USER;
     private END_POINT: string = COLLECTION_END_POINT;
 
-    private AUTH: string = `Basic ${btoa(
-        this.publicUser.username + ':' + this.publicUser.password
+    private PUBLIC_AUTH: string = `Basic ${btoa(
+        PUBLIC_USER.username + ':' + PUBLIC_USER.password
     )}`;
-    private httpOptions = {
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            Authorization: this.AUTH,
-        }),
-    };
 
     private categoryCollection = 'category';
     private detailCollection = 'categorydetail';
@@ -36,20 +30,15 @@ export class DataCategoryService {
 
     getAllCategory(): Observable<Category[]> {
         return this.httpClient
-            .get<Category[]>(this.allCategoryURL, this.httpOptions)
+            .get<Category[]>(this.allCategoryURL, headerOptions(this.PUBLIC_AUTH))
             .pipe(
                 map((data) => {
                     let result: Category[] = [];
                     let bigCate = data.filter((cate) => !cate.parentId);
                     for (const cate of bigCate) {
-                        result.push({
-                            _id: cate._id,
-                            name: cate.name,
-                            parentId: cate.parentId,
-                            url: cate.url,
-                            thumbnail: cate.thumbnail,
-                            child: [],
-                        });
+                        let {_id, name, parentId, url, thumbnail } = cate;
+                        let child = [];
+                        result.push({ _id, name, parentId, url, thumbnail, child });
                     }
 
                     let notAttached = data.filter((cate) => cate.parentId);
@@ -66,7 +55,7 @@ export class DataCategoryService {
         return this.httpClient
             .get<Post[]>(
                 this.detailURL + `/?query={"categoryId":"${_id}"}`,
-                this.httpOptions
+                headerOptions(this.PUBLIC_AUTH)
             )
             .pipe(
                 map((data) => {
@@ -78,7 +67,7 @@ export class DataCategoryService {
 
     getRawAllCategory(): Observable<Category[]> {
         return this.httpClient
-            .get<Category[]>(this.allCategoryURL, this.httpOptions)
+            .get<Category[]>(this.allCategoryURL, headerOptions(this.PUBLIC_AUTH))
             .pipe(
                 map((data) => {
                     let newData: Category[] = [];
@@ -90,7 +79,7 @@ export class DataCategoryService {
 
     getSingleCategory(_id: string): Observable<Category> {
         return this.httpClient
-            .get<Category>(this.allCategoryURL + `/${_id}`, this.httpOptions)
+            .get<Category>(this.allCategoryURL + `/${_id}`, headerOptions(this.PUBLIC_AUTH))
             .pipe(map((data) => new Category(data)));
     }
 
@@ -98,7 +87,7 @@ export class DataCategoryService {
         return this.httpClient
             .get<Category[]>(
                 this.allCategoryURL + `/?query={"url":"${url}"}`,
-                this.httpOptions
+                headerOptions(this.PUBLIC_AUTH)
             )
             .pipe(map((data) => new Category(data[0])));
     }
@@ -107,7 +96,7 @@ export class DataCategoryService {
         return this.httpClient
             .get<Category[]>(
                 this.allCategoryURL + `/?query={"parentId":"${parentId}"}`,
-                this.httpOptions
+                headerOptions(this.PUBLIC_AUTH)
             )
             .pipe(
                 map((data) => {

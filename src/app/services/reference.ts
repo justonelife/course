@@ -1,11 +1,11 @@
 export const PUBLIC_USER = {
-  username: 'public',
-  password: 'public',
+    username: 'public',
+    password: 'public',
 };
 
 export const ROOT_USER = {
-  username: 'root',
-  password: 'toor',
+    username: 'root',
+    password: 'toor',
 };
 
 export const APP_KEY = 'kid_BkJoH0wxd';

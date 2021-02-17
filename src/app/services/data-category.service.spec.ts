@@ -28,13 +28,15 @@ describe('DataCategoryService', () => {
                 _id: '1',
                 name: 'lap trinh',
                 parentId: null,
-                url: 'lap-trinh'
+                url: 'lap-trinh',
+                thumbnail: 'img-src'
             },
             {
                 _id: '2',
                 name: 'python',
                 parentId: '1',
-                url: 'python'
+                url: 'python',
+                thumbnail: 'img-src'
             },
         ];
         const expectData:Category[] = [
@@ -42,13 +44,15 @@ describe('DataCategoryService', () => {
                 _id: '1',
                 name: 'lap trinh',
                 parentId: null,
-                url: 'lap-trinh'
+                url: 'lap-trinh',
+                thumbnail: 'img-src'
             },
             {
                 _id: '2',
                 name: 'python',
                 parentId: '1',
-                url: 'python'
+                url: 'python',
+                thumbnail: 'img-src'
             },
         ];
 
@@ -65,13 +69,15 @@ describe('DataCategoryService', () => {
                 _id: '1',
                 name: 'lap trinh',
                 parentId: null,
-                url: 'lap-trinh'
+                url: 'lap-trinh',
+                thumbnail: 'img-src'
             },
             {
                 _id: '2',
                 name: 'python',
                 parentId: '1',
-                url: 'python'
+                url: 'python',
+                thumbnail: 'img-src'
             },
         ];
         const queryId = '1';
@@ -79,7 +85,8 @@ describe('DataCategoryService', () => {
             _id: '1',
             name: 'lap trinh',
             parentId: null,
-            url: 'lap-trinh'
+            url: 'lap-trinh',
+            thumbnail: 'img-src'
         };
 
         spyOn(dataCategory, 'getSingleCategory').and.callFake(
@@ -102,13 +109,15 @@ describe('DataCategoryService', () => {
                 _id: '1',
                 name: 'lap trinh',
                 parentId: null,
-                url: 'lap-trinh'
+                url: 'lap-trinh',
+                thumbnail: 'img-src'
             },
             {
                 _id: '2',
                 name: 'python',
                 parentId: '1',
-                url: 'python'
+                url: 'python',
+                thumbnail: 'img-src'
             },
         ];
         const queryURL = 'python';
@@ -116,7 +125,8 @@ describe('DataCategoryService', () => {
             _id: '2',
             name: 'python',
             parentId: '1',
-            url: 'python'
+            url: 'python',
+            thumbnail: 'img-src'
         };
 
         spyOn(dataCategory, 'getSingleCategoryByURL').and.callFake(
@@ -139,31 +149,36 @@ describe('DataCategoryService', () => {
                 _id: '1',
                 name: 'lap trinh',
                 parentId: null,
-                url: 'lap-trinh'
+                url: 'lap-trinh',
+                thumbnail: 'img-src'
             },
             {
                 _id: '2',
                 name: 'python',
                 parentId: '1',
-                url: 'python'
+                url: 'python',
+                thumbnail: 'img-src'
             },
             {
                 _id: '3',
                 name: 'js',
                 parentId: '1',
-                url: 'js'
+                url: 'js',
+                thumbnail: 'img-src'
             },
             {
                 _id: '4',
                 name: 'ngoai ngu',
                 parentId: null,
-                url: 'ngoai-ngu'
+                url: 'ngoai-ngu',
+                thumbnail: 'img-src'
             },
             {
                 _id: '5',
                 name: 'tieng anh',
                 parentId: '4',
-                url: 'tieng-anh'
+                url: 'tieng-anh',
+                thumbnail: 'img-src'
             },
         ];
 
@@ -173,13 +188,15 @@ describe('DataCategoryService', () => {
                 _id: '2',
                 name: 'python',
                 parentId: '1',
-                url: 'python'
+                url: 'python',
+                thumbnail: 'img-src'
             },
             {
                 _id: '3',
                 name: 'js',
                 parentId: '1',
-                url: 'js'
+                url: 'js',
+                thumbnail: 'img-src'
             },
         ];
 

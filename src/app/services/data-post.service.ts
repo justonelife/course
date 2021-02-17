@@ -4,23 +4,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PUBLIC_USER, COLLECTION_END_POINT } from './reference';
 import { Post } from '../models/post.model';
 import { map } from 'rxjs/operators';
+import { headerOptions } from './authorization.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class DataPostService {
-    private publicUser = PUBLIC_USER;
     private END_POINT: string = COLLECTION_END_POINT;
 
-    private AUTH: string = `Basic ${btoa(
-        this.publicUser.username + ':' + this.publicUser.password
+    private PUBLIC_AUTH: string = `Basic ${btoa(
+        PUBLIC_USER.username + ':' + PUBLIC_USER.password
     )}`;
-    private httpOptions = {
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            Authorization: this.AUTH,
-        }),
-    };
 
     private postCollection: string = 'post';
     private latestPostUrl: string;
@@ -37,7 +31,7 @@ export class DataPostService {
 
     getNewPost(): Observable<Post[]> {
         return this.httpClient
-            .get<Post[]>(this.newPostUrl, this.httpOptions)
+            .get<Post[]>(this.newPostUrl, headerOptions(this.PUBLIC_AUTH))
             .pipe(
                 map(data => this.transformData(data))
             )
@@ -45,7 +39,7 @@ export class DataPostService {
 
     getAllPostOfCategory(_id: string): Observable<Post[]> {
         return this.httpClient
-            .get<Post[]>(this.allPostUrl + `/?query={"categoryId":"${_id}"}`, this.httpOptions)
+            .get<Post[]>(this.allPostUrl + `/?query={"categoryId":"${_id}"}`, headerOptions(this.PUBLIC_AUTH))
             .pipe(
                 map(data => this.transformData(data))
             )
@@ -55,7 +49,7 @@ export class DataPostService {
         return this.httpClient
             .get<Post[]>(
                 this.latestPostUrl + `&query={"categoryId":"${_id}"}`,
-                this.httpOptions
+                headerOptions(this.PUBLIC_AUTH)
             )
             .pipe(
                 map(data => {
@@ -70,7 +64,7 @@ export class DataPostService {
         return this.httpClient
             .get<Post[]>(
                 this.singlePostUrl + `&query={"categoryId":"${_id}"}`,
-                this.httpOptions
+                headerOptions(this.PUBLIC_AUTH)
             )
             .pipe(
                 map((data) => {
@@ -89,7 +83,7 @@ export class DataPostService {
         return this.httpClient
             .get<any>(
                 this.allPostUrl + `/_count/?query={"$or":[${result}]}`,
-                this.httpOptions
+                headerOptions(this.PUBLIC_AUTH)
             )
             .pipe(map((data) => data.count));
     }
@@ -104,7 +98,7 @@ export class DataPostService {
             .get<Post[]>(
                 this.allPostUrl +
                 `/?query={"$or":[${result}]}&skip=${skip}&limit=${limit}`,
-                this.httpOptions
+                headerOptions(this.PUBLIC_AUTH)
             )
             .pipe(
                 map(data => this.transformData(data))
@@ -115,7 +109,7 @@ export class DataPostService {
         return this.httpClient
             .get<Post[]>(
                 this.allPostUrl + `/?query={"url":"${url}"}`,
-                this.httpOptions
+                headerOptions(this.PUBLIC_AUTH)
             )
             .pipe(
                 map(data => new Post(data[0]))
@@ -124,7 +118,10 @@ export class DataPostService {
 
     getSearchPost(title: string): Observable<Post[]> {
         return this.httpClient
-            .get<Post[]>(this.allPostUrl + `/?query={"title":{"$regex":"^${title}"}}`, this.httpOptions)
+            .get<Post[]>(
+                this.allPostUrl + `/?query={"title":{"$regex":"^${title}"}}`, 
+                headerOptions(this.PUBLIC_AUTH)
+            )
             .pipe(
                 map(data => this.transformData(data))
             )

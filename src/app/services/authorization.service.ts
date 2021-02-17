@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { PUBLIC_USER,ROOT_USER, USER_END_POINT, APP_KEY, APP_SECRET, MASTER_KEY, ROLE_END_POINT } from './reference';
+import { 
+    PUBLIC_USER, 
+    ROOT_USER, 
+    USER_END_POINT, 
+    APP_KEY, 
+    APP_SECRET, 
+    MASTER_KEY, 
+    ROLE_END_POINT
+} from './reference';
 import { catchError, map } from 'rxjs/operators';
 import { Role } from '../models/role.model';
 import { User } from '../models/user.model';
@@ -20,6 +28,8 @@ export class AuthorizationService {
 
 
     private loginUrl: string;
+    private logoutUrl: string;
+    private infoUrl: string;
 
 
     //root credentials
@@ -38,21 +48,34 @@ export class AuthorizationService {
 
     constructor(private httpClient: HttpClient) {
         this.loginUrl = this.END_POINT + 'login';
+        this.logoutUrl = this.END_POINT + '_logout';
+        this.infoUrl = this.END_POINT + '_me';
     }
 
     postLogin(info: any): Observable<any> {
         return this.httpClient
-            .post(this.loginUrl, info, this.headerOptions(this.PUBLIC_AUTH))
+            .post(this.loginUrl, info, headerOptions(this.PUBLIC_AUTH))
             .pipe(
-                map(data => new User(data)),
+                map(data => {
+                    this.storeToken(data);
+                    return new User(data);
+                }),
                 catchError(err => of(err.error))
             );
+    }
+
+    postLogout(): Observable<any> {
+        return this.httpClient
+            .post(this.logoutUrl, {}, headerOptions(this.PUBLIC_AUTH))
+            .pipe(
+                catchError(err => err)
+            )
     }
 
 
     getAllRole(): Observable<Role[]> {
         return this.httpClient
-            .get<Role[]>(this.ROLE_END_POINT, this.headerOptions(this.MASTER_AUTH))
+            .get<Role[]>(this.ROLE_END_POINT, this.alterHeaderOptions(this.MASTER_AUTH))
             .pipe(
                 map(data => {
                     let newData: Role[] = [];
@@ -64,7 +87,7 @@ export class AuthorizationService {
 
     postRegister(info): Observable<any> {
         return this.httpClient
-            .post(this.END_POINT, info, this.headerOptions(this.APP_AUTH))
+            .post(this.END_POINT, info, this.alterHeaderOptions(this.APP_AUTH))
             .pipe(
                 map(data => new User(data)),
                 catchError(err => of(err.error))
@@ -73,7 +96,7 @@ export class AuthorizationService {
 
     putAssignRole(userId: string, roleId: string): Observable<any> {
         return this.httpClient
-            .put<any>(`${this.END_POINT}${userId}/roles/${roleId}`, {}, this.headerOptions(this.MASTER_AUTH))
+            .put<any>(`${this.END_POINT}${userId}/roles/${roleId}`, {}, this.alterHeaderOptions(this.MASTER_AUTH))
             .pipe(
                 map(data => {
                     if (data.error) return of(false);
@@ -82,16 +105,21 @@ export class AuthorizationService {
             )
     }
 
-    putInfo(info: {[key:string]: string}, id:string): Observable<any> {
+    putInfo(info: { [key: string]: string }, id: string): Observable<any> {
         return this.httpClient
-            .put<any>(this.END_POINT + id, info, this.headerOptions(this.ROOT_AUTH))
+            .put<any>(this.END_POINT + id, info, headerOptions(this.ROOT_AUTH))
             .pipe(
                 map(data => new User(data)),
                 catchError(err => of(err.error))
             )
-    } 
+    }
 
-    headerOptions(auth: string) {
+    // getInfo(): Observable<any> {
+    //     return null;
+    // }
+
+
+    alterHeaderOptions(auth: string) {
         return {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
@@ -100,5 +128,23 @@ export class AuthorizationService {
         }
     }
 
+    storeToken(data: any) {
+        let token = data._kmd.authtoken;
+        sessionStorage.setItem('token', token);
+    }
 
+
+}
+
+export function headerOptions(basicAuth: string) {
+    let token = sessionStorage.getItem('token');
+    let auth = token
+        ? `Kinvey ${token}`
+        : basicAuth;
+    return {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': auth
+        })
+    }
 }
