@@ -16,4 +16,17 @@ describe('SideBarComponent', () => {
         let component = fixture.componentInstance;
         expect(component).toBeTruthy();
     });
+
+    it('sidebar should render title', () => {
+        let fixture = TestBed.createComponent(SideBarComponent);
+        let component = fixture.componentInstance;
+        let compiled = fixture.nativeElement;
+
+        component.title = 'fake title';
+
+        fixture.detectChanges();
+
+        let titleTag = compiled.querySelector('h3');
+        expect(titleTag.innerText).toEqual(component.title.toUpperCase());
+    });
 });

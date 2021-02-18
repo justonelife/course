@@ -12,7 +12,7 @@ describe('HeadComponent', () => {
                 RouterTestingModule,
                 HttpClientTestingModule
             ]
-        })
+        });
     });
 
     it('should create', () => {
@@ -20,4 +20,21 @@ describe('HeadComponent', () => {
         let component = fixture.componentInstance;
         expect(component).toBeTruthy();
     });
+
+    // NGMODEL this.query
+
+    // it('onSeachClick should be called', () => {
+    //     let fixture = TestBed.createComponent(HeadComponent);
+    //     let component = fixture.componentInstance;
+    //     spyOn(component, 'onSearchClick');
+
+    //     fixture.detectChanges();
+
+    //     let compiled = fixture.nativeElement;
+    //     let searchBtn = compiled.querySelector("button.search-btn");
+
+    //     searchBtn.click();
+
+    //     expect(component.onSearchClick).toHaveBeenCalled();
+    // });
 });
