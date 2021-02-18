@@ -1,25 +1,29 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 import { ReadComponent } from './read.component';
 
 describe('ReadComponent', () => {
-  let component: ReadComponent;
-  let fixture: ComponentFixture<ReadComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ReadComponent ]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [ReadComponent],
+            imports: [HttpClientTestingModule],
+            providers: [
+                {
+                    provide: ActivatedRoute,
+                    useValue: {
+                        params: of({name: 'nhap-mon-angular'})
+                    }
+                }
+            ]
+        })
     })
-    .compileComponents();
-  }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ReadComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        let fixture = TestBed.createComponent(ReadComponent);
+        let component = fixture.componentInstance;
+        expect(component).toBeTruthy();
+    });
 });

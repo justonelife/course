@@ -1,25 +1,23 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { HeadComponent } from './head.component';
 
 describe('HeadComponent', () => {
-  let component: HeadComponent;
-  let fixture: ComponentFixture<HeadComponent>;
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [HeadComponent],
+            imports: [
+                RouterTestingModule,
+                HttpClientTestingModule
+            ]
+        })
+    });
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HeadComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HeadComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        let fixture = TestBed.createComponent(HeadComponent);
+        let component = fixture.componentInstance;
+        expect(component).toBeTruthy();
+    });
 });

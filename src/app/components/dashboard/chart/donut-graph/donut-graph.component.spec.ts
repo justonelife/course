@@ -1,25 +1,31 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { DonutGraphComponent } from './donut-graph.component';
 
 describe('DonutGraphComponent', () => {
-  let component: DonutGraphComponent;
-  let fixture: ComponentFixture<DonutGraphComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DonutGraphComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [DonutGraphComponent],
+            imports: [HttpClientTestingModule]
+        })
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DonutGraphComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    it('should create', () => {
+        let fixture = TestBed.createComponent(DonutGraphComponent);
+        let component = fixture.componentInstance;
+        expect(component).toBeTruthy();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    // it('getIn should be called', () => {
+    //     let fixture = TestBed.createComponent(DonutGraphComponent);
+    //     let component = fixture.componentInstance;
+    //     spyOn(component, 'getIn');
+
+    //     fixture.detectChanges();
+    //     let canvas = component.donutCanvas;
+    //     canvas.nativeElement.click();
+    //     expect(component.getIn).toHaveBeenCalled();
+    // });
 });

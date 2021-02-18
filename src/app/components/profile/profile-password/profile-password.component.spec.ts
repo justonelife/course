@@ -1,25 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 
 import { ProfilePasswordComponent } from './profile-password.component';
 
 describe('ProfilePasswordComponent', () => {
-  let component: ProfilePasswordComponent;
-  let fixture: ComponentFixture<ProfilePasswordComponent>;
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [ProfilePasswordComponent],
+            imports: [HttpClientTestingModule],
+            providers: [FormBuilder]
+        })
+    });
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ProfilePasswordComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ProfilePasswordComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        let fixture = TestBed.createComponent(ProfilePasswordComponent);
+        let component = fixture.componentInstance;
+        expect(component).toBeTruthy();
+    });
 });
