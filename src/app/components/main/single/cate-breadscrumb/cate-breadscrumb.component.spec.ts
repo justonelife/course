@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +8,6 @@ import { Category } from 'src/app/models/category.model';
 import { CateBreadscrumbComponent } from './cate-breadscrumb.component';
 
 describe('CateBreadscrumbComponent', () => {
-    let location: Location;
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [CateBreadscrumbComponent],
@@ -26,8 +24,6 @@ describe('CateBreadscrumbComponent', () => {
                 }
             ]
         });
-
-        location = TestBed.inject(Location);
     });
 
     it('should create', () => {
