@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { PUBLIC_USER, COLLECTION_END_POINT } from './reference';
+import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { PUBLIC_USER, COLLECTION_END_POINT, POST_COLLECTION, VIEW_COLLECTION } from './reference';
 import { Post } from '../models/post.model';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { headerOptions } from './authorization.service';
+import { View } from '../models/view.model';
 
 @Injectable({
     providedIn: 'root',
@@ -16,17 +17,18 @@ export class DataPostService {
         PUBLIC_USER.username + ':' + PUBLIC_USER.password
     )}`;
 
-    private postCollection: string = 'post';
     private latestPostUrl: string;
     private singlePostUrl: string;
     private allPostUrl: string;
     private newPostUrl: string;
+    private viewUrl: string;
 
     constructor(private httpClient: HttpClient) {
-        this.allPostUrl = this.END_POINT + this.postCollection;
-        this.latestPostUrl = this.END_POINT + this.postCollection + `/?sort={"_kmd":1}&limit=5`;
-        this.singlePostUrl = this.END_POINT + this.postCollection + `/?limit=1`;
-        this.newPostUrl = this.END_POINT + this.postCollection + `/?sort={"_kmd":-1}&limit=10`;
+        this.allPostUrl = this.END_POINT + POST_COLLECTION;
+        this.latestPostUrl = this.END_POINT + POST_COLLECTION + `/?sort={"_kmd":1}&limit=5`;
+        this.singlePostUrl = this.END_POINT + POST_COLLECTION + `/?limit=1`;
+        this.newPostUrl = this.END_POINT + POST_COLLECTION + `/?sort={"_kmd":-1}&limit=10`;
+        this.viewUrl = this.END_POINT + VIEW_COLLECTION;
     }
 
     getNewPost(): Observable<Post[]> {
@@ -138,6 +140,40 @@ export class DataPostService {
         let newData: Post[] = [];
         data.forEach(d => newData.push(new Post(d)));
         return newData;
+    }
+
+    transformView(view: View[]): View[] {
+        let newData: View[] = [];
+        view.forEach(v => newData.push(new View(v)));
+        return newData;
+    }
+
+    postView(view: View): Observable<any> {
+        return this.httpClient
+            .post<View>(this.viewUrl, view, headerOptions(this.PUBLIC_AUTH))
+            .pipe(
+                map(data => new View(data)),
+                catchError(err => of(err))
+            )
+    }
+
+    getViewOfMonth(_from: Date, _to: Date): Observable<any> {
+        return this.httpClient
+            .get<View[]>(this.viewUrl + `/?query={"$and": [
+                {"_kmd.ect": {"$gte":${_from}}},
+                {"_kmd.ect": {"$lte":${_to}}} 
+            ]}`)
+            .pipe(
+                map(data => this.transformView(data)),
+                catchError(err => of(err))
+            )
+    }
+
+    extractTime(time: Date): { _from: Date, _current: Date } {
+        let year = time.getFullYear();
+        let month = time.getMonth();
+        let result = new Date(year, month, 1, 0, 0);
+        return {_from: result, _current: time};
     }
 
 }

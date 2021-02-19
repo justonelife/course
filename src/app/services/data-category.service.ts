@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
-import { COLLECTION_END_POINT, PUBLIC_USER } from './reference';
+import { 
+    COLLECTION_END_POINT, 
+    PUBLIC_USER, 
+    CATEGORY_COLLECTION, 
+    CATEGORY_DETAIL_COLLECTION 
+} from './reference';
 import { map } from 'rxjs/operators';
 import { Post } from '../models/post.model';
 import { headerOptions } from './authorization.service';
@@ -17,15 +22,12 @@ export class DataCategoryService {
         PUBLIC_USER.username + ':' + PUBLIC_USER.password
     )}`;
 
-    private categoryCollection = 'category';
-    private detailCollection = 'categorydetail';
-
     private allCategoryURL: string;
     private detailURL: string;
 
     constructor(private httpClient: HttpClient) {
-        this.allCategoryURL = this.END_POINT + this.categoryCollection;
-        this.detailURL = this.END_POINT + this.detailCollection;
+        this.allCategoryURL = this.END_POINT + CATEGORY_COLLECTION;
+        this.detailURL = this.END_POINT + CATEGORY_DETAIL_COLLECTION;
     }
 
     getAllCategory(): Observable<Category[]> {

@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
 import { Post } from 'src/app/models/post.model';
+import { View } from 'src/app/models/view.model';
 import { DataCategoryService } from 'src/app/services/data-category.service';
 import { DataPostService } from 'src/app/services/data-post.service';
 
@@ -36,17 +37,27 @@ export class ReadComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    getPost(url:string) {
+    getPost(url:string): void {
         let sub = this.dataPost.getSinglePostByUrl(url).subscribe(res => {
             this.post = res;
             sub.unsubscribe();
+            this.increaseView(this.post);
             this.getCategory(this.post.categoryId);
         });
     }
 
-    getCategory(id:string) {
+    getCategory(id:string): void {
         let sub = this.dataCategory.getSingleCategory(id).subscribe(res => {
             this.category = res;
+            sub.unsubscribe();
+        });
+    }
+
+    increaseView(post: Post): void {
+        let ticket: View = { postId: post._id, categoryId: post.categoryId };
+        let sub = this.dataPost.postView(ticket).subscribe(res => {
+            if (!res.error) console.log('add view');
+            else console.log('add view error', res.error);
             sub.unsubscribe();
         });
     }

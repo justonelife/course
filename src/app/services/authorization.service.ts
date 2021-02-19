@@ -29,7 +29,6 @@ export class AuthorizationService {
 
     private loginUrl: string;
     private logoutUrl: string;
-    private infoUrl: string;
 
 
     //root credentials
@@ -49,7 +48,6 @@ export class AuthorizationService {
     constructor(private httpClient: HttpClient) {
         this.loginUrl = this.END_POINT + 'login';
         this.logoutUrl = this.END_POINT + '_logout';
-        this.infoUrl = this.END_POINT + '_me';
     }
 
     postLogin(info: any): Observable<any> {
@@ -113,11 +111,6 @@ export class AuthorizationService {
                 catchError(err => of(err.error))
             )
     }
-
-    // getInfo(): Observable<any> {
-    //     return null;
-    // }
-
 
     alterHeaderOptions(auth: string) {
         return {

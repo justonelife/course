@@ -20,3 +20,8 @@ export const ROLE_END_POINT: string = `${SITE}roles/${APP_KEY}/`;
 
 export const ROLE_ADMIN: string = '342d09ed-db1e-4d45-adc2-ec7cdbeb9d0b';
 export const ROLE_USER: string = 'd9edcef4-e9be-4641-a43c-a64900d5eb9b';
+
+export const POST_COLLECTION:string = 'post';
+export const CATEGORY_COLLECTION:string = 'category';
+export const CATEGORY_DETAIL_COLLECTION:string = 'categorydetail';
+export const VIEW_COLLECTION:string = 'postmonthview'; 
