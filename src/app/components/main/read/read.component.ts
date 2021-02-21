@@ -54,7 +54,11 @@ export class ReadComponent implements OnInit, OnDestroy {
     }
 
     increaseView(post: Post): void {
-        let ticket: View = { postId: post._id, categoryId: post.categoryId };
+        let ticket: View = { 
+            postId: post._id,
+            postTitle: post.title, 
+            categoryId: post.categoryId
+        };
         let sub = this.dataPost.postView(ticket).subscribe(res => {
             if (!res.error) console.log('add view');
             else console.log('add view error', res.error);

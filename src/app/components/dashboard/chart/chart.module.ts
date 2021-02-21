@@ -10,9 +10,10 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { PagingModule } from '../paging/paging.module';
 import { PostsStatiticsComponent } from './posts-statitics/posts-statitics.component';
 import { DonutGraphComponent } from './donut-graph/donut-graph.component';
+import { PostViewMonthComponent } from './post-view-month/post-view-month.component';
 
 @NgModule({
-  declarations: [ChartComponent, PostsStatiticsComponent, DonutGraphComponent],
+  declarations: [ChartComponent, PostsStatiticsComponent, DonutGraphComponent, PostViewMonthComponent],
   imports: [
     CommonModule,
     AppRoutingModule,

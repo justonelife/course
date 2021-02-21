@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { PUBLIC_USER, COLLECTION_END_POINT, POST_COLLECTION, VIEW_COLLECTION } from './reference';
+import { 
+    PUBLIC_USER, 
+    COLLECTION_END_POINT, 
+    POST_COLLECTION, 
+    VIEW_COLLECTION,
+    ROOT_USER 
+} from './reference';
 import { Post } from '../models/post.model';
 import { catchError, map } from 'rxjs/operators';
 import { headerOptions } from './authorization.service';
@@ -16,6 +22,8 @@ export class DataPostService {
     private PUBLIC_AUTH: string = `Basic ${btoa(
         PUBLIC_USER.username + ':' + PUBLIC_USER.password
     )}`;
+
+    private ROOT_AUTH: string = `Basic ${btoa(ROOT_USER.username + ':' + ROOT_USER.password)}`;
 
     private latestPostUrl: string;
     private singlePostUrl: string;
@@ -157,23 +165,27 @@ export class DataPostService {
             )
     }
 
-    getViewOfMonth(_from: Date, _to: Date): Observable<any> {
+    getViewOfMonth(_from: string, _to: string): Observable<any> {
+
         return this.httpClient
-            .get<View[]>(this.viewUrl + `/?query={"$and": [
-                {"_kmd.ect": {"$gte":${_from}}},
-                {"_kmd.ect": {"$lte":${_to}}} 
-            ]}`)
+            .get<View[]>(
+                this.viewUrl + `/?query={"$and":[
+                    {"_kmd.ect": {"$gte":"${_from}"}},
+                    {"_kmd.ect": {"$lte":"${_to}"}} 
+                ]}`,
+                headerOptions(this.ROOT_AUTH)
+            )
             .pipe(
                 map(data => this.transformView(data)),
                 catchError(err => of(err))
             )
     }
 
-    extractTime(time: Date): { _from: Date, _current: Date } {
+    extractTime(time: Date): { _from: string, _current: string } {
         let year = time.getFullYear();
         let month = time.getMonth();
         let result = new Date(year, month, 1, 0, 0);
-        return {_from: result, _current: time};
+        return {_from: result.toISOString(), _current: time.toISOString()};
     }
 
 }
