@@ -181,11 +181,4 @@ export class DataPostService {
             )
     }
 
-    extractTime(time: Date): { _from: string, _current: string } {
-        let year = time.getFullYear();
-        let month = time.getMonth();
-        let result = new Date(year, month, 1, 0, 0);
-        return {_from: result.toISOString(), _current: time.toISOString()};
-    }
-
 }

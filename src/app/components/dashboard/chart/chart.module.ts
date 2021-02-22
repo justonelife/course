@@ -11,9 +11,10 @@ import { PagingModule } from '../paging/paging.module';
 import { PostsStatiticsComponent } from './posts-statitics/posts-statitics.component';
 import { DonutGraphComponent } from './donut-graph/donut-graph.component';
 import { PostViewMonthComponent } from './post-view-month/post-view-month.component';
+import { CategoryViewMonthComponent } from './category-view-month/category-view-month.component';
 
 @NgModule({
-  declarations: [ChartComponent, PostsStatiticsComponent, DonutGraphComponent, PostViewMonthComponent],
+  declarations: [ChartComponent, PostsStatiticsComponent, DonutGraphComponent, PostViewMonthComponent, CategoryViewMonthComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
